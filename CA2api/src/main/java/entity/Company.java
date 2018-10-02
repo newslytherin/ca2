@@ -12,17 +12,50 @@ import javax.persistence.Id;
 public class Company extends InfoEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
     private String name;
     private String description;
     private String cvr;
     private int numEmployees;
     private double marketValue;
 
-    public Integer getId() {
-        return id;
+    public Company()
+    {
     }
+
+    public Company(String name, String description, String cvr, int numEmployees, double marketValue)
+    {
+        this.name = name;
+        this.description = description;
+        this.cvr = cvr;
+        this.numEmployees = numEmployees;
+        this.marketValue = marketValue;
+    }
+    
+    
+    public String getName()
+    {
+        return name;
+    }
+    
+    public String getDescription()
+    {
+        return description;
+    }
+
+    public String getCvr()
+    {
+        return cvr;
+    }
+
+    public int getNumEmployees()
+    {
+        return numEmployees;
+    }
+
+    public double getMarketValue()
+    {
+        return marketValue;
+    }
+    
 
 }

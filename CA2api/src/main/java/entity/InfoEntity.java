@@ -34,4 +34,22 @@ public class InfoEntity implements Serializable {
         return id;
     }
 
+    public String getEmail()
+    {
+        return email;
+    }
+
+    public List<Phone> getPhones()
+    {
+        return phones;
+    }
+
+    public Address getAddress()
+    {
+        return address;
+    }
+    
+    
+    
+
 }
