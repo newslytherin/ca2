@@ -5,9 +5,7 @@
 
 ## API Documetation
 
-### GET
-
-**Person**
+### Person
 
 | GET |  |
 | --- | --- |
@@ -19,13 +17,28 @@
 
 **Company**
 
-* api/company
+**GET**
+* api/company/
+  * returns a list of all persons
+  
 * api/company/name/{`name`}
+  * returns a person with specific id
+
 * api/company/cvr/{`cvr`}
+  * returns a person with specific phone number
+  
 * api/company/id/{`id`}
+  * returns a person with specific email
+  
 * api/company/phone/{`phone`}
+  * returns a person with specific query params
+  
 * api/company/email/{`email`}
-* api/company/?count=`count`&marketvalue=`marketvalue`&zip=`zip`&street=`street`&min=`min`&max=`max`
+  * returns a person with specific query params
+  
+* api/company/?countmin=`countmin`&countmax=`countmax`&zip=`zip`&street=`street`&valuemin=`valuemin`&valuemax=`valuemax` 
+  * returns a person with specific query params
+
 
 **City**
 
