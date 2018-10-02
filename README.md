@@ -27,7 +27,7 @@ returns a list of all persons
 {name: "name",
  description: "description",
  cvr: "cvr",
- numEmployees, "numEmployees",
+ numEmployees: "numEmployees",
  marketValue: "marketValue"},
  { ... }
 ]
