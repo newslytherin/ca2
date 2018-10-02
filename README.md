@@ -5,7 +5,9 @@
 
 ## API Documetation
 
-### Person
+### GET
+
+**Person**
 
 | GET |  |
 | --- | --- |
@@ -17,9 +19,19 @@
 
 **Company**
 
-**GET**
-* api/company/
-  * returns a list of all persons
+**api/company/**
+returns a list of all persons
+  
+```json
+[
+{name: name,
+ description: description,
+ cvr: cvr,
+ numEmployees, NumEmployees,
+ marketValue: marketValue},
+ { ... }
+]
+```
   
 * api/company/name/{`name`}
   * returns a person with specific id
