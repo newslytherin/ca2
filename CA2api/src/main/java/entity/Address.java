@@ -21,7 +21,7 @@ public class Address implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String street;
-    private String additionalInfo;
+    private String addressInfo;
     @OneToMany(mappedBy = "address")
     @ElementCollection()
     private List<InfoEntity> infoEntities;
@@ -38,7 +38,7 @@ public class Address implements Serializable {
 
     public String getAdditionalInfo()
     {
-        return additionalInfo;
+        return addressInfo;
     }
 
     public List<InfoEntity> getInfoEntities()
