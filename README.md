@@ -53,11 +53,11 @@
 **Phone**
 
 * api/phone
+* api/phone/number{`number`}
 
 
 **Address**
 
 * api/address
-
 * api/address/zip/{`zip`}
 
