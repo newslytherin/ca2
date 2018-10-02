@@ -75,5 +75,8 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# SPA
+node_modules
+build
 
 # End of https://www.gitignore.io/api/macos,maven,windows,netbeans
