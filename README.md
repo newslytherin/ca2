@@ -10,13 +10,9 @@
 **Person**
 
 * api/person/
-
 * api/person/id/{`id`}
-
 * api/person/phone/{`phone`}
-
 * api/person/email/{`email`}
-
 * api/person/person?zip=`zip`&street=`street`&hobby=`hobby`
 
 
