@@ -31,4 +31,26 @@ public class Address implements Serializable {
         return id;
     }
 
+    public String getStreet()
+    {
+        return street;
+    }
+
+    public String getAdditionalInfo()
+    {
+        return additionalInfo;
+    }
+
+    public List<InfoEntity> getInfoEntities()
+    {
+        return infoEntities;
+    }
+
+    public CityInfo getCityInfo()
+    {
+        return cityInfo;
+    }
+    
+    
+
 }

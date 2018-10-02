@@ -29,5 +29,23 @@ public class Hobby implements Serializable {
     public Integer getId() {
         return id;
     }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public String getDescription()
+    {
+        return description;
+    }
+
+    public List<Person> getPeople()
+    {
+        return people;
+    }
+    
+    
+    
   
 }

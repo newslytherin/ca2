@@ -32,4 +32,27 @@ public class Phone implements Serializable {
         return id;
     }
 
+    public List<InfoEntity> getInfoEntitys()
+    {
+        return infoEntitys;
+    }
+
+    public String getNumber()
+    {
+        return number;
+    }
+
+    public String getDescription()
+    {
+        return description;
+    }
+
+    public InfoEntity getInfoEntity()
+    {
+        return infoEntity;
+    }
+    
+    
+    
+
 }

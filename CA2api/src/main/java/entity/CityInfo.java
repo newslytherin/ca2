@@ -26,4 +26,21 @@ public class CityInfo implements Serializable {
         return id;
     }
 
+    public int getZipCode()
+    {
+        return zipCode;
+    }
+
+    public String getCity()
+    {
+        return city;
+    }
+
+    public List<Address> getAddresses()
+    {
+        return addresses;
+    }
+    
+    
+
 }

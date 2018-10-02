@@ -24,6 +24,8 @@ public class CompanyDTO {
         cvr = c.getCvr();
         numEmployees = c.getNumEmployees();
         marketValue = c.getMarketValue();
+        
+        c.getAddress().g
     }
     
     
