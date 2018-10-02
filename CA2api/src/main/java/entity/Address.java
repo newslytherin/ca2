@@ -36,7 +36,7 @@ public class Address implements Serializable {
         return street;
     }
 
-    public String getAdditionalInfo()
+    public String getAddressInfo()
     {
         return addressInfo;
     }
