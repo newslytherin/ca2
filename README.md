@@ -9,11 +9,13 @@
 
 **Person**
 
-* api/person/
-* api/person/id/{`id`}
-* api/person/phone/{`phone`}
-* api/person/email/{`email`}
-* api/person/person?zip=`zip`&street=`street`&hobby=`hobby`
+| uri | result |
+| --- | --- |
+| api/person/                 | returns a list of all persons |
+| api/person/id/{`id`}        | returns a person with specific id |
+| api/person/phone/{`phone`}  | returns a person with specific phone number |
+| api/person/email/{`email`}  | returns a person with specific email |
+| api/person/person?zip=`zip`&street=`street`&hobby=`hobby` | returns a person with specific query params |
 
 **Company**
 
