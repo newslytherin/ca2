@@ -9,7 +9,7 @@
 
 **Person**
 
-| uri | result |
+| GET |  |
 | --- | --- |
 | api/person/                 | returns a list of all persons |
 | api/person/id/{`id`}        | returns a person with specific id |
