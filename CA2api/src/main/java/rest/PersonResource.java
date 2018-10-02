@@ -1,5 +1,8 @@
 package rest;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import facade.PersonFacade;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
@@ -15,6 +18,8 @@ import javax.ws.rs.core.Response;
 @Path("person")
 public class PersonResource {
 
+    private Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private PersonFacade pf = new PersonFacade();
     @Context
     private UriInfo context;
 
@@ -31,7 +36,7 @@ public class PersonResource {
     @Path("id/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getJsonById(@PathParam("id") int id) {
-        throw new UnsupportedOperationException();
+        return Response.ok(gson.toJson(pf.getPersonDTOById(id))).build();
     }
 
     @GET
