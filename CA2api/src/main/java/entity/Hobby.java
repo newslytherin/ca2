@@ -26,6 +26,16 @@ public class Hobby implements Serializable {
     @ElementCollection()
     private List<Person> people;
 
+    public Hobby()
+    {
+    }
+
+    public Hobby(String name, String description)
+    {
+        this.name = name;
+        this.description = description;
+    }
+    
     public Integer getId() {
         return id;
     }
@@ -43,6 +53,21 @@ public class Hobby implements Serializable {
     public List<Person> getPeople()
     {
         return people;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
+
+    public void setPeople(List<Person> people)
+    {
+        this.people = people;
     }
     
     
