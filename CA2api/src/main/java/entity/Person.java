@@ -11,9 +11,10 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @DiscriminatorValue("P")
-@NamedQueries(
-        @NamedQuery(name = "Person.findbyemail", query = "SELECT new PersonDTO(p) FROM Person p where p.email = :email")
-)
+@NamedQueries({
+    @NamedQuery(name = "Person.findbyid", query = "SELECT new PersonDTO(p) FROM Person p where p.id = :id"),
+    @NamedQuery(name = "Person.findbyemail", query = "SELECT new PersonDTO(p) FROM Person p where p.email = :email")
+})
 public class Person extends InfoEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
