@@ -18,7 +18,7 @@ public class PersonFacade {
     }
 
     //get all + filter
-    public PersonDTO getPersonDTOByPhone(int id) {
+    public PersonDTO getPersonDTOById(int id) {
         EntityManager em = emf.createEntityManager();
         try {
             return em.createNamedQuery("Person.findbyid", PersonDTO.class)
