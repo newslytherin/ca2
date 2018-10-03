@@ -10,6 +10,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -75,12 +76,25 @@ public class PersonResource {
         pf.addPerson(p);
         return Response.ok(json).build();
     }
+
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response putJson(String json) {
         Person p = gson.fromJson(json, Person.class);
-        pf.addPerson(p);
+        pf.updatePerson(p);
         return Response.ok(json).build();
+    }
+
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteJson(String json) {
+        Person p = gson.fromJson(json, Person.class);
+        if (pf.deletePerson(p) != null) {
+            return Response.ok(json).build();
+        } else {
+            return Response.status(Response.Status.NOT_ACCEPTABLE).entity("{}").build();
+        }
     }
 }
