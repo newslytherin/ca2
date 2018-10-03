@@ -44,6 +44,52 @@
 ---
 
 #### **GET** `api/company/name/{name}`
+*returns a company with specific name*
+
+**Fuldført forbindelse**
+```js
+  {
+    "name": "name",
+    "description": "description",
+    "cvr": "cvr",
+    "numEmployees": "numEmployees",
+    "marketValue": "marketValue"
+  }
+```
+
+**Fejl forbindelse**
+```js
+{
+  "status code": "status code",
+   "detail": "detail",
+ }
+```
+---
+
+#### **GET** `api/company/cvr/{`cvr`}`
+*returns a company with specific cvr*
+
+**Fuldført forbindelse**
+```js
+  {
+    "name": "name",
+    "description": "description",
+    "cvr": "cvr",
+    "numEmployees": "numEmployees",
+    "marketValue": "marketValue"
+  }
+```
+
+**Fejl forbindelse**
+```js
+{
+  "status code": "status code",
+   "detail": "detail",
+ }
+```
+---
+
+#### **GET** `api/company/id/{`id`}`
 *returns a company with specific id*
 
 **Fuldført forbindelse**
@@ -65,24 +111,77 @@
  }
 ```
 ---
-  
-* api/company/name/{`name`}
-  * returns a person with specific id
 
-* api/company/cvr/{`cvr`}
-  * returns a person with specific phone number
-  
-* api/company/id/{`id`}
-  * returns a person with specific email
-  
-* api/company/phone/{`phone`}
-  * returns a person with specific query params
-  
-* api/company/email/{`email`}
-  * returns a person with specific query params
-  
-* api/company/?countmin=`countmin`&countmax=`countmax`&zip=`zip`&street=`street`&valuemin=`valuemin`&valuemax=`valuemax` 
-  * returns a person with specific query params
+#### **GET** `api/company/phone/{`phone`}`
+*returns a company with specific phone number*
+
+**Fuldført forbindelse**
+```js
+  {
+    "name": "name",
+    "description": "description",
+    "cvr": "cvr",
+    "numEmployees": "numEmployees",
+    "marketValue": "marketValue"
+  }
+```
+
+**Fejl forbindelse**
+```js
+{
+  "status code": "status code",
+   "detail": "detail",
+ }
+```
+---
+
+#### **GET** `api/company/email/{`email`}`
+*returns a company with specific email*
+
+**Fuldført forbindelse**
+```js
+  {
+    "name": "name",
+    "description": "description",
+    "cvr": "cvr",
+    "numEmployees": "numEmployees",
+    "marketValue": "marketValue"
+  }
+```
+
+**Fejl forbindelse**
+```js
+{
+  "status code": "status code",
+   "detail": "detail",
+ }
+```
+---
+
+#### **GET** `api/company/?countmin=countmin&countmax=countmax&zip=zip&street=street&valuemin=valuemin&valuemax=valuemax`
+*returns a companies with specific parameters*
+
+**Fuldført forbindelse**
+```js
+[
+  {"name": "name",
+  "description": "description",
+  "cvr": "cvr",
+  "numEmployees": "numEmployees",
+  "marketValue": "marketValue"},
+  { ... }
+]
+```
+
+**Fejl forbindelse**
+```js
+{
+  "status code": "status code",
+   "detail": "detail",
+ }
+```
+---
+
 
 
 **City**
