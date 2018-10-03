@@ -2,14 +2,18 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import entity.Person;
 import facade.PersonFacade;
+import java.util.HashMap;
+import java.util.Map;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.Path;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
@@ -28,8 +32,18 @@ public class PersonResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getJson(@QueryParam("street") String street, @QueryParam("hobby") String hobby, @QueryParam("zipcode") int zip) {
-        throw new UnsupportedOperationException();
+    public Response getJson(@QueryParam("street") String street, @QueryParam("hobby") String hobby, @QueryParam("zipcode") String zipCode) {
+        Map<String, String> params = new HashMap<>();
+        if (street != null) {
+            params.put("street", street);
+        }
+        if (zipCode != null) {
+            params.put("zipCode", zipCode);
+        }
+        if (hobby != null) {
+            params.put("hobby", hobby);
+        }
+        return Response.ok(gson.toJson(pf.getPersonDTOWithFilters(params))).build();
     }
 
     @GET
@@ -53,8 +67,20 @@ public class PersonResource {
         return Response.ok(gson.toJson(pf.getPersonDTOByEmail(email))).build();
     }
 
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response postJson(String json) {
+        Person p = gson.fromJson(json, Person.class);
+        pf.addPerson(p);
+        return Response.ok(json).build();
+    }
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public void putJson(String content) {
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response putJson(String json) {
+        Person p = gson.fromJson(json, Person.class);
+        pf.addPerson(p);
+        return Response.ok(json).build();
     }
 }
