@@ -15,13 +15,12 @@ import java.util.stream.Collectors;
 public class CityInfoDTO {
     private int zipCode;
     private String city;
-    private List<Address> addresses;
+    private List<String> addresses;
 
     public CityInfoDTO(CityInfo ci) {
         this.zipCode = ci.getZipCode();
         this.city = ci.getCity();
-        //addresses = ci.getAddresses().stream().map(Address::getName).collect(Collectors.toList());
-        this.addresses = ci.getAddresses().stream().collect(Collectors.toList()); // ???
+        this.addresses = ci.getAddresses().stream().map(Address::toString).collect(Collectors.toList());
     }
 
     public int getZipCode() {
@@ -40,12 +39,8 @@ public class CityInfoDTO {
         this.city = city;
     }
 
-    public List<Address> getAddresses() {
+    public List<String> getAddresses() {
         return addresses;
-    }
-
-    public void setAddresses(List<Address> addresses) {
-        this.addresses = addresses;
     }
     
 }

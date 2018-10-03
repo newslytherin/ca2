@@ -50,7 +50,11 @@ public class Address implements Serializable {
     {
         return cityInfo;
     }
-    
-    
 
+    @Override
+    public String toString() {
+        return street + " " + addressInfo;
+    }
+    
+    
 }
