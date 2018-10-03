@@ -21,7 +21,6 @@ function setFilter(){
         case 'phone': filterPhone();
             break;
         case 'hobby': filterHobby();
-            break;
     }
 }
 
@@ -60,7 +59,7 @@ function filterHobby(){
     renderFilters(filters);
 }
 
-const URL = "http://localhost:8090/CA2api/api/city/";
+const URL = "http://localhost:8090/CA2api/api/";
 
 function handleHttpErrors(res) {
     if (res.ok) {
@@ -93,7 +92,7 @@ function renderTable(data){
             }
             tBody += "<td>" + data[i][j] + "</td>";
         }
-        
+
         first = false;
         tBody += "</tr>";
     }
