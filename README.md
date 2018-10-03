@@ -19,18 +19,18 @@
 
 ## Company
 
-**GET** `api/company/`  
-*returns a list of all persons*
+#### **GET** `api/company/`
+*returns a list of all companies*
 
 **Fuldført forbindelse**
 ```js
 [
-{"name": "name",
- "description": "description",
- "cvr": "cvr",
- "numEmployees": "numEmployees",
- "marketValue": "marketValue"},
- { ... }
+  {"name": "name",
+  "description": "description",
+  "cvr": "cvr",
+  "numEmployees": "numEmployees",
+  "marketValue": "marketValue"},
+  { ... }
 ]
 ```
 
@@ -41,6 +41,30 @@
    "detail": "detail",
  }
 ```
+---
+
+#### **GET** `api/company/name/{name}`
+*returns a company with specific id*
+
+**Fuldført forbindelse**
+```js
+  {
+    "name": "name",
+    "description": "description",
+    "cvr": "cvr",
+    "numEmployees": "numEmployees",
+    "marketValue": "marketValue"
+  }
+```
+
+**Fejl forbindelse**
+```js
+{
+  "status code": "status code",
+   "detail": "detail",
+ }
+```
+---
   
 * api/company/name/{`name`}
   * returns a person with specific id
