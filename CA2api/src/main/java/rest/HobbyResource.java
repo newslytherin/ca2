@@ -26,7 +26,7 @@ import javax.ws.rs.core.Response;
  *
  * @author Jacob Borg
  */
-@Path("Hobby")
+@Path("hobby")
 public class HobbyResource
 {
 
