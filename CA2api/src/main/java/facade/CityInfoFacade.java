@@ -15,18 +15,18 @@ import javax.persistence.Persistence;
  *
  * @author Stephan
  */
-public class CityInfoFacada {
-    private EntityManagerFactory emf;
+public class CityInfoFacade {
+    private static EntityManagerFactory emf;
 
-    public CityInfoFacada() {
+    public CityInfoFacade() {
         emf = Persistence.createEntityManagerFactory("pu");
     }
     
-    public void addEntityManageractory(EntityManagerFactory emf) {
-        this.emf = emf;
+    public static void addEntityManageractory(EntityManagerFactory ef) {
+        emf = ef;
     }
     
-    public CityInfoDTO getCityInfoDTOByZip(int zipCode) {
+    public static CityInfoDTO getCityInfoDTOByZip(int zipCode) {
         EntityManager em = emf.createEntityManager();
         
         try {
@@ -38,7 +38,7 @@ public class CityInfoFacada {
         }
     }
     
-    public List<CityInfoDTO> getAllCityDTO() {
+    public static List<CityInfoDTO> getAllCityDTO() {
         EntityManager em = emf.createEntityManager();
         
         try {

@@ -56,4 +56,8 @@ public class InfoEntity implements Serializable
         return "";
     }
 
+    void addPhone(Phone phone) {
+        phones.add(phone);
+    }
+
 }
