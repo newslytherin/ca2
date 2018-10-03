@@ -17,7 +17,7 @@ import javax.persistence.OneToMany;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "Address.findbyzip", query = "SELECT new Entity.AddressDTO(a) FROM Address a where a.cityInfo.zipCode = :zipCode")
+    @NamedQuery(name = "Address.findbyzip", query = "SELECT new entity.AddressDTO(a) FROM Address a where a.cityInfo.zipCode = :zipCode")
 })
 public class Address implements Serializable {
 
