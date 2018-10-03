@@ -1,18 +1,22 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author super
  */
+@NamedQueries({
+    @NamedQuery(name = "Phone.findall", query = "SELECT new entity.PhoneDTO(p) FROM Phone p"),
+    @NamedQuery(name = "Phone.findbynumber", query = "SELECT new entity.PhoneDTO(p) FROM Phone p WHERE p.number = :number")
+})
 @Entity
 public class Phone implements Serializable {
 
