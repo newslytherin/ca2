@@ -16,9 +16,6 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Phone implements Serializable {
 
-    @ManyToMany(mappedBy = "phones")
-    private List<InfoEntity> infoEntitys;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,11 +27,6 @@ public class Phone implements Serializable {
 
     public Integer getId() {
         return id;
-    }
-
-    public List<InfoEntity> getInfoEntitys()
-    {
-        return infoEntitys;
     }
 
     public String getNumber()

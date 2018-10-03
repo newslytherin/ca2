@@ -12,12 +12,12 @@ package entity;
 public class PhoneDTO {
     private String number;
     private String description;
-    private InfoEntity infoEntity;
+    private String infoEntity;
 
     public PhoneDTO(Phone phone) {
         this.number = phone.getNumber();
         this.description = phone.getDescription();
-        this.infoEntity = phone.getInfoEntity();
+        this.infoEntity = phone.getInfoEntity().getName();
     }
 
     public String getNumber() {
@@ -36,11 +36,11 @@ public class PhoneDTO {
         this.description = description;
     }
 
-    public InfoEntity getInfoEntity() {
+    public String getInfoEntity() {
         return infoEntity;
     }
 
-    public void setInfoEntity(InfoEntity infoEntity) {
+    public void setInfoEntity(String infoEntity) {
         this.infoEntity = infoEntity;
     }
     
