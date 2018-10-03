@@ -31,26 +31,25 @@ public class Address implements Serializable {
         return id;
     }
 
-    public String getStreet()
-    {
+    public String getStreet() {
         return street;
     }
 
-    public String getAddressInfo()
-    {
+    public String getAddressInfo() {
         return addressInfo;
     }
 
-    public List<InfoEntity> getInfoEntities()
-    {
+    public List<InfoEntity> getInfoEntities() {
         return infoEntities;
     }
 
-    public CityInfo getCityInfo()
-    {
+    public CityInfo getCityInfo() {
         return cityInfo;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return street + " " + addressInfo;
+    }
 
 }
