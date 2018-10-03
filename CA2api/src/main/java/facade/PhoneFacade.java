@@ -28,10 +28,9 @@ public class PhoneFacade {
     
       public PhoneDTO getPhoneDTOByNumber(int number) {
         EntityManager em = emf.createEntityManager();
-        String query = "SELECT new entity.PhoneDTO(p) FROM Phone p WHERE p.number = :number";
         
         try {
-            return em.createQuery(query, PhoneDTO.class)
+            return em.createNamedQuery("Phone.findbynumber", PhoneDTO.class)
                     .setParameter("number", number)
                     .getSingleResult();
         } finally {
@@ -41,10 +40,9 @@ public class PhoneFacade {
     
     public List<PhoneDTO> getAllCityDTO() {
         EntityManager em = emf.createEntityManager();
-        String query = "SELECT new entity.PhoneDTO(p) FROM Phone p";
         
         try {
-            return em.createQuery(query, PhoneDTO.class)
+            return em.createNamedQuery("Phone.findall", PhoneDTO.class)
                     .getResultList();
         } finally {
             em.close();

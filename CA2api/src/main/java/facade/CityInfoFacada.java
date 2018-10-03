@@ -28,10 +28,9 @@ public class CityInfoFacada {
     
     public CityInfoDTO getCityInfoDTOByZip(int zipCode) {
         EntityManager em = emf.createEntityManager();
-        String query = "SELECT new entity.CityInfoDTO(c) FROM City c WHERE c.zipCode = :zipCode";
         
         try {
-            return em.createQuery(query, CityInfoDTO.class)
+            return em.createNamedQuery("CityInfo.findbyzipcode", CityInfoDTO.class)
                     .setParameter("zipCode", zipCode)
                     .getSingleResult();
         } finally {
@@ -41,10 +40,9 @@ public class CityInfoFacada {
     
     public List<CityInfoDTO> getAllCityDTO() {
         EntityManager em = emf.createEntityManager();
-        String query = "SELECT new entity.CityInfoDTO(c) FROM City c";
         
         try {
-            return em.createQuery(query, CityInfoDTO.class)
+            return em.createNamedQuery("CityInfo.findall", CityInfoDTO.class)
                     .getResultList();
         } finally {
             em.close();

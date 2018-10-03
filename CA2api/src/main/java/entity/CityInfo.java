@@ -7,8 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+@NamedQueries({
+    @NamedQuery(name = "CityInfo.findall", query = "SELECT new entity.CityInfoDTO(c) FROM City c"),
+    @NamedQuery(name = "CityInfo.findbyzipcode", query = "SELECT new entity.CityInfoDTO(c) FROM City c WHERE c.zipCode = :zipCode")
+})
 @Entity
 @Table(name="CITY")
 public class CityInfo implements Serializable {
