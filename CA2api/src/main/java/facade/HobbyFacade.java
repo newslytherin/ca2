@@ -21,12 +21,12 @@ public class HobbyFacade
         return emf.createEntityManager();
     }
     
-    public HobbyDTO getHobby(int id)
+    public HobbyDTO getHobby(String name)
     {
         EntityManager em = getEm();
         try {
-            return em.createNamedQuery("Hobby.findbyid", HobbyDTO.class)
-                    .setParameter("id", id)
+            return em.createNamedQuery("Hobby.findbyname", HobbyDTO.class)
+                    .setParameter("name", name)
                     .getSingleResult();
         } finally {
             em.close();
