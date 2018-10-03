@@ -16,13 +16,31 @@ public class PersonDTO {
 
     public PersonDTO(Person p) {
         this.id = p.getId();
+//        this.email = p.getEmail();
+//        this.name = p.getName();
+//        this.address = p.getAddress().toString();
+//        this.zipCode = p.getAddress().getCityInfo().getZipCode();
+//        this.city = p.getAddress().getCityInfo().getCity();
+//        phones = p.getPhones().stream().map(Phone::getNumber).collect(Collectors.toList());
+//        hobbies = p.getHobbies().stream().map(Hobby::getName).collect(Collectors.toList());
+
         this.email = p.getEmail();
+        //person
         this.name = p.getName();
-        this.address = p.getAddress().toString();
-        this.zipCode = p.getAddress().getCityInfo().getZipCode();
-        this.city = p.getAddress().getCityInfo().getCity();
-        phones = p.getPhones().stream().map(Phone::getNumber).collect(Collectors.toList());
-        hobbies = p.getHobbies().stream().map(Hobby::getName).collect(Collectors.toList());
+
+        //phones -> maybe es works?
+//        this.phones = new ArrayList<>();
+        this.phones = phones.stream().map(Phone::getNumber).collect(Collectors.toList());
+//        this.hobbies = new ArrayList<>();
+        this.phones = hobbies.stream().map(Hobby::getName).collect(Collectors.toList());
+
+        if (p.getAddress() != null) {
+            this.address = p.getAddress().getStreet() + " " + p.getAddress().getAddressInfo();
+            if (p.getAddress().getCityInfo() != null) {
+                this.zipCode = p.getAddress().getCityInfo().getZipCode();
+                this.city = p.getAddress().getCityInfo().getCity();
+            }
+        }
     }
 
     public int getId() {
