@@ -32,6 +32,7 @@ public class Person extends InfoEntity implements Serializable {
         return lastName;
     }
     
+    @Override
     public String getName() {
         return firstName + " " + lastName;
     }

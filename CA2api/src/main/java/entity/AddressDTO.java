@@ -18,7 +18,7 @@ public class AddressDTO
         this.id = a.getId();
         this.street = a.getStreet();
         this.addressInfo = a.getAddressInfo();
-        this.infoEntities = a.getInfoEntities().stream().map(e->e.g).collect(Collectors.toList());
+        this.infoEntities = a.getInfoEntities().stream().map(InfoEntity->InfoEntity.getName()).collect(Collectors.toList());
         this.cityInfo = a.getCityInfo().getCity();
     }
     

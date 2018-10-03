@@ -32,6 +32,7 @@ public class Company extends InfoEntity implements Serializable {
     }
     
     
+    @Override
     public String getName()
     {
         return name;
