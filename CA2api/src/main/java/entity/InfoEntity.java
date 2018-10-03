@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,10 +26,10 @@ public class InfoEntity implements Serializable
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String email;
-    @OneToMany(mappedBy = "infoEntity")
+    @OneToMany(mappedBy = "infoEntity", fetch = FetchType.EAGER)
     @ElementCollection()
     private List<Phone> phones;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Address address;
 
     public Integer getId()
