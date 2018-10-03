@@ -31,11 +31,7 @@ public class Address implements Serializable {
     {
     }
 
-    public Address(String street, String additionalInfo)
-    {
-        this.street = street;
-        this.additionalInfo = additionalInfo;
-    }
+    
 
     public Integer getId() {
         return id;
@@ -66,10 +62,6 @@ public class Address implements Serializable {
         this.street = street;
     }
 
-    public void setAdditionalInfo(String additionalInfo)
-    {
-        this.additionalInfo = additionalInfo;
-    }
 
     public void setInfoEntities(List<InfoEntity> infoEntities)
     {
