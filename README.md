@@ -21,7 +21,8 @@
 
 **api/company/**
 returns a list of all persons
-  
+
+**Fuldført forbindelse**
 ```js
 [
 {"name": "name",
@@ -31,6 +32,14 @@ returns a list of all persons
  "marketValue": "marketValue"},
  { ... }
 ]
+```
+
+**Fejl forbindelse**
+```js
+{
+  "status code": "status code",
+   "detail": "detail",
+ }
 ```
   
 * api/company/name/{`name`}
