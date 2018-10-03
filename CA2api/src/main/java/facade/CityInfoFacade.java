@@ -16,7 +16,7 @@ import javax.persistence.Persistence;
  * @author Stephan
  */
 public class CityInfoFacade {
-    private static EntityManagerFactory emf;
+    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
 
     public CityInfoFacade() {
         emf = Persistence.createEntityManagerFactory("pu");
