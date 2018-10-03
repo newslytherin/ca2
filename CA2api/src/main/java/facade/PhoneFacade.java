@@ -19,17 +19,17 @@ import javax.persistence.Persistence;
  */
 public class PhoneFacade {
 
-    private EntityManagerFactory emf;
+    private static EntityManagerFactory emf;
 
     public PhoneFacade() {
         emf = Persistence.createEntityManagerFactory("pu");
     }
 
-    public void addEntityManageractory(EntityManagerFactory emf) {
-        this.emf = emf;
+    public static void addEntityManageractory(EntityManagerFactory ef) {
+        emf = ef;
     }
 
-    public PhoneDTO getPhoneDTOByNumber(int number) {
+    public static PhoneDTO getPhoneDTOByNumber(int number) {
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -41,7 +41,7 @@ public class PhoneFacade {
         }
     }
 
-    public List<PhoneDTO> getAllCityDTO() {
+    public static List<PhoneDTO> getAllPhonesDTO() {
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -52,7 +52,7 @@ public class PhoneFacade {
         }
     }
     
-    public PhoneDTO addPhone(String description, String number, int infoEntityid) {
+    public static PhoneDTO addPhone(String description, String number, int infoEntityid) {
         EntityManager em = emf.createEntityManager();
         Phone phone = new Phone();
         phone.setDescription(description);
@@ -70,7 +70,7 @@ public class PhoneFacade {
         return new PhoneDTO(phone);
     }
     
-    public PhoneDTO deletePhone(Phone phone) {
+    public static PhoneDTO deletePhone(Phone phone) {
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -84,7 +84,7 @@ public class PhoneFacade {
         return new PhoneDTO(phone);
     }
     
-    public PhoneDTO editPhone(Phone phone) {
+    public static PhoneDTO editPhone(Phone phone) {
         EntityManager em = emf.createEntityManager();
 
         try {
