@@ -43,14 +43,14 @@ public class PersonResource {
     @Path("phone/{phone}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getJsonByPhone(@PathParam("phone") String phone) {
-        throw new UnsupportedOperationException();
+        return Response.ok(gson.toJson(pf.getPersonDTOByPhone(phone))).build();
     }
 
     @GET
     @Path("email/{email}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getJsonByEmail(@PathParam("email") String email) {
-        throw new UnsupportedOperationException();
+        return Response.ok(gson.toJson(pf.getPersonDTOByEmail(email))).build();
     }
 
     @PUT
