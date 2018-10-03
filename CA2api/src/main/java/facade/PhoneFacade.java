@@ -52,11 +52,8 @@ public class PhoneFacade {
         }
     }
     
-    public static PhoneDTO addPhone(String description, String number, int infoEntityid) {
+    public static PhoneDTO addPhone(Phone phone, int infoEntityid) {
         EntityManager em = emf.createEntityManager();
-        Phone phone = new Phone();
-        phone.setDescription(description);
-        phone.setNumber(number);
 
         try {
             phone.setInfoEntity(em.find(InfoEntity.class, infoEntityid));
