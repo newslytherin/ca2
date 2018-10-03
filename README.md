@@ -22,7 +22,7 @@
 **api/company/**
 returns a list of all persons
   
-```json
+```js
 [
 {name: "name",
  description: "description",
