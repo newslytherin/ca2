@@ -24,11 +24,11 @@ returns a list of all persons
   
 ```js
 [
-{name: "name",
- description: "description",
- cvr: "cvr",
- numEmployees: "numEmployees",
- marketValue: "marketValue"},
+{"name": "name",
+ "description": "description",
+ "cvr": "cvr",
+ "numEmployees": "numEmployees",
+ "marketValue": "marketValue"},
  { ... }
 ]
 ```
