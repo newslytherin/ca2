@@ -17,8 +17,8 @@ public class PersonDTO {
     public PersonDTO(Person p) {
         this.id = p.getId();
         this.email = p.getEmail();
-        this.name = p.getFirstName() + " " + p.getLastName();
-        this.address = p.getAddress().getStreet() + " " + p.getAddress().getAddressInfo();
+        this.name = p.getName();
+        this.address = p.getAddress().toString();
         this.zipCode = p.getAddress().getCityInfo().getZipCode();
         this.city = p.getAddress().getCityInfo().getCity();
         phones = p.getPhones().stream().map(Phone::getNumber).collect(Collectors.toList());
