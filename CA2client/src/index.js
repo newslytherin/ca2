@@ -2,6 +2,9 @@ import 'bootstrap/dist/css/bootstrap.css'
 
 var target = document.getElementById('target');
 var filter = document.getElementById('filter');
+var tableHead = document.getElementById('tablehead');
+var tableBody = document.getElementById('tablebody');
+document.getElementById('find-btn').addEventListener('click', getData)
 
 target.onchange = setFilter;
 
@@ -57,3 +60,59 @@ function filterHobby(){
     renderFilters(filters);
 }
 
+const URL = "http://localhost:8090/CA2api/api/city/";
+
+function handleHttpErrors(res) {
+    if (res.ok) {
+        return res.json();
+    } else {
+        return Promise.reject({
+            httpError: res.status,
+            fullError: res.json()
+        })
+    }
+}
+
+
+function renderTable(data){
+    var tHead = "";
+    var tBody = "";
+    var first = true;
+
+    if(data.length == undefined) {
+        var dataTmp = data;
+        data = [dataTmp];
+    }
+
+    for(var i in data){
+        tBody += "<tr>";
+        
+        for(var j in data[i]){
+            if (first) {
+                tHead += "<th>" + j + "</th>";
+            }
+            tBody += "<td>" + data[i][j] + "</td>";
+        }
+        
+        first = false;
+        tBody += "</tr>";
+    }
+    tableHead.innerHTML = tHead;
+    tableBody.innerHTML = tBody;
+}
+
+function getData() {
+    fetch(URL)
+        .then(res => handleHttpErrors(res))
+        .then(data => {
+            console.log(data);
+            renderTable(data);
+        })
+        .catch(err => {
+            if (err.httpError) {
+                err.fullError.then(eJson => console.log("Error: " + eJson.detail))
+            } else {
+                console.log("Netværks fejl")
+            }
+        })
+}
