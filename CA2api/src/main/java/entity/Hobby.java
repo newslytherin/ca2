@@ -17,6 +17,7 @@ import javax.persistence.NamedQuery;
  */
 @Entity
 @NamedQueries({
+    @NamedQuery(name = "Hobby.findall", query = "SELECT new entity.HobbyDTO(h) FROM Hobby h"),
     @NamedQuery(name = "Hobby.findbyname", query = "SELECT new entity.HobbyDTO(h) FROM Hobby h where h.name = :name")
 })
 public class Hobby implements Serializable {
