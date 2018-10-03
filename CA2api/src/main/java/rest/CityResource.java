@@ -17,6 +17,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  * REST Web Service
@@ -43,8 +44,14 @@ public class CityResource {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getJson() {
-        return gson.toJson(CityInfoFacade.getAllCityDTO());
+    public Response getJson() {
+        
+        String json = gson.toJson(CityInfoFacade.getAllCityDTO());
+        if(json != null) {
+            return Response.ok(json).build();
+        } else {
+            return Response.status(Response.Status.NOT_ACCEPTABLE).entity("{}").build();
+        }
     }
     
     /**
@@ -55,8 +62,14 @@ public class CityResource {
     @Path("zip/{zip}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getJson(@PathParam("zip") int zip) {
-        return gson.toJson(CityInfoFacade.getCityInfoDTOByZip(zip));
+    public Response getJson(@PathParam("zip") int zip) {
+
+        String json = gson.toJson(CityInfoFacade.getCityInfoDTOByZip(zip));
+        if(json != null) {
+            return Response.ok(json).build();
+        } else {
+            return Response.status(Response.Status.NOT_ACCEPTABLE).entity("{}").build();
+        }
     }
 
 }

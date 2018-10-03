@@ -20,6 +20,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  * REST Web Service
@@ -46,8 +47,14 @@ public class PhoneResource {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getJson() {
-        return gson.toJson(PhoneFacade.getAllPhonesDTO());
+    public Response getJson() {
+        
+        String json = gson.toJson(PhoneFacade.getAllPhonesDTO()); 
+        if(json != null) {
+            return Response.ok(json).build();
+        } else {
+            return Response.status(Response.Status.NOT_ACCEPTABLE).entity("{}").build();
+        }
     }
     
     /**
@@ -58,8 +65,14 @@ public class PhoneResource {
     @Path("number/{number}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getJson(@PathParam("number") int number) {
-        return gson.toJson(PhoneFacade.getPhoneDTOByNumber(number));
+    public Response getJson(@PathParam("number") int number) {
+        
+        String json = gson.toJson(PhoneFacade.getPhoneDTOByNumber(number));  
+        if(json != null) {   
+            return Response.ok(json).build();
+        } else {
+            return Response.status(Response.Status.NOT_ACCEPTABLE).entity("{}").build();
+        }
     }
 
     /**
@@ -70,23 +83,41 @@ public class PhoneResource {
     @Path("infoentityid/{id}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public void putJson(String content, @PathParam("id") int infoEntityid) {
-        PhoneFacade.addPhone(gson.fromJson(content, Phone.class), infoEntityid);
+    public Response putJson(String content, @PathParam("id") int infoEntityid) {
+        
+        Phone phone = gson.fromJson(content, Phone.class);   
+        if(PhoneFacade.addPhone(phone, infoEntityid) != null) {
+            return Response.ok(content).build();
+        } else {
+            return Response.status(Response.Status.NOT_ACCEPTABLE).entity("{}").build();
+        }
     }
     
     @Path("number/{number}")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public void postJson(String content) {
-        PhoneFacade.editPhone(gson.fromJson(content, Phone.class));
+    public Response postJson(String content) {
+        
+        Phone phone = gson.fromJson(content, Phone.class);     
+        if(PhoneFacade.editPhone(phone) != null) {
+            return Response.ok(content).build();
+        } else {
+            return Response.status(Response.Status.NOT_ACCEPTABLE).entity("{}").build();
+        } 
     }
     
     @Path("number/{number}")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public void deleteJson(String content) {
-        PhoneFacade.deletePhone(gson.fromJson(content, Phone.class));
+    public Response deleteJson(String content) {
+        
+        Phone phone = gson.fromJson(content, Phone.class);     
+        if(PhoneFacade.deletePhone(phone) != null) {
+            return Response.ok(content).build();
+        } else {
+            return Response.status(Response.Status.NOT_ACCEPTABLE).entity("{}").build();
+        }     
     }
 }
