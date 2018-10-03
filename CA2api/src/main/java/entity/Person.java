@@ -31,9 +31,19 @@ public class Person extends InfoEntity implements Serializable {
     public String getLastName() {
         return lastName;
     }
+    
+    public String getName() {
+        return firstName + " " + lastName;
+    }
 
     public List<Hobby> getHobbies() {
         return hobbies;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Person{" + "firstName=" + firstName + ", lastName=" + lastName + ", hobbies=" + hobbies + '}';
     }
 
 }
