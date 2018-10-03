@@ -14,6 +14,9 @@ public class ApplicationConfig extends Application {
     }
 
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(cors.CorsRequestFilter.class);
+        resources.add(cors.CorsResponseFilter.class);
+        resources.add(rest.CityResource.class);
         resources.add(rest.PersonResource.class);
     }
     

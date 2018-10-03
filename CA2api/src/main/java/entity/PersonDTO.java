@@ -1,6 +1,7 @@
 package entity;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PersonDTO {
 
@@ -14,6 +15,7 @@ public class PersonDTO {
     private String city;
     private List<String> phones;
     private List<String> hobbies;
+
     public PersonDTO(Person p) {
         this.id = p.getId();
         this.email = p.getEmail();
@@ -23,7 +25,47 @@ public class PersonDTO {
         this.addressInfo = p.getAddress().getAddressInfo();
         this.zipCode = p.getAddress().getCityInfo().getZipCode();
         this.city = p.getAddress().getCityInfo().getCity();
-        p.getPhones().forEach(phone -> phones.add(phone.toString()));
-        
+        phones = p.getPhones().stream().map(Phone::getNumber).collect(Collectors.toList());
+        hobbies = p.getHobbies().stream().map(Hobby::getName).collect(Collectors.toList());
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public String getAddressInfo() {
+        return addressInfo;
+    }
+
+    public int getZipCode() {
+        return zipCode;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public List<String> getPhones() {
+        return phones;
+    }
+
+    public List<String> getHobbies() {
+        return hobbies;
     }
 }
