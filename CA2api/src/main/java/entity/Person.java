@@ -22,7 +22,7 @@ public class Person extends InfoEntity implements Serializable {
     private String firstName;
     private String lastName;
     @ManyToMany(mappedBy = "people", fetch = FetchType.EAGER)
-    @ElementCollection()
+    //@ElementCollection()
     private List<Hobby> hobbies;
 
     public String getFirstName() {

@@ -31,7 +31,7 @@ public class Address implements Serializable {
     private String street;
     private String addressInfo;
     @OneToMany(mappedBy = "address", fetch = FetchType.EAGER)
-    @ElementCollection()
+    //@ElementCollection()
     private List<InfoEntity> infoEntities;
     @ManyToOne(fetch = FetchType.EAGER)
     private CityInfo cityInfo;

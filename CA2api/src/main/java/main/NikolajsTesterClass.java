@@ -13,7 +13,7 @@ public class NikolajsTesterClass {
 //        params.put("zipCode", "2800");
 //        params.put("hobby", "Gaming");
 //        System.out.println(pf.getPersonDTOWithFilters(params));
-        System.out.println(pf.getPersonDTOById(1));
+        //System.out.println(pf.getPersonDTOById(1));
 //        System.out.println(pf.getPersonDTOByEmail("Nikolaj.Najaholm@mail.dk"));
     }
 }

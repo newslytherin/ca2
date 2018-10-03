@@ -28,7 +28,7 @@ public class CityInfo implements Serializable {
     private Integer id;
     private int zipCode;
     private String city;
-    @ElementCollection()
+    //@ElementCollection()
     @OneToMany(mappedBy = "cityInfo", fetch = FetchType.EAGER)
     private List<Address> addresses;
 

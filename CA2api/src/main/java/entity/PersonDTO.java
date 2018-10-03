@@ -30,9 +30,9 @@ public class PersonDTO {
 
         //phones -> maybe es works?
 //        this.phones = new ArrayList<>();
-        this.phones = phones.stream().map(Phone::getNumber).collect(Collectors.toList());
+        this.phones = p.getPhones().stream().map(Phone::getNumber).collect(Collectors.toList());
 //        this.hobbies = new ArrayList<>();
-        this.phones = hobbies.stream().map(Hobby::getName).collect(Collectors.toList());
+        this.phones = p.getHobbies().stream().map(Hobby::getName).collect(Collectors.toList());
 
         if (p.getAddress() != null) {
             this.address = p.getAddress().getStreet() + " " + p.getAddress().getAddressInfo();
