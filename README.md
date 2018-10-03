@@ -17,10 +17,10 @@
 | api/person/email/{`email`}  | returns a person with specific email |
 | api/person/person?zip=`zip`&street=`street`&hobby=`hobby` | returns a person with specific query params |
 
-**Company**
+## Company
 
-**api/company/**
-returns a list of all persons
+**GET** `api/company/`  
+*returns a list of all persons*
 
 **Fuldført forbindelse**
 ```js
