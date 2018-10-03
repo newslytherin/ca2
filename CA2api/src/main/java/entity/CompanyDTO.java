@@ -47,27 +47,10 @@ public class CompanyDTO
         this.numEmployees = c.getNumEmployees();
         this.marketValue = c.getMarketValue();
 
+        if(!c.getPhones().isEmpty()){
+            this.phones = c.getPhones().stream().map(Phone::getNumber).collect(Collectors.toList());
+        }
         
-        c.getPhones().size();
-        System.out.println(c.getPhones());
-        
-        //phones -> maybe es works?
-//        if (c.getPhones() != null && c.getPhones().isEmpty())
-//        {
-//            System.out.println("EMPTY LIST HILSDEN DANIEL");
-//        }
-//        {
-//            System.out.println(c.getPhones());
-//            //this.phones = c.getPhones().stream().map(e -> e.getNumber()).collect(Collectors.toList());
-//        }
-
-//        System.out.println("----");
-//        System.out.println("----");
-//        System.out.println(phones);
-//        System.out.println("----");
-//        System.out.println("----");
-
-        //this.phones = new ArrayList();
         if (c.getAddress() != null)
         {
             this.addressInfo = c.getAddress().getAddressInfo();

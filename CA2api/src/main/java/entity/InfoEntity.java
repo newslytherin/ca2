@@ -28,7 +28,7 @@ public class InfoEntity implements Serializable
     private Integer id;
     private String email;
     @OneToMany(mappedBy = "infoEntity", fetch = FetchType.EAGER)
-    @ElementCollection()
+    //@ElementCollection()
     private List<Phone> phones;
     @ManyToOne(fetch = FetchType.EAGER)
     private Address address;
