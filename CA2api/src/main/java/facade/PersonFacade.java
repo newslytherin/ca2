@@ -1,5 +1,6 @@
 package facade;
 
+import entity.Person;
 import entity.PersonDTO;
 import java.util.List;
 import java.util.Map;
@@ -81,6 +82,17 @@ public class PersonFacade {
             return em.createNamedQuery("Person.findbyemail", PersonDTO.class)
                     .setParameter("email", email)
                     .getSingleResult();
+        } finally {
+            em.close();
+        }
+    }
+
+    public void addPerson(Person p) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(p);
+            em.getTransaction().commit();
         } finally {
             em.close();
         }
