@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 /**
@@ -14,6 +16,9 @@ import javax.persistence.OneToMany;
  * @author super
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Address.findbyzip", query = "SELECT new AddressDTO(a) FROM Address a where a.cityInfo.zipCode = :zipCode")
+})
 public class Address implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -31,7 +36,11 @@ public class Address implements Serializable {
     {
     }
 
-    
+    public Address(String street, String addressInfo)
+    {
+        this.street = street;
+        this.addressInfo = addressInfo;
+    }
 
     public Integer getId() {
         return id;
@@ -58,7 +67,6 @@ public class Address implements Serializable {
         this.street = street;
     }
 
-
     public void setInfoEntities(List<InfoEntity> infoEntities)
     {
         this.infoEntities = infoEntities;
@@ -68,7 +76,6 @@ public class Address implements Serializable {
     {
         this.cityInfo = cityInfo;
     }
-    
     
     @Override
     public String toString() {
