@@ -69,4 +69,11 @@ public class InfoEntity implements Serializable
         phones.add(phone);
     }
 
+    @Override
+    public String toString()
+    {
+        return "InfoEntity{" + "id=" + id + ", email=" + email + ", phones=" + phones + ", address=" + address + '}';
+    }
+
+    
 }

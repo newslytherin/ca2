@@ -54,7 +54,11 @@ public class CompanyResource
             @QueryParam("zipCode") String zipCode
     )
     {
-
+        System.out.println("-----");
+        System.out.println(zipCode);
+        System.out.println(street);
+        System.out.println("-----");
+        
         Map<String, String> map = new HashMap();
 
         if (empmin != null)
@@ -73,14 +77,16 @@ public class CompanyResource
         {
             map.put("valuemax", valuemax);
         }
-        if (empmin != null)
+        if (street != null)
         {
             map.put("street", street);
         }
-        if (empmin != null)
+        if (zipCode != null)
         {
             map.put("zipCode", zipCode);
         }
+        
+        System.out.println(map);
 
         return Response
                 .status(Response.Status.OK)
