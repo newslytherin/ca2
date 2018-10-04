@@ -19,16 +19,8 @@ returns a list of all persons as json
     "email": "xxx",
     "name": "xxx",
     "zipCode": 1234,
-    "phones": [
-      12345678,
-      23456789,
-      ...
-    ],
-    "hobbies": [
-      "hobby1",
-      "hobby2",
-      ...
-    ]
+    "phones": [12345678, 23456789, ...],
+    "hobbies": ["hobby1", "hobby2", ...]
   },
   {...}
   ]
