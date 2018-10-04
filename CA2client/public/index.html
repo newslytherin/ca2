@@ -3,26 +3,132 @@
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link href="style.css" rel="stylesheet">
 </head>
 
 <body>
   <div class="container">
-    get <select id="target">
-      <option value="" disabled selected hidden>Select</option>
-      <option value="person">Person</option>
-      <option value="company">Company</option>
-      <option value="city">City</option>
-      <option value="address">Address</option>
-      <option value="phone">Phone</option>
-      <option value="hobby">Hobby</option>
+    <h1>new Krak</h1>
+    <select id="target" class="form-control selcls">
+      <option value="" disabled selected hidden>target</option>
+      <option value="person">person</option>
+      <option value="company">company</option>
+      <option value="city">city</option>
+      <option value="address">address</option>
+      <option value="phone">phone</option>
+      <option value="hobby">hobby</option>
     </select>
 
-    by <select id="filter">
+    <select id="filter" class="form-control selcls">
+      <option value="" disabled selected hidden>choose target</option>
     </select>
 
-    <input type="text" id="filter-input">
-    <button id="find-btn">find</button>
+    <input type="text" id="key" class="form-control" placeholder="keyword">
+    <button id="find-btn" class="btn btn-info btn-lg">find</button>
+
+    <!-- Trigger the modal with a button -->
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#person-model">add person</button>
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#company-model">add company</button>
+
+    <!-- Person Modal -->
+    <div class="modal fade" id="person-model" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">add person</h4>
+          </div>
+          <div class="modal-body">
+
+            <div id="general">
+              <h4>general</h4>
+              <input type="text" id="firstName" class="form-control" placeholder="first name">
+              <input type="text" id="lastName" class="form-control" placeholder="last name">
+              <input type="text" id="email" class="form-control" placeholder="email">
+              <div id="person-phone-container">
+                <input type="text" id="phone-number" class="form-control" placeholder="phone number">
+                <input type="text" id="phone-description" class="form-control" placeholder="phone description">
+              </div>
+              <button type="button" id="add-person-phone" class="btn btn-default phone">add phone</button>
+            </div>
+            <br>
+
+            <div id="address">
+              <h4>address</h4>
+              <input type="text" id="address-city" class="form-control" placeholder="city">
+              <input type="text" id="address-zipcode" class="form-control" placeholder="zipcode">
+              <input type="text" id="address-street" class="form-control" placeholder="street">
+            </div>
+            <br>
+
+            <div id="hobbies">
+              <h4>hobbies</h4>
+              <div id="hobby-container">
+                <input type="text" id="hobby-name" class="form-control" placeholder="name (optional)">
+                <input type="text" id="hobby-desciption" class="form-control" placeholder="desciption (optional)">
+              </div>
+              <button type="button" id="add-hobby" class="btn btn-default phone">add hobby</button>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default">add</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Company Modal -->
+    <div class="modal fade" id="company-model" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">add company</h4>
+          </div>
+          <div class="modal-body">
+
+            <div id="general">
+              <h4>general</h4>
+              <input type="text" id="firstName" class="form-control" placeholder="first name">
+              <input type="text" id="lastName" class="form-control" placeholder="last name">
+              <input type="text" id="cvr" class="form-control" placeholder="cvr">
+              <input type="text" id="email" class="form-control" placeholder="email">
+              <div id="company-phone-container">
+                <input type="text" id="phone" class="form-control" placeholder="phone number">
+                <input type="text" id="phone-description" class="form-control" placeholder="phone description">
+              </div>
+              <button type="button" id="add-company-phone" class="btn btn-default phone">add phone</button>
+            </div>
+            <br>
+
+            <div id="address">
+              <h4>address</h4>
+              <input type="text" id="address-city" class="form-control" placeholder="city">
+              <input type="text" id="address-zipcode" class="form-control" placeholder="zipcode">
+              <input type="text" id="address-street" class="form-control" placeholder="street">
+            </div>
+            <br>
+
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default">add</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
 
     <table class="table">
       <thead id="tablehead">
