@@ -13,7 +13,7 @@ returns a list of all persons as json
 ```js
 [
   {
-    "id": 1,
+    "id": x,
     "email": "xxx",
     "name": "xxx",
     "zipCode": 1234,
@@ -39,7 +39,7 @@ returns a person with specific id as json
 **Succes**
 ```js
 {
-  "id": 1,
+  "id": x,
   "email": "xxx",
   "name": "xxx",
   "zipCode": 1234,
@@ -57,7 +57,30 @@ returns a person with specific id as json
 newlines added for readability
 
 ---
+#### **GET** `api/person/email/{email}`
+returns a person with specific email as json
 
+**Succes**
+```js
+{
+  "id": x,
+  "email": "xxx",
+  "name": "xxx",
+  "zipCode": 1234,
+  "phones": [12345678, 23456789, ...],
+  "hobbies": ["hobby1", "hobby2", ...]
+}
+```
+**Fejl forbindelse**
+```js
+{
+  "status code": 404,
+   "detail": "xxxx",
+}
+```
+newlines added for readability
+
+---
 | GET |  |
 | --- | --- |
 | api/person/                 | returns a list of all persons |
@@ -68,7 +91,7 @@ newlines added for readability
 
 ## Company
 
-#### **GET** `api/company/`
+#### **GET** `api/company`
 *returns a list of all companies*
 
 **Fuldført forbindelse**
