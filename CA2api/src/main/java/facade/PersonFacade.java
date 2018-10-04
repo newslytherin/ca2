@@ -2,12 +2,12 @@ package facade;
 
 import entity.Person;
 import entity.PersonDTO;
+import entity.Phone;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 public class PersonFacade {
@@ -24,7 +24,7 @@ public class PersonFacade {
 
     public List<PersonDTO> getPersonDTOWithFilters(Map<String, String> parameters) {
         EntityManager em = emf.createEntityManager();
-        String jpql = "SELECT new entity.PersonDTO(p) FROM InfoEntity p WHERE TYPE(p) <> Person";
+        String jpql = "SELECT new entity.PersonDTO(p) FROM InfoEntity p WHERE TYPE(p) = Person";
         //build query string
         if (parameters.containsKey("street")) {
             jpql += " AND (SELECT a.street FROM Address a) = :street";
@@ -42,7 +42,7 @@ public class PersonFacade {
                 query = query.setParameter("street", parameters.get("street"));
             }
             if (parameters.containsKey("zipCode")) {
-                query = query.setParameter("zipCode", parameters.get("zipCode"));
+                query = query.setParameter("zipCode", Integer.parseInt(parameters.get("zipCode")));
             }
             if (parameters.containsKey("hobby")) {
                 query = query.setParameter("hobby", parameters.get("hobby"));
@@ -57,7 +57,7 @@ public class PersonFacade {
     public PersonDTO getPersonDTOById(int id) {
         EntityManager em = emf.createEntityManager();
         try {
-            return em.createNamedQuery("Person.findbyid", PersonDTO.class)
+            return em.createQuery("SELECT new entity.PersonDTO(p) FROM InfoEntity p WHERE TYPE(p) = Person AND p.id = :id", PersonDTO.class)
                     .setParameter("id", id)
                     .getSingleResult();
         } finally {
@@ -67,11 +67,12 @@ public class PersonFacade {
 
     public PersonDTO getPersonDTOByPhone(String phone) {
         EntityManager em = emf.createEntityManager();
-        String jpql = "SELECT new entity.PersonDTO(e) FROM InfoEntity e WHERE (SELECT p.number FROM e.phones p) = :phone";
+        String jpql = "SELECT p FROM Phone p WHERE p.number = :phone";
         try {
-            return em.createQuery(jpql, PersonDTO.class)
-                    .setParameter("number", phone)
+            Phone p = em.createQuery(jpql, Phone.class)
+                    .setParameter("phone", phone)
                     .getSingleResult();
+            return new PersonDTO((Person) p.getInfoEntity());
         } finally {
             em.close();
         }
@@ -80,7 +81,7 @@ public class PersonFacade {
     public PersonDTO getPersonDTOByEmail(String email) {
         EntityManager em = emf.createEntityManager();
         try {
-            return em.createNamedQuery("Person.findbyemail", PersonDTO.class)
+            return em.createQuery("SELECT new entity.PersonDTO(p) FROM InfoEntity p WHERE TYPE(p) = Person AND p.email = :email", PersonDTO.class)
                     .setParameter("email", email)
                     .getSingleResult();
         } finally {
