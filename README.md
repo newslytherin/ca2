@@ -3,9 +3,7 @@
 [Course Assignment 2](https://docs.google.com/document/d/1hHtsSG-cZxqjkq-Ii2bbdir-lmZDgvxUFwT6RHwPYCw/edit)
 
 
-## API Documetation
-
-### GET
+# API Documetation
 
 ## Person
 #### **GET** `api/person`
@@ -24,6 +22,30 @@ returns a list of all persons as json
   },
   {...}
 ]
+```
+**Fejl forbindelse**
+```js
+{
+  "status code": 404,
+   "detail": "xxxx",
+}
+```
+newlines added for readability
+
+---
+#### **GET** `api/person/id/{id}`
+returns a person with specific id as json
+
+**Succes**
+```js
+{
+  "id": 1,
+  "email": "xxx",
+  "name": "xxx",
+  "zipCode": 1234,
+  "phones": [12345678, 23456789, ...],
+  "hobbies": ["hobby1", "hobby2", ...]
+}
 ```
 **Fejl forbindelse**
 ```js
