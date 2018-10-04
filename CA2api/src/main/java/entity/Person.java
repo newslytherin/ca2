@@ -3,19 +3,12 @@ package entity;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.DiscriminatorValue;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 
 @Entity
 @DiscriminatorValue("P")
-@NamedQueries({
-    //@NamedQuery(name = "Person.findbyid", query = "SELECT new entity.PersonDTO(p) FROM InfoEntity p WHERE p = P AND id = :id"),
-    //@NamedQuery(name = "Person.findbyemail", query = "SELECT new entity.PersonDTO(p) FROM InfoEntity p WHERE p = P AND p.email = :email")
-})
 public class Person extends InfoEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -32,7 +25,7 @@ public class Person extends InfoEntity implements Serializable {
     public String getLastName() {
         return lastName;
     }
-    
+
     @Override
     public String getName() {
         return firstName + " " + lastName;
@@ -43,8 +36,7 @@ public class Person extends InfoEntity implements Serializable {
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "Person{" + "firstName=" + firstName + ", lastName=" + lastName + ", hobbies=" + hobbies + '}';
     }
 
