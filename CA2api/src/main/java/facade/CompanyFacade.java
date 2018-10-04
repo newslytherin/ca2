@@ -37,17 +37,12 @@ public class CompanyFacade
         String query = "SELECT new entity.CompanyDTO(c) FROM InfoEntity c WHERE TYPE(c) <> Company";
 
         //build query string
-        
-        
         // TESTERSSSSSSSSSSSSSSSSSSSSSSSSSSSSSsss
         if (parameters.containsKey("cvr"))
         {
             query += " AND c.cvr = :cvr";
         }
-        
-        
-        
-        
+
         if (parameters.containsKey("empmin"))
         {
             query += " AND c.numEmployees = :empmin";
@@ -79,14 +74,12 @@ public class CompanyFacade
         {
 
             TypedQuery tq = em.createQuery(query, CompanyDTO.class);
-            
+
             // THE TESTER
             if (parameters.containsKey("cvr"))
             {
                 tq = tq.setParameter("cvr", parameters.get("cvr"));
             }
-            
-            
 
             if (parameters.containsKey("empmin"))
             {
@@ -123,54 +116,45 @@ public class CompanyFacade
 
     public static void main(String[] args)
     {
-        Map map = new HashMap();
-        
-        
-        map.put("cvr", "12345678");
-
-//        map.put("empmin", "5");
-//        map.put("empmax", "20");
-//        map.put("valuemin", "5");
-//        map.put("valuemax", "20");
-//        map.put("zipCode", "2680");
-//        map.put("street", "minvej");
+//        Map map = new HashMap();
+//
+//        map.put("cvr", "12345678");
+//
+////        map.put("empmin", "5");
+////        map.put("empmax", "20");
+////        map.put("valuemin", "5");
+////        map.put("valuemax", "20");
+////        map.put("zipCode", "2680");
+////        map.put("street", "minvej");
 
         CompanyFacade cf = new CompanyFacade();
-        List<CompanyDTO> list = cf.getCompanyDTOWithFilters(map);
-        System.out.println(list);
+        List <CompanyDTO> dto = cf.getCompanyDTOByCvr("hejsa");
+        System.out.println(dto);
 
     }
 
     public CompanyDTO getCompanyDTOById(int id)
     {
-
-        EntityManager em = emf.createEntityManager();
-        String query = "SELECT new CompanyDTO(c) FROM infoEntity c WHERE c = C AND c.id = :id";
-
-        try
-        {
-            return em
-                    .createNamedQuery(query, CompanyDTO.class)
-                    .setParameter("id", id)
-                    .getSingleResult();
-        } finally
-        {
-            em.close();
-        }
+        String query = "SELECT new CompanyDTO(c, a) FROM InfoEntity c WHERE c = C AND c.id = :id";
+        return simpleFacadeBuilder(query, "id", id);
     }
 
-    public CompanyDTO getCompanyDTOByCvr(String cvr)
+    public List<CompanyDTO> getCompanyDTOByCvr(String cvr)
     {
+        
+        //String name, String description, String cvr, int numEmployees, double marketValue, List<String> phones, String addressInfo, String street, int zipCode, String city)
+        String query = "SELECT new entity.CompanyDTO(c) FROM InfoEntity c WHERE c = C AND TREAT(c as Company).cvr = :cvr";
 
         EntityManager em = emf.createEntityManager();
-        String query = "SELECT new CompanyDTO(c) FROM infoEntity c WHERE c = C AND c.cvr = :cvr";
-
+        
+        System.out.println(query);
+        
         try
         {
             return em
-                    .createNamedQuery(query, CompanyDTO.class)
+                    .createQuery(query, CompanyDTO.class)
                     .setParameter("cvr", cvr)
-                    .getSingleResult();
+                    .getResultList();
         } finally
         {
             em.close();
@@ -179,59 +163,52 @@ public class CompanyFacade
 
     public CompanyDTO getCompanyDTOByName(String name)
     {
-
-        EntityManager em = emf.createEntityManager();
-        String query = "SELECT new CompanyDTO(c) FROM infoEntity c WHERE c = C AND c.name = :name";
-
-        try
-        {
-            return em
-                    .createNamedQuery(query, CompanyDTO.class)
-                    .setParameter("name", name)
-                    .getSingleResult();
-        } finally
-        {
-            em.close();
-        }
+        String query = "SELECT new CompanyDTO(c) FROM InfoEntity c WHERE c = C AND c.name = :name";
+        return simpleFacadeBuilder(query, "name", name);
     }
 
     public CompanyDTO getCompanyDTOByPhone(String phone)
     {
-
-        EntityManager em = emf.createEntityManager();
-        
-        String query = "SELECT new CompanyDTO(c) FROM infoEntity c WHERE c = C AND (SELECT p.number FROM c.phones p) = :phone";
-
-        try
-        {
-            return em
-                    .createNamedQuery(query, CompanyDTO.class)
-                    .setParameter("phone", phone)
-                    .getSingleResult();
-        } finally
-        {
-            em.close();
-        }
+        String query = "SELECT new CompanyDTO(c) FROM InfoEntity c WHERE c = C AND (SELECT p.number FROM c.phones p) = :phone";
+        return simpleFacadeBuilder(query, "phone", phone);
     }
-    
+
     public CompanyDTO getCompanyDTOByEmail(String email)
     {
+        String query = "SELECT new CompanyDTO(c) FROM InfoEntity c WHERE c = C AND c.email = :email";
+        return simpleFacadeBuilder(query, "email", email);
+    }
 
+    private CompanyDTO simpleFacadeBuilder(String query, String setValue, String here)
+    {
         EntityManager em = emf.createEntityManager();
-        String query = "SELECT new CompanyDTO(c) FROM infoEntity c WHERE c = C AND c.email = :email";
 
         try
         {
             return em
-                    .createNamedQuery(query, CompanyDTO.class)
-                    .setParameter("email", email)
+                    .createQuery(query, CompanyDTO.class)
+                    .setParameter(setValue, here)
                     .getSingleResult();
         } finally
         {
             em.close();
         }
     }
-    
-    
+
+    private CompanyDTO simpleFacadeBuilder(String query, String setValue, int here)
+    {
+        EntityManager em = emf.createEntityManager();
+
+        try
+        {
+            return em
+                    .createQuery(query, CompanyDTO.class)
+                    .setParameter(setValue, here)
+                    .getSingleResult();
+        } finally
+        {
+            em.close();
+        }
+    }
 
 }

@@ -29,7 +29,7 @@ public class Hobby implements Serializable {
     private String name;
     private String description;
     @ManyToMany
-    @ElementCollection()
+    //@ElementCollection()
     private List<Person> people;
 
     public Hobby()

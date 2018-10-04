@@ -1,6 +1,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.ElementCollection;
@@ -27,11 +28,18 @@ public class InfoEntity implements Serializable
     private Integer id;
     private String email;
     @OneToMany(mappedBy = "infoEntity", fetch = FetchType.EAGER)
-    @ElementCollection()
+    //@ElementCollection()
     private List<Phone> phones;
     @ManyToOne(fetch = FetchType.EAGER)
     private Address address;
 
+    public InfoEntity()
+    {
+        phones = new ArrayList();
+    }
+
+    
+    
     public Integer getId()
     {
         return id;
