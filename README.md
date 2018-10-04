@@ -23,14 +23,14 @@ returns a list of all persons as json
     "hobbies": ["hobby1", "hobby2", ...]
   },
   {...}
-  ]
+]
 ```
 **Fejl forbindelse**
 ```js
 {
   "status code": 404,
    "detail": "xxxx",
- }
+}
 ```
 newlines added for readability
 
