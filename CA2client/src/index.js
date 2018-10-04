@@ -1,17 +1,24 @@
-import 'bootstrap/dist/css/bootstrap.css'
+//import 'bootstrap/dist/css/bootstrap.css'
 
 var target = document.getElementById('target');
 var filter = document.getElementById('filter');
 var tableHead = document.getElementById('tablehead');
 var tableBody = document.getElementById('tablebody');
-document.getElementById('find-btn').addEventListener('click', getData)
+document.getElementById('find-btn').addEventListener('click', getData);
+document.getElementById('add-person-phone').addEventListener('click', addPersonPhoneInput);
+document.getElementById('add-company-phone').addEventListener('click', addCompanyPhoneInput);
+document.getElementById('add-hobby').addEventListener('click', addHobbyInput);
+
+var personPhoneContainer = document.getElementById('person-phone-container');
+var companyPhoneContainer = document.getElementById('company-phone-container');
+var hobbyContainer = document.getElementById('hobby-container');
 
 target.onchange = setFilter;
 
-const URL = "http://localhost:8090/CA2api/api/city/zip/2800";
+const URL = "http://localhost:8090/CA2api/api/";
 
 function getData() {
-    fetch(URL)
+    fetch(URL + getInputs())
         .then(res => handleHttpErrors(res))
         .then(data => renderTable(data))
         .catch(err => {
@@ -38,10 +45,10 @@ function handleHttpErrors(res) {
 function setFilter() {
     switch (target.value) {
         case 'person':
-            addFilters('all', 'id', 'phone', 'email');
+            addFilters('all', 'phone', 'email', 'hobby', 'city');
             break;
         case 'company':
-            addFilters('all', 'id', 'cvr', 'name', 'phone', 'email');
+            addFilters('all', 'cvr', 'name', 'phone', 'email', 'city');
             break;
         case 'city':
             addFilters('all', 'zip');
@@ -68,9 +75,7 @@ function addFilters() {
 
 // adds filters to option
 function renderFilters(filters) {
-    // adds default option
-    var optionDefault = "<option value='' disabled selected hidden>select</option>";
-    filter.innerHTML = optionDefault + filters.map(
+    filter.innerHTML = filters.map(
         value => "<option value=" + value + ">" + value + "</option>").join();
 }
 
@@ -104,3 +109,31 @@ function renderTable(data) {
     tableBody.innerHTML = tBody;
 }
 
+function getInputs() {
+    var targetValue = target.value;
+    var filterValue = filter.value;
+    var keyValue = key.value;
+
+    return filterValue == 'all' ? targetValue : targetValue + "/" + filterValue + "/" + keyValue;
+}
+
+// note: get phone numers by class!
+function addPersonPhoneInput(){
+    personPhoneContainer.innerHTML += "<hr>";
+    personPhoneContainer.innerHTML += "<input type='text' class='form-control phone' placeholder='phone number'>";
+    personPhoneContainer.innerHTML += "<input type='text' id='phone-description' class='form-control' placeholder='phone description'>";
+}
+
+// note: get phone numers by class!
+function addCompanyPhoneInput(){
+    companyPhoneContainer.innerHTML += "<hr>";
+    companyPhoneContainer.innerHTML += "<input type='text' class='form-control phone' placeholder='phone number'>";
+    companyPhoneContainer.innerHTML += "<input type='text' id='phone-description' class='form-control' placeholder='phone description'>";
+}
+
+// note: get phone numers by class!
+function addHobbyInput(){
+    hobbyContainer.innerHTML += "<hr>";
+    hobbyContainer.innerHTML += "<input type='text' id='hobby-name' class='form-control' placeholder='name (optional)'>";
+    hobbyContainer.innerHTML += "<input type='text' id='hobby-desciption' class='form-control' placeholder='desciption (optional)'>";
+}

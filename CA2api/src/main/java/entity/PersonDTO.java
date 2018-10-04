@@ -32,7 +32,7 @@ public class PersonDTO {
 //        this.phones = new ArrayList<>();
         this.phones = p.getPhones().stream().map(Phone::getNumber).collect(Collectors.toList());
 //        this.hobbies = new ArrayList<>();
-        this.phones = p.getHobbies().stream().map(Hobby::getName).collect(Collectors.toList());
+        this.hobbies = p.getHobbies().stream().map(Hobby::getName).collect(Collectors.toList());
 
         if (p.getAddress() != null) {
             this.address = p.getAddress().getStreet() + " " + p.getAddress().getAddressInfo();
@@ -73,5 +73,10 @@ public class PersonDTO {
 
     public List<String> getHobbies() {
         return hobbies;
+    }
+
+    @Override
+    public String toString() {
+        return "id: " + id + ", " + name + ", " + email + ", " + address + ", " + zipCode + " " + city;
     }
 }

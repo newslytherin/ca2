@@ -10,3 +10,6 @@ body {
      margin-right: auto;
   }
   
+  .form-control, .btn {
+  margin-top: 10px;
+}
