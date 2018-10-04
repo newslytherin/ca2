@@ -7,7 +7,42 @@
 
 ### GET
 
-**Person**
+## Person
+#### **GET** `api/person`
+returns a list of all persons as json
+
+**Succes**
+```js
+[
+  {
+    "id": 1,
+    "email": "xxx",
+    "name": "xxx",
+    "zipCode": 1234,
+    "phones": [
+      12345678,
+      23456789,
+      ...
+    ],
+    "hobbies": [
+      "hobby1",
+      "hobby2",
+      ...
+    ]
+  },
+  {...}
+  ]
+```
+**Fejl forbindelse**
+```js
+{
+  "status code": 404,
+   "detail": "xxxx",
+ }
+```
+newlines added for readability
+
+---
 
 | GET |  |
 | --- | --- |
