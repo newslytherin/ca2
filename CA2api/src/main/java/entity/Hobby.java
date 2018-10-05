@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,7 +29,7 @@ public class Hobby implements Serializable {
     private Integer id;
     private String name;
     private String description;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     //@ElementCollection()
     private List<Person> people;
 

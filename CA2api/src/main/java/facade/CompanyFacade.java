@@ -9,6 +9,8 @@ import entity.Company;
 import entity.CompanyDTO;
 import entity.InfoEntity;
 import entity.Phone;
+import exception.CompanyNotFoundException;
+import exception.InvalidDataException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,19 +37,19 @@ public class CompanyFacade
         this.emf = emf;
     }
 
-    public List<CompanyDTO> getCompanyDTOWithFilters(Map<String, String> parameters)
+    public List<CompanyDTO> getCompanyDTOWithFilters(Map<String, String> parameters) throws InvalidDataException
     {
 
         EntityManager em = emf.createEntityManager();
         String query = "SELECT new entity.CompanyDTO(c) FROM Company c";
-        
-        if(parameters.containsKey("street") || parameters.containsKey("zipCode")){
+
+        if (parameters.containsKey("street") || parameters.containsKey("zipCode"))
+        {
             query += " JOIN Address a";
         }
-        
+
         query += " WHERE TYPE(c) = Company";
-        
-        
+
         List<CompanyDTO> list;
 
         //build query string
@@ -108,16 +110,20 @@ public class CompanyFacade
                 tq = tq.setParameter("zipCode", Integer.parseInt(parameters.get("zipCode")));
             }
 
-            list = tq.getResultList();
+            return tq.getResultList();
 
+        } catch (Exception ex)
+        {
+            throw new InvalidDataException("Inserted data is not valid");
         } finally
         {
-            em.close();
+            {
+                em.close();
+            }
         }
-        return list;
     }
 
-    public static void main(String[] args)
+    public static void main(String[] args) throws CompanyNotFoundException, InvalidDataException
     {
         Map map = new HashMap();
 //        map.put("cvr", "hejsa");
@@ -134,79 +140,77 @@ public class CompanyFacade
 
         //CompanyDTO dto = cf.getCompanyDTOByEmail("test@test.dk");
         //CompanyDTO dto = cf.getCompanyDTOByPhone("1234562278");
-        //System.out.println(dto);
+        System.out.println(dto);
     }
 
-    public CompanyDTO getCompanyDTOById(int id)
+    public CompanyDTO getCompanyDTOById(int id) throws CompanyNotFoundException
     {
         String query = "SELECT new entity.CompanyDTO(c) FROM Company c WHERE c.id = :id";
         return simpleFacadeBuilder(query, "id", id);
     }
 
-    public CompanyDTO getCompanyDTOByCvr(String cvr)
+    public CompanyDTO getCompanyDTOByCvr(String cvr) throws CompanyNotFoundException
     {
         String query = "SELECT new entity.CompanyDTO(c) FROM Company c WHERE c.cvr = :cvr";
         return simpleFacadeBuilder(query, "cvr", cvr);
     }
 
-    public CompanyDTO getCompanyDTOByName(String name)
+    public CompanyDTO getCompanyDTOByName(String name) throws CompanyNotFoundException
     {
         String query = "SELECT new entity.CompanyDTO(c) FROM Company c WHERE c.name = :name";
         return simpleFacadeBuilder(query, "name", name);
     }
 
-    public CompanyDTO getCompanyDTOByPhone(String phone)
+    public CompanyDTO getCompanyDTOByPhone(String phone) throws CompanyNotFoundException
     {
         String query = "SELECT new entity.CompanyDTO(c) FROM Company c JOIN c.phones p WHERE p.number = :phone";
         return simpleFacadeBuilder(query, "phone", phone);
     }
 
-    public CompanyDTO getCompanyDTOByEmail(String email)
+    public CompanyDTO getCompanyDTOByEmail(String email) throws CompanyNotFoundException
     {
         String query = "SELECT new entity.CompanyDTO(c) FROM Company c WHERE c.email = :email";
         return simpleFacadeBuilder(query, "email", email);
     }
 
-    private CompanyDTO simpleFacadeBuilder(String query, String setValue, String here)
+    private CompanyDTO simpleFacadeBuilder(String query, String setValue, String here) throws CompanyNotFoundException
     {
         EntityManager em = emf.createEntityManager();
-        CompanyDTO dto = null;
         try
         {
-            dto = em
+            return em
                     .createQuery(query, CompanyDTO.class)
                     .setParameter(setValue, here)
                     .getSingleResult();
         } catch (Exception ex)
         {
-            System.out.println(ex.getMessage());
+            //System.out.println(ex.getMessage());
+            throw new CompanyNotFoundException("No such company exist");
 
         } finally
         {
             em.close();
         }
-        return dto;
     }
 
-    private CompanyDTO simpleFacadeBuilder(String query, String setValue, int here)
+    private CompanyDTO simpleFacadeBuilder(String query, String setValue, int here) throws CompanyNotFoundException
     {
         EntityManager em = emf.createEntityManager();
-        CompanyDTO dto = null;
         try
         {
-            dto = em
+            return em
                     .createQuery(query, CompanyDTO.class)
                     .setParameter(setValue, here)
                     .getSingleResult();
         } catch (Exception ex)
         {
-            System.out.println(ex.getMessage());
+            //System.out.println(ex.getMessage());
+            throw new CompanyNotFoundException("No such company exist");
 
         } finally
         {
             em.close();
         }
-        return dto;
     }
 
 }

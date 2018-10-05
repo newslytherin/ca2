@@ -33,16 +33,13 @@ public class PersonResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getJson(@QueryParam("street") String street, @QueryParam("hobby") String hobby, @QueryParam("zipcode") String zipCode) {
+    public Response getJson(@QueryParam("street") String street, @QueryParam("zipcode") String zipCode) {
         Map<String, String> params = new HashMap<>();
         if (street != null) {
             params.put("street", street);
         }
         if (zipCode != null) {
             params.put("zipCode", zipCode);
-        }
-        if (hobby != null) {
-            params.put("hobby", hobby);
         }
         return Response.ok(gson.toJson(pf.getPersonDTOWithFilters(params))).build();
     }
@@ -66,6 +63,12 @@ public class PersonResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getJsonByEmail(@PathParam("email") String email) {
         return Response.ok(gson.toJson(pf.getPersonDTOByEmail(email))).build();
+    }
+    @GET
+    @Path("hobby/{hobby}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getJsonByHobby(@PathParam("hobby") String hobby) {
+        return Response.ok(gson.toJson(pf.getPersonDTOByHobby(hobby))).build();
     }
 
     @POST
