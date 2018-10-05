@@ -81,6 +81,58 @@
       </div>
     </div>
 
+    <!-- Person Edit Modal -->
+    <div class="modal fade" id="person-edit-model" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title" id="edit-title"></h4>
+          </div>
+          <div class="modal-body">
+
+            <div id="general">
+              <div id="edit-name"></div>
+              <b>email: </b>
+              <input type="text" id="edit-email" class="form-control"></input>
+              <div id="edit-phone-container">
+              </div>
+              <button type="button" id="add-person-phone" class="btn btn-default phone">add phone</button>
+            </div>
+            <br>
+
+            <div id="address">
+              <h4>address</h4>
+              <b>Street</b>
+              <input type="text" id="edit-street" class="form-control">
+
+              <b>City</b>
+              <input type="text" id="edit-city" class="form-control">
+
+              <b>Zip code</b>
+              <input type="text" id="edit-zipcode" class="form-control">
+            </div>
+            <br>
+
+            <div id="hobbies">
+              <h4>hobbies</h4>
+              <div id="edit-hobby-container">
+              </div>
+              <button type="button" id="add-hobby" class="btn btn-default phone">add hobby</button>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default">edit</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
     <!-- Company Modal -->
     <div class="modal fade" id="company-model" role="dialog">
       <div class="modal-dialog">

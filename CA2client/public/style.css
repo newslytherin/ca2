@@ -13,3 +13,7 @@ body {
   .form-control, .btn {
   margin-top: 10px;
 }
+
+input {
+  margin-bottom: 10px;
+}

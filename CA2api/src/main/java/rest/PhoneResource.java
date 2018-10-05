@@ -81,7 +81,7 @@ public class PhoneResource {
      * @param infoEntityid
      */
     @Path("infoentityid/{id}")
-    @PUT
+    @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response putJson(String content, @PathParam("id") int infoEntityid) {
         
@@ -94,7 +94,7 @@ public class PhoneResource {
     }
     
     @Path("number/{number}")
-    @POST
+    @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response postJson(String content) {

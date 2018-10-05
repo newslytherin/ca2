@@ -9,18 +9,18 @@ public class AddressDTO
 {
     private Integer id;
     private String street;
-    private String addressInfo;
-    private List<String> infoEntities;
-    private String cityInfo;
+    private String address;
+    private List<String> persons;
+    private String city;
+    private int zipCode;
 
     public AddressDTO(Address a)
     {
         this.id = a.getId();
-        this.street = a.getStreet();
-        this.addressInfo = a.getAddressInfo();
-        this.infoEntities = a.getInfoEntities().stream().map(InfoEntity->InfoEntity.getName()).collect(Collectors.toList());
-        this.cityInfo = a.getCityInfo().getCity();
+        this.address = a.getStreet() + " " + a.getAddressInfo();
+        this.persons = a.getInfoEntities().stream().map(InfoEntity->InfoEntity.getName()).collect(Collectors.toList());
+        this.city = a.getCityInfo().getCity();
+        this.zipCode = a.getCityInfo().getZipCode();
     }
-    
-    
+        
 }

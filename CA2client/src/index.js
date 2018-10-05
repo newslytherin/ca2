@@ -14,19 +14,21 @@ var personPhoneContainer = document.getElementById('person-phone-container');
 var companyPhoneContainer = document.getElementById('company-phone-container');
 var hobbyContainer = document.getElementById('hobby-container');
 
+var fetchData = null;
+
 target.onchange = setFilter;
 
-<<<<<<< HEAD
 // CHANGE IP TO LOCAL!!
 const URL = "http://localhost:8090/CA2api/api/";
-=======
-const URL = "http://localhost:8084/CA2api/api/";
->>>>>>> bd18a31325ce55fc327c643a7a32c2756cbd92f5
 
 function getData() {
+    resetTable();
     fetch(URL + getInputs())
         .then(res => handleHttpErrors(res))
-        .then(data => renderTable(data))
+        .then(data => {
+            fetchData = data;
+            return renderTable(data)
+        })
         .catch(err => {
             if (err.httpError) {
                 err.fullError.then(eJson => console.log("Error: " + eJson.detail))
@@ -47,6 +49,11 @@ function handleHttpErrors(res) {
     }
 }
 
+function resetTable() {
+    tableHead.innerHTML = null;
+    tableBody.innerHTML = null;
+}
+
 // set values for filter option
 function setFilter() {
     switch (target.value) {
@@ -54,7 +61,7 @@ function setFilter() {
             addFilters('all', 'id', 'phone', 'email', 'hobby');
             break;
         case 'company':
-            addFilters('all', 'cvr', 'name', 'phone', 'email', 'city');
+            addFilters('all', 'cvr', 'name', 'phone', 'email');
             break;
         case 'city':
             addFilters('all', 'zip');
@@ -86,7 +93,36 @@ function renderFilters(filters) {
 }
 
 function viewDetails(object) {
-    console.log(object.target.id);
+    // 
+    if(target.value != 'person' && target.value != 'company') return;
+    $('#person-edit-model').modal('show');
+    setEditValues(object.target.id);
+}
+
+function setEditValues(index) {
+    var jsonObject = fetchData[index];
+    console.log(jsonObject);
+
+    // general
+    document.getElementById('edit-title').innerText = jsonObject['name'];
+    document.getElementById('edit-email').value = jsonObject['email'];
+
+    document.getElementById('edit-phone-container').innerHTML = "<h5><b>phones</b></h5>";
+    for(var phone in jsonObject['phones']){  
+        document.getElementById('edit-phone-container').innerHTML += "<input type='text' class='form-control' value='" + jsonObject['phones'][phone] + "'>";
+        console.log(jsonObject['phones'][phone]);
+    }
+
+    // address
+    document.getElementById('edit-street').value = jsonObject['address'];
+    document.getElementById('edit-city').value = jsonObject['city'];
+    document.getElementById('edit-zipcode').value = jsonObject['zipCode'];
+
+    // hobbies
+    document.getElementById('edit-hobby-container').innerHTML = "";
+    for(var hobby in jsonObject['hobbies']){  
+        document.getElementById('edit-hobby-container').innerHTML += "<input type='text' class='form-control' value='" + jsonObject['hobbies'][hobby] + "'>";
+    }
 }
 
 // iterate through data and adds it to the table 
@@ -99,7 +135,6 @@ function renderTable(data) {
     if (!Array.isArray(data)) {
         var dataTmp = data;
         data = [dataTmp];
-        console.log(data);
     }
 
     // iterate through json objects in array
@@ -115,7 +150,6 @@ function renderTable(data) {
         // stops adding table headers
         header = false;
         tBody += "</tr>";
-
     }
     tableHead.innerHTML = tHead;
     tableBody.innerHTML = tBody;
@@ -133,19 +167,19 @@ function getInputs() {
 function addPersonPhoneInput() {
     personPhoneContainer.innerHTML += "<hr>";
     personPhoneContainer.innerHTML += "<input type='text' class='form-control phone' placeholder='phone number'>";
-    personPhoneContainer.innerHTML += "<input type='text' id='phone-description' class='form-control' placeholder='phone description'>";
+    personPhoneContainer.innerHTML += "<input type='text' class='phone-description form-control' placeholder='phone description'>";
 }
 
 // note: get phone numers by class!
 function addCompanyPhoneInput() {
     companyPhoneContainer.innerHTML += "<hr>";
     companyPhoneContainer.innerHTML += "<input type='text' class='form-control phone' placeholder='phone number'>";
-    companyPhoneContainer.innerHTML += "<input type='text' id='phone-description' class='form-control' placeholder='phone description'>";
+    companyPhoneContainer.innerHTML += "<input type='text' class='phone-description form-control' placeholder='phone description'>";
 }
 
-// note: get phone numers by class!
+// note: get hobby numers by class!
 function addHobbyInput() {
     hobbyContainer.innerHTML += "<hr>";
-    hobbyContainer.innerHTML += "<input type='text' id='hobby-name' class='form-control' placeholder='name (optional)'>";
-    hobbyContainer.innerHTML += "<input type='text' id='hobby-desciption' class='form-control' placeholder='desciption (optional)'>";
+    hobbyContainer.innerHTML += "<input type='text' class='hobby-name form-control' placeholder='name (optional)'>";
+    hobbyContainer.innerHTML += "<input type='text' class='hobby-desciption form-control' placeholder='desciption (optional)'>";
 }

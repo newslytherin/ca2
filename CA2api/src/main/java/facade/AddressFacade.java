@@ -22,14 +22,14 @@ public class AddressFacade
         return emf.createEntityManager();
     }
 
-    public AddressDTO getAddressByZip(int zipCode)
+    public List<AddressDTO>  getAddressByZip(int zipCode)
     {
         EntityManager em = getEm();
         try
         {
             return em.createNamedQuery("Address.findbyzip", AddressDTO.class)
                     .setParameter("zipCode", zipCode)
-                    .getSingleResult();
+                    .getResultList();
         } finally
         {
             em.close();
