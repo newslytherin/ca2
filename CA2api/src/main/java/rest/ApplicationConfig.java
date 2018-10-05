@@ -19,6 +19,7 @@ public class ApplicationConfig extends Application {
         resources.add(exception.CompanyNotFoundExceptionMapper.class);
         resources.add(exception.GenericExceptionMapper.class);
         resources.add(exception.InvalidDataExceptionMapper.class);
+        resources.add(exception.PersonNotFoundExceptionMapper.class);
         resources.add(rest.AddressResource.class);
         resources.add(rest.CityResource.class);
         resources.add(rest.CompanyResource.class);
@@ -26,5 +27,4 @@ public class ApplicationConfig extends Application {
         resources.add(rest.PersonResource.class);
         resources.add(rest.PhoneResource.class);
     }
-    
 }
