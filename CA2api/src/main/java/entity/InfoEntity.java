@@ -62,6 +62,8 @@ public abstract class InfoEntity implements Serializable {
 
     public void setAddress(Address address) {
         this.address = address;
+        this.address.getInfoEntities().add(this);
+        
     }
     
     public InfoEntity addPhone(Phone phone){

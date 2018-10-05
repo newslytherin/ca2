@@ -82,41 +82,41 @@ public class Phone implements Serializable {
     
     
     
-    public static void main(String[] args)
-    {
-        
-        PersonFacade personfacade = new PersonFacade();
-        PhoneFacade phonefacade = new PhoneFacade();
-        CompanyFacade companyfacade = new CompanyFacade();
-        
-        Person p = new Person();
-        p.setFirstName("daniel");
-        p.setLastName("lindholm");
-        
-        Company c = new Company("Daniels Company", null, null, 0, 0d);
-        
-        companyfacade.addCompany(c);
-        personfacade.addPerson(p);
-        
-        
-        Phone phone = new Phone();
-        phone.setNumber("555345345");
-        phone.setDescription("Min iPhone");
-        
-     
-        phonefacade.addPhone(phone);
-        
-        
-        System.out.println("-----");
-        System.out.println(c);
-        //System.out.println(p);
-        System.out.println(phone);
-        System.out.println("-----");
-        
-        
-        System.out.println(phonefacade.addPhoneToInfoEntity(c, phone));
-          
-        
-    }
+//    public static void main(String[] args)
+//    {
+//        
+//        PersonFacade personfacade = new PersonFacade();
+//        PhoneFacade phonefacade = new PhoneFacade();
+//        CompanyFacade companyfacade = new CompanyFacade();
+//        
+//        Person p = new Person();
+//        p.setFirstName("daniel");
+//        p.setLastName("lindholm");
+//        
+//        Company c = new Company("Daniels Company", null, null, 0, 0d);
+//        
+//        companyfacade.addCompany(c);
+//        personfacade.addPerson(p);
+//        
+//        
+//        Phone phone = new Phone();
+//        phone.setNumber("555345345");
+//        phone.setDescription("Min iPhone");
+//        
+//     
+//        phonefacade.addPhone(phone);
+//        
+//        
+//        System.out.println("-----");
+//        System.out.println(c);
+//        //System.out.println(p);
+//        System.out.println(phone);
+//        System.out.println("-----");
+//        
+//        
+//        System.out.println(phonefacade.addPhoneToInfoEntity(c, phone));
+//          
+//        
+//    }
     
 }

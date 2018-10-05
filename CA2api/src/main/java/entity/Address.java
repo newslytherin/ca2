@@ -79,6 +79,12 @@ public class Address implements Serializable {
     public void setCityInfo(CityInfo cityInfo)
     {
         this.cityInfo = cityInfo;
+        this.cityInfo.addAddress(this);
+    }
+    
+    public void addInfoEntity(InfoEntity infoEntity){
+        
+        infoEntity.setAddress(this);
     }
     
     @Override

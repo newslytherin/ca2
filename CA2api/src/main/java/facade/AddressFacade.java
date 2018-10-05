@@ -2,6 +2,7 @@ package facade;
 
 import entity.Address;
 import entity.AddressDTO;
+import entity.Person;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -76,5 +77,25 @@ public class AddressFacade
             em.close();
         }
         return new AddressDTO(tmp);
+    }
+    
+    public void addPersonToAddress(int personid, int addressid){
+        
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            em.getTransaction().begin();
+           
+            Person p = em.find(Person.class, personid);
+            Address a = em.find(Address.class, addressid);
+
+            a.addInfoEntity(p);
+            
+            em.getTransaction().commit();
+           
+        } finally {
+            em.close();
+        }
+        
     }
 }

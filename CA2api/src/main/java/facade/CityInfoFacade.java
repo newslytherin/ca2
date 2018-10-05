@@ -5,6 +5,9 @@
  */
 package facade;
 
+import entity.Address;
+import entity.AddressDTO;
+import entity.CityInfo;
 import entity.CityInfoDTO;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -47,6 +50,26 @@ public class CityInfoFacade {
         } finally {
             em.close();
         }
+    }
+    
+    public void addAddressToCityInfo(int addressid, int cityid){
+        
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            em.getTransaction().begin();
+           
+            Address a = em.find(Address.class, addressid);
+            CityInfo city = em.find(CityInfo.class, cityid);
+
+            city.addAddress(a);
+
+            em.getTransaction().commit();
+           
+        } finally {
+            em.close();
+        }
+        
     }
 
 }
