@@ -345,7 +345,7 @@ only allow companies with an address on in a certain area<br>
 **Fejl forbindelse**
 ```js
 {
-  "statusCode": 500,
+   "statusCode": 500,
    "message": "xxx",
    "description": "xxx"
 }
@@ -356,24 +356,24 @@ only allow companies with an address on in a certain area<br>
 Consumes json
 ```json
 {
-	"name": "Daniel",
-	"email": "test@test.dk",
-	"cvr": "55-2355-6-63",
-	"description": "beskrivelsen",
-	"numEmployees": 500,
-	"marketValue": 2000
+   "name": "Daniel",
+   "email": "test@test.dk",
+   "cvr": "55-2355-6-63",
+   "description": "beskrivelsen",
+   "numEmployees": 500,
+   "marketValue": 2000
 }
 ```
 **Succes**
 ```json
 {
-	"id": 11,
-	"name": "Daniel",
-	"email": "test@test.dk",
-	"cvr": "55-2355-6-63",
-	"description": "beskrivelsen",
-	"numEmployees": 500,
-	"marketValue": 2000
+   "id": 11,
+   "name": "Daniel",
+   "email": "test@test.dk",
+   "cvr": "55-2355-6-63",
+   "description": "beskrivelsen",
+   "numEmployees": 500,
+   "marketValue": 2000
 }
 ```
 **Fejl forbindelse**
