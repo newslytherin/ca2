@@ -12,13 +12,19 @@ import java.util.stream.Collectors;
 public class CompanyDTO
 {
 
-    //infoentity
-    private String email = null;
+    private Integer id = null;
 
-    //company
+    //infoentity
     private String name = null;
-    private String description = null;
+    private String email = null;
+    private String address = null;
+
+    private Integer zipCode = null;
+    private String city = null;
+
     private String cvr = null;
+    private String description = null;
+
     private Integer numEmployees = null;
     private Double marketValue = null;
 
@@ -26,17 +32,13 @@ public class CompanyDTO
     private List<String> phones = null;
 
     //address
-    private String addressInfo = null;
-    private String street = null;
-
+//    private String addressInfo = null;
+//    private String street = null;
     //cityinfo
-    private Integer zipCode = null;
-    private String city = null;
-
     public CompanyDTO(Company c)
     {
 
-        System.out.println(c);
+        this.id = c.getId();
 
         this.email = c.getEmail();
 
@@ -47,14 +49,14 @@ public class CompanyDTO
         this.numEmployees = c.getNumEmployees();
         this.marketValue = c.getMarketValue();
 
-        if(!c.getPhones().isEmpty()){
+        if (!c.getPhones().isEmpty())
+        {
             this.phones = c.getPhones().stream().map(Phone::getNumber).collect(Collectors.toList());
         }
-        
+
         if (c.getAddress() != null)
         {
-            this.addressInfo = c.getAddress().getAddressInfo();
-            this.street = c.getAddress().getStreet();
+            this.address = c.getAddress().getStreet() + " " + c.getAddress().getAddressInfo();
 
             if (c.getAddress().getCityInfo() != null)
             {
@@ -68,7 +70,7 @@ public class CompanyDTO
     @Override
     public String toString()
     {
-        return "CompanyDTO{" + "email=" + email + ", name=" + name + ", description=" + description + ", cvr=" + cvr + ", numEmployees=" + numEmployees + ", marketValue=" + marketValue + ", phones=" + phones + ", addressInfo=" + addressInfo + ", street=" + street + ", zipCode=" + zipCode + ", city=" + city + '}';
+        return "CompanyDTO{" + "id=" + id + ", name=" + name + ", email=" + email + ", address=" + address + ", zipCode=" + zipCode + ", city=" + city + ", cvr=" + cvr + ", description=" + description + ", numEmployees=" + numEmployees + ", marketValue=" + marketValue + ", phones=" + phones + '}';
     }
 
 }

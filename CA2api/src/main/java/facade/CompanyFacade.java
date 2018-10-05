@@ -50,8 +50,6 @@ public class CompanyFacade
 
         query += " WHERE TYPE(c) = Company";
 
-        List<CompanyDTO> list;
-
         //build query string
         if (parameters.containsKey("empmin"))
         {
@@ -214,7 +212,7 @@ public class CompanyFacade
     }
     
     
-    public void addCompany(Company c) {
+    public CompanyDTO addCompany(Company c) {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
@@ -223,17 +221,25 @@ public class CompanyFacade
         } finally {
             em.close();
         }
+        return new CompanyDTO(c);
     }
     
-    public void updateCompany(Company c) {
+    public CompanyDTO updateCompany(Company c) {
+        
         EntityManager em = emf.createEntityManager();
+        
+        Company DBCompany = c;
+        
         try {
             em.getTransaction().begin();
-            em.merge(c);
+            
+            DBCompany = em.find(Company.class, c.getId()).updateValues(c);
+            
             em.getTransaction().commit();
         } finally {
             em.close();
         }
+        return new CompanyDTO(DBCompany);
     }
     
     
