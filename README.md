@@ -225,9 +225,10 @@ only allow companies with an address on in a certain area<br>
 **Fejl forbindelse**
 ```js
 {
-  "status code": "status code",
-   "detail": "detail",
- }
+  "statusCode": 500,
+   "message": "xxx",
+   "description": "xxx"
+}
 ```
 ---
 
@@ -248,9 +249,10 @@ only allow companies with an address on in a certain area<br>
 **Fejl forbindelse**
 ```js
 {
-  "status code": "status code",
-   "detail": "detail",
- }
+  "statusCode": 500,
+   "message": "xxx",
+   "description": "xxx"
+}
 ```
 ---
 
@@ -271,9 +273,10 @@ only allow companies with an address on in a certain area<br>
 **Fejl forbindelse**
 ```js
 {
-  "status code": "status code",
-   "detail": "detail",
- }
+  "statusCode": 500,
+   "message": "xxx",
+   "description": "xxx"
+}
 ```
 ---
 
@@ -294,9 +297,10 @@ only allow companies with an address on in a certain area<br>
 **Fejl forbindelse**
 ```js
 {
-  "status code": "status code",
-   "detail": "detail",
- }
+  "statusCode": 500,
+   "message": "xxx",
+   "description": "xxx"
+}
 ```
 ---
 
@@ -317,9 +321,10 @@ only allow companies with an address on in a certain area<br>
 **Fejl forbindelse**
 ```js
 {
-  "status code": "status code",
-   "detail": "detail",
- }
+  "statusCode": 500,
+   "message": "xxx",
+   "description": "xxx"
+}
 ```
 ---
 
@@ -340,9 +345,10 @@ only allow companies with an address on in a certain area<br>
 **Fejl forbindelse**
 ```js
 {
-  "status code": "status code",
-   "detail": "detail",
- }
+  "statusCode": 500,
+   "message": "xxx",
+   "description": "xxx"
+}
 ```
 ---
 
@@ -364,9 +370,10 @@ only allow companies with an address on in a certain area<br>
 **Fejl forbindelse**
 ```js
 {
-  "status code": "status code",
-   "detail": "detail",
- }
+  "statusCode": 500,
+   "message": "xxx",
+   "description": "xxx"
+}
 ```
 ---
 
