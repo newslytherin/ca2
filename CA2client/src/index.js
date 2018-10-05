@@ -8,6 +8,7 @@ document.getElementById('find-btn').addEventListener('click', getData);
 document.getElementById('add-person-phone').addEventListener('click', addPersonPhoneInput);
 document.getElementById('add-company-phone').addEventListener('click', addCompanyPhoneInput);
 document.getElementById('add-hobby').addEventListener('click', addHobbyInput);
+document.getElementById('tablebody').addEventListener('click', viewDetails);
 
 var personPhoneContainer = document.getElementById('person-phone-container');
 var companyPhoneContainer = document.getElementById('company-phone-container');
@@ -15,7 +16,7 @@ var hobbyContainer = document.getElementById('hobby-container');
 
 target.onchange = setFilter;
 
-const URL = "http://localhost:8090/CA2api/api/";
+const URL = "http://localhost:8084/CA2api/api/";
 
 function getData() {
     fetch(URL + getInputs())
@@ -79,31 +80,37 @@ function renderFilters(filters) {
         value => "<option value=" + value + ">" + value + "</option>").join();
 }
 
+function viewDetails(object) {
+    console.log(object.target.id);
+}
+
 // iterate through data and adds it to the table 
 function renderTable(data) {
     var tHead = "";
     var tBody = "";
-    var first = true;
+    var header = true;
 
     // adds data to array
     if (!Array.isArray(data)) {
         var dataTmp = data;
         data = [dataTmp];
+        console.log(data);
     }
 
     // iterate through json objects in array
-    for (var object in data) {
+    for (var index in data) {
         tBody += "<tr>";
-
+        // tBody += "<td><button value = '" + index + "'>edit</button></td>";
         // iterate through values in json object
-        for (var key in data[object]) {
+        for (var key in data[index]) {
             // adds table header from key values
-            if (first) tHead += "<th>" + key + "</th>";
-            tBody += "<td>" + data[object][key] + "</td>";
+            if (header) tHead += "<th>" + key + "</th>";
+            tBody += "<td id = '" + index + "'>" + data[index][key] + "</td>";
         }
         // stops adding table headers
-        first = false;
+        header = false;
         tBody += "</tr>";
+
     }
     tableHead.innerHTML = tHead;
     tableBody.innerHTML = tBody;
@@ -118,21 +125,21 @@ function getInputs() {
 }
 
 // note: get phone numers by class!
-function addPersonPhoneInput(){
+function addPersonPhoneInput() {
     personPhoneContainer.innerHTML += "<hr>";
     personPhoneContainer.innerHTML += "<input type='text' class='form-control phone' placeholder='phone number'>";
     personPhoneContainer.innerHTML += "<input type='text' id='phone-description' class='form-control' placeholder='phone description'>";
 }
 
 // note: get phone numers by class!
-function addCompanyPhoneInput(){
+function addCompanyPhoneInput() {
     companyPhoneContainer.innerHTML += "<hr>";
     companyPhoneContainer.innerHTML += "<input type='text' class='form-control phone' placeholder='phone number'>";
     companyPhoneContainer.innerHTML += "<input type='text' id='phone-description' class='form-control' placeholder='phone description'>";
 }
 
 // note: get phone numers by class!
-function addHobbyInput(){
+function addHobbyInput() {
     hobbyContainer.innerHTML += "<hr>";
     hobbyContainer.innerHTML += "<input type='text' id='hobby-name' class='form-control' placeholder='name (optional)'>";
     hobbyContainer.innerHTML += "<input type='text' id='hobby-desciption' class='form-control' placeholder='desciption (optional)'>";
