@@ -123,6 +123,7 @@ Consumes json
 	"email": "mail@mail.dk" 
 }
 ```
+returns the new person as json
 **Succes**
 ```json
 {
@@ -152,6 +153,7 @@ Consumes json
 	"email": "mail@mail.dk" 
 }
 ```
+returns the modified person
 **Succes**
 ```json
 {
