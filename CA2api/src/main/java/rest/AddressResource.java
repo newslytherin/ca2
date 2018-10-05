@@ -63,19 +63,22 @@ public class AddressResource
     {
         return Response.ok(gson.toJson(af.getAddressByZip(zip))).build();
     }
-    
+
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response putJson(String json) {
+    public Response putJson(String json)
+    {
         Address a = gson.fromJson(json, Address.class);
         af.addAddress(a);
         return Response.ok(json).build();
     }
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response postJson(String json) {
+    public Response postJson(String json)
+    {
         Address a = gson.fromJson(json, Address.class);
         af.addAddress(a);
         return Response.ok(json).build();
