@@ -129,7 +129,38 @@ Consumes json
   "firstName": "xxx",
   "lastName": "xxx",
   "id": 1,
+  "email": "xxx"
+}
+```
+**Fejl forbindelse**
+```json
+{
+  "statusCode": 500,
+   "message": "xxx",
+   "description": "xxx"
+}
+```
+newlines added for readability
+---
+#### **PUT** `api/person`
+Consumes json
+```json
+{
+	"id": 1,
+	"firstName": "Daniel",
+	"lastName": "Lindholm",
+	"email": "mail@mail.dk" 
+}
+```
+**Succes**
+```json
+{
+  "id": 1,
   "email": "xxx",
+  "name": "xxx",
+  "zipCode": 1234,
+  "phones": [12345678, 23456789, ...],
+  "hobbies": ["hobby1", "hobby2", ...]
 }
 ```
 **Fejl forbindelse**
