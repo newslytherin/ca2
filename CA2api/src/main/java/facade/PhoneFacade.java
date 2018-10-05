@@ -128,9 +128,6 @@ public class PhoneFacade
             
             infoEntity.addPhone(phone);
             
-            System.out.println(infoEntity);
-            
-            em.merge(phone);
             em.getTransaction().commit();
             
             

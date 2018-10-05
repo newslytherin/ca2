@@ -2,6 +2,7 @@ package facade;
 
 import entity.Hobby;
 import entity.HobbyDTO;
+import entity.Person;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -59,5 +60,25 @@ public class HobbyFacade
         } finally {
             em.close();
         }
+    }
+    
+    public void addHobbyToPerson(int personID, int hobbyID){
+        
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            em.getTransaction().begin();
+           
+            Hobby h = em.find(Hobby.class, hobbyID);
+            Person p = em.find(Person.class, personID);
+
+            p.addHobby(h);
+            
+            em.getTransaction().commit();
+           
+        } finally {
+            em.close();
+        }
+        
     }
 }
