@@ -406,10 +406,17 @@ Consumes json
    "id": 11,
    "name": "Daniel",
    "email": "test@test.dk",
+   "address": "Pedersvej 24",
+   "zipCode": 2680,
+   "city": "Solrød",
    "cvr": "55-2355-6-63",
    "description": "beskrivelsen",
    "numEmployees": 500,
-   "marketValue": 2000
+   "marketValue": 2000,
+   "phones": [
+      "83838485",
+      "12345678"
+   ]
 }
 ```
 **Fejl forbindelse**
