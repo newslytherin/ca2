@@ -65,6 +65,7 @@ public class Company extends InfoEntity implements Serializable {
         this.cvr = c.getCvr();
         this.numEmployees = c.getNumEmployees();
         this.marketValue = c.getMarketValue();
+        this.email = c.getEmail();
         
         return this;
     }

@@ -24,13 +24,13 @@ public class InfoEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String email;
+    protected Integer id;
+    protected String email;
     @OneToMany(mappedBy = "infoEntity", fetch = FetchType.EAGER)
     //@ElementCollection()
-    private List<Phone> phones;
+    protected List<Phone> phones;
     @ManyToOne(fetch = FetchType.EAGER)
-    private Address address;
+    protected Address address;
 
     public InfoEntity() {
     }
