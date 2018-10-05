@@ -9,39 +9,62 @@ package entity;
  *
  * @author Stephan
  */
-public class PhoneDTO {
+public class PhoneDTO
+{
+
     private String number;
     private String description;
     private String infoEntity;
 
-    public PhoneDTO(Phone phone) {
+    public PhoneDTO(Phone phone)
+    {
         this.number = phone.getNumber();
         this.description = phone.getDescription();
-        this.infoEntity = phone.getInfoEntity().getName();
+
+        if (phone.getInfoEntity() != null)
+        {
+            this.infoEntity = phone.getInfoEntity().getName();
+
+        }
+
     }
 
-    public String getNumber() {
+    public String getNumber()
+    {
         return number;
     }
 
-    public void setNumber(String number) {
+    public void setNumber(String number)
+    {
         this.number = number;
     }
 
-    public String getDescription() {
+    public String getDescription()
+    {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(String description)
+    {
         this.description = description;
     }
 
-    public String getInfoEntity() {
+    public String getInfoEntity()
+    {
         return infoEntity;
     }
 
-    public void setInfoEntity(String infoEntity) {
+    public void setInfoEntity(String infoEntity)
+    {
         this.infoEntity = infoEntity;
     }
+
+    @Override
+    public String toString()
+    {
+        return "PhoneDTO{" + "number=" + number + ", description=" + description + ", infoEntity=" + infoEntity + '}';
+    }
     
+    
+
 }

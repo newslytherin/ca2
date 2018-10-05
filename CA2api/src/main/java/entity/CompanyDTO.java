@@ -49,7 +49,7 @@ public class CompanyDTO
         this.numEmployees = c.getNumEmployees();
         this.marketValue = c.getMarketValue();
 
-        if (!c.getPhones().isEmpty())
+        if (c.getPhones() != null && !c.getPhones().isEmpty())
         {
             this.phones = c.getPhones().stream().map(Phone::getNumber).collect(Collectors.toList());
         }

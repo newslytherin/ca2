@@ -5,7 +5,9 @@
  */
 package facade;
 
+import entity.Company;
 import entity.InfoEntity;
+import entity.Person;
 import entity.Phone;
 import entity.PhoneDTO;
 import java.util.List;
@@ -61,13 +63,12 @@ public class PhoneFacade
         }
     }
 
-    public PhoneDTO addPhone(Phone phone, int infoEntityid)
+    public PhoneDTO addPhone(Phone phone)
     {
         EntityManager em = emf.createEntityManager();
 
         try
         {
-            phone.setInfoEntity(em.find(InfoEntity.class, infoEntityid));
             em.getTransaction().begin();
             em.persist(phone);
             em.getTransaction().commit();
@@ -112,5 +113,56 @@ public class PhoneFacade
 
         return new PhoneDTO(phone);
     }
+    
+    
+    
+    public PhoneDTO addPhoneToInfoEntity(InfoEntity infoEntity, Phone phone) {
+        EntityManager em = emf.createEntityManager();
 
+        
+        try {
+            em.getTransaction().begin();
+            
+            phone = em.find(Phone.class, phone.getId());
+            infoEntity = em.find(InfoEntity.class, infoEntity.getId());
+            
+            infoEntity.addPhone(phone);
+            
+            System.out.println(infoEntity);
+            
+            em.merge(phone);
+            em.getTransaction().commit();
+            
+            
+        } finally {
+            em.close();
+        }
+        
+        return new PhoneDTO(phone);
+    }
+    
+    public PhoneDTO addPhoneToInfoEntity(Phone phone, int id) {
+        EntityManager em = emf.createEntityManager();
+
+        
+        try {
+            em.getTransaction().begin();
+            
+            phone = em.find(Phone.class, phone.getId());
+            InfoEntity infoEntity = em.find(InfoEntity.class, id);
+            
+            infoEntity.addPhone(phone);
+            
+            em.merge(phone);
+            em.getTransaction().commit();
+            
+            
+        } finally {
+            em.close();
+        }
+        
+        return new PhoneDTO(phone);
+    }
+
+        
 }

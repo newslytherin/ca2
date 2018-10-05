@@ -1,6 +1,12 @@
 package entity;
 
+import exception.CompanyNotFoundException;
+import facade.CompanyFacade;
+import facade.PersonFacade;
+import facade.PhoneFacade;
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -57,9 +63,60 @@ public class Phone implements Serializable {
         this.description = description;
     }
 
-    public void setInfoEntity(InfoEntity infoEntity) {
+    public Phone setInfoEntity(InfoEntity infoEntity) {
+        
         this.infoEntity = infoEntity;
-        infoEntity.addPhone(this);
+        this.infoEntity.getPhones().add(this);
+        
+        return this;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Phone{" + "id=" + id + ", number=" + number + ", description=" + description + '}';
+    }
+    
+    
+    
+    
+    
+    
+    public static void main(String[] args)
+    {
+        
+        PersonFacade personfacade = new PersonFacade();
+        PhoneFacade phonefacade = new PhoneFacade();
+        CompanyFacade companyfacade = new CompanyFacade();
+        
+        Person p = new Person();
+        p.setFirstName("daniel");
+        p.setLastName("lindholm");
+        
+        Company c = new Company("Daniels Company", null, null, 0, 0d);
+        
+        companyfacade.addCompany(c);
+        personfacade.addPerson(p);
+        
+        
+        Phone phone = new Phone();
+        phone.setNumber("555345345");
+        phone.setDescription("Min iPhone");
+        
+     
+        phonefacade.addPhone(phone);
+        
+        
+        System.out.println("-----");
+        System.out.println(c);
+        //System.out.println(p);
+        System.out.println(phone);
+        System.out.println("-----");
+        
+        
+        System.out.println(phonefacade.addPhoneToInfoEntity(c, phone));
+          
+        
     }
     
 }

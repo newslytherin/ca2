@@ -8,6 +8,7 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import entity.Phone;
+import entity.PhoneDTO;
 import facade.PhoneFacade;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -87,9 +88,12 @@ public class PhoneResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response putJson(String content, @PathParam("id") int infoEntityid) {
         
-        Phone phone = gson.fromJson(content, Phone.class);   
-        if(pf.addPhone(phone, infoEntityid) != null) {
-            return Response.ok(content).build();
+        Phone phone = gson.fromJson(content, Phone.class);
+        
+        PhoneDTO dto = pf.addPhoneToInfoEntity(phone, infoEntityid);
+        
+        if(dto != null) {
+            return Response.ok(gson.toJson(dto)).build();
         } else {
             return Response.status(Response.Status.NOT_ACCEPTABLE).entity("{}").build();
         }
