@@ -11,6 +11,7 @@ var hobbyContainer = document.getElementById('hobby-container');
 document.getElementById('find-btn').addEventListener('click', getData);
 document.getElementById('add-person-phone').addEventListener('click', addPersonPhoneInput);
 document.getElementById('add-company-phone').addEventListener('click', addCompanyPhoneInput);
+document.getElementById('queryParamBtn').addEventListener('click', getQueryParams);
 document.getElementById('add-hobby').addEventListener('click', addHobbyInput);
 document.getElementById('tablebody').addEventListener('click', viewDetails);
 
@@ -211,7 +212,14 @@ function addHobbyInput() {
 }
 
 function getQueryParams(){
-    var entity = "company/";
+    var identities = [];
+    identities.push('empmin');
+    identities.push('empmax');
+    identities.push('valuemin');
+    identities.push('valuemax');
+    identities.push('street');
+    identities.push('zipCode');
+
     var params = [];
     params.push(document.getElementById('qp-min-emps').value);
     params.push(document.getElementById('qp-max-emps').value);
@@ -220,6 +228,14 @@ function getQueryParams(){
     params.push(document.getElementById('qp-street').value);
     params.push(document.getElementById('qp-zip-code').value);
 
-
-
+    var queryParams = [];
+    for(var index in params) {
+        if(params[index] != '' && params[index] != null) {
+            queryParams.push(identities[index] + "=" + params[index]);
+        }
+    }
+    $('#query-params-modal').modal('hide');
+    var s = "company?" + queryParams.join("&");
+    console.log(queryParams);
+    console.log(s);
 }
