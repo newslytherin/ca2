@@ -1,7 +1,7 @@
 package facade;
 
 import entity.Hobby;
-import entity.HobbyDTO;
+import dto.HobbyDTO;
 import entity.Person;
 import java.util.List;
 import javax.persistence.EntityManager;

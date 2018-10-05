@@ -1,4 +1,4 @@
-package exception;
+package dto;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

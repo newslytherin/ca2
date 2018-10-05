@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity;
+package dto;
 
+import entity.Address;
+import entity.CityInfo;
 import java.util.List;
 import java.util.stream.Collectors;
 

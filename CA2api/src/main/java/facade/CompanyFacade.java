@@ -6,7 +6,7 @@
 package facade;
 
 import entity.Company;
-import entity.CompanyDTO;
+import dto.CompanyDTO;
 import entity.InfoEntity;
 import entity.Phone;
 import exception.CompanyNotFoundException;
