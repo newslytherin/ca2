@@ -3,6 +3,7 @@ package facade;
 import entity.Hobby;
 import entity.Person;
 import entity.PersonDTO;
+import exception.PersonNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -50,41 +51,47 @@ public class PersonFacade {
         }
     }
 
-    public PersonDTO getPersonDTOById(int id) {
+    public PersonDTO getPersonDTOById(int id) throws PersonNotFoundException {
         EntityManager em = emf.createEntityManager();
         try {
             return em.createQuery("SELECT new entity.PersonDTO(p) FROM Person p WHERE p.id = :id", PersonDTO.class)
                     .setParameter("id", id)
                     .getSingleResult();
+        } catch (Exception e) {
+            throw new PersonNotFoundException("Could not find person with id: " + id);
         } finally {
             em.close();
         }
     }
 
-    public PersonDTO getPersonDTOByPhone(String phone) {
+    public PersonDTO getPersonDTOByPhone(String phone) throws PersonNotFoundException {
         EntityManager em = emf.createEntityManager();
         String jpql = "SELECT new entity.PersonDTO(p) FROM Person p JOIN p.phones phone WHERE phone.number = :phone";
         try {
             return em.createQuery(jpql, PersonDTO.class)
                     .setParameter("phone", phone)
                     .getSingleResult();
+        } catch (Exception e) {
+            throw new PersonNotFoundException("Could not find person with phone number: " + phone);
         } finally {
             em.close();
         }
     }
 
-    public PersonDTO getPersonDTOByEmail(String email) {
+    public PersonDTO getPersonDTOByEmail(String email) throws PersonNotFoundException {
         EntityManager em = emf.createEntityManager();
         try {
             return em.createQuery("SELECT new entity.PersonDTO(p) FROM Person p WHERE p.email = :email", PersonDTO.class)
                     .setParameter("email", email)
                     .getSingleResult();
+        } catch (Exception e) {
+            throw new PersonNotFoundException("Could not find person with email: " + email);
         } finally {
             em.close();
         }
     }
 
-    public List<PersonDTO> getPersonDTOByHobby(String hobby) {
+    public List<PersonDTO> getPersonDTOByHobby(String hobby) throws PersonNotFoundException {
         EntityManager em = emf.createEntityManager();
         try {
             Hobby h = em.createQuery("SELECT h FROM Hobby h WHERE h.name = :hobby", Hobby.class)
@@ -97,6 +104,8 @@ public class PersonFacade {
             }
             System.out.println("PersonDTO size: " + people.size());
             return people;
+        } catch (Exception e) {
+            throw new PersonNotFoundException("Could not find any persons with hobby: " + hobby);
         } finally {
             em.close();
         }
