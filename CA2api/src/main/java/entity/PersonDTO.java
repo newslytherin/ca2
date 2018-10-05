@@ -33,6 +33,8 @@ public class PersonDTO {
         this.phones = p.getPhones().stream().map(Phone::getNumber).collect(Collectors.toList());
 //        this.hobbies = new ArrayList<>();
         this.hobbies = p.getHobbies().stream().map(Hobby::getName).collect(Collectors.toList());
+        p.getHobbies().forEach(System.out::println);
+//        hobbies.forEach(System.out::println);
 
         if (p.getAddress() != null) {
             this.address = p.getAddress().getStreet() + " " + p.getAddress().getAddressInfo();

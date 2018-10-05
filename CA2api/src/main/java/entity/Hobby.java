@@ -29,7 +29,7 @@ public class Hobby implements Serializable {
     private Integer id;
     private String name;
     private String description;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     //@ElementCollection()
     private List<Person> people;
 

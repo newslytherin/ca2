@@ -14,7 +14,7 @@ public class Person extends InfoEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     private String firstName;
     private String lastName;
-    @ManyToMany(mappedBy = "people", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "people", fetch = FetchType.EAGER)
     //@ElementCollection()
     private List<Hobby> hobbies;
 
