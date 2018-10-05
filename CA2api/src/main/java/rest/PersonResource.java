@@ -67,6 +67,12 @@ public class PersonResource {
     public Response getJsonByEmail(@PathParam("email") String email) {
         return Response.ok(gson.toJson(pf.getPersonDTOByEmail(email))).build();
     }
+    @GET
+    @Path("hobby/{hobby}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getJsonByHobby(@PathParam("hobby") String hobby) {
+        return Response.ok(gson.toJson(pf.getPersonDTOByHobby(hobby))).build();
+    }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
