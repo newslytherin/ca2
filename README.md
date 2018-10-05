@@ -6,14 +6,15 @@
 # API Documetation
 
 ## Person
-#### **GET** `api/person`
-returns a list of all persons as json
+#### **GET** `api/person?street=street&zipcode=zipcode`
+returns a list of all persons filtered by street and/or zipcode as json
+if neither street nor zipcode is specified return a list of all persons
 
 **Succes**
-```js
+```json
 [
   {
-    "id": x,
+    "id": 1,
     "email": "xxx",
     "name": "xxx",
     "zipCode": 1234,
@@ -24,7 +25,34 @@ returns a list of all persons as json
 ]
 ```
 **Fejl forbindelse**
-```js
+```json
+{
+  "status code": 404,
+   "detail": "xxxx",
+}
+```
+newlines added for readability
+
+---
+#### **GET** `api/person/hobby/{hobby}`
+returns a list of persons with a specific hobby as json
+
+**Succes**
+```json
+[
+  {
+    "id": 1,
+    "email": "xxx",
+    "name": "xxx",
+    "zipCode": 1234,
+    "phones": [12345678, 23456789, ...],
+    "hobbies": ["hobby1", "hobby2", ...]
+  },
+  {...}
+]
+```
+**Fejl forbindelse**
+```json
 {
   "status code": 404,
    "detail": "xxxx",
@@ -34,12 +62,12 @@ newlines added for readability
 
 ---
 #### **GET** `api/person/id/{id}`
-returns a person with specific id as json
+returns a person with the specific id as json
 
 **Succes**
-```js
+```json
 {
-  "id": x,
+  "id": 1,
   "email": "xxx",
   "name": "xxx",
   "zipCode": 1234,
@@ -48,7 +76,7 @@ returns a person with specific id as json
 }
 ```
 **Fejl forbindelse**
-```js
+```json
 {
   "status code": 404,
    "detail": "xxxx",
@@ -58,12 +86,12 @@ newlines added for readability
 
 ---
 #### **GET** `api/person/email/{email}`
-returns a person with specific email as json
+returns a person with the specific email as json
 
 **Succes**
-```js
+```json
 {
-  "id": x,
+  "id": 1,
   "email": "xxx",
   "name": "xxx",
   "zipCode": 1234,
@@ -72,7 +100,7 @@ returns a person with specific email as json
 }
 ```
 **Fejl forbindelse**
-```js
+```json
 {
   "status code": 404,
    "detail": "xxxx",
@@ -81,14 +109,12 @@ returns a person with specific email as json
 newlines added for readability
 
 ---
-| GET |  |
-| --- | --- |
-| api/person/                 | returns a list of all persons |
-| api/person/id/{`id`}        | returns a person with specific id |
-| api/person/phone/{`phone`}  | returns a person with specific phone number |
-| api/person/email/{`email`}  | returns a person with specific email |
-| api/person/hobby/{`hobby`}  | returns a person with specific hobby |
-| api/person/person?zip=`zip`&street=`street` | returns a person with specific query params |
+
+#### **POST** `api/person`
+ 
+
+---
+
 
 ## Company
 
