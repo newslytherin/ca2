@@ -19,13 +19,14 @@ import javax.persistence.Table;
 @Inheritance
 @DiscriminatorColumn(name = "type")
 @Table(name = "INFO")
-public class InfoEntity implements Serializable {
+public abstract class InfoEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
     protected String email;
+    protected boolean status;
     @OneToMany(mappedBy = "infoEntity", fetch = FetchType.EAGER)
     //@ElementCollection()
     protected List<Phone> phones;
