@@ -4,18 +4,17 @@ var target = document.getElementById('target');
 var filter = document.getElementById('filter');
 var tableHead = document.getElementById('tablehead');
 var tableBody = document.getElementById('tablebody');
+var personPhoneContainer = document.getElementById('person-phone-container');
+var companyPhoneContainer = document.getElementById('company-phone-container');
+var hobbyContainer = document.getElementById('hobby-container');
+
 document.getElementById('find-btn').addEventListener('click', getData);
 document.getElementById('add-person-phone').addEventListener('click', addPersonPhoneInput);
 document.getElementById('add-company-phone').addEventListener('click', addCompanyPhoneInput);
 document.getElementById('add-hobby').addEventListener('click', addHobbyInput);
 document.getElementById('tablebody').addEventListener('click', viewDetails);
 
-var personPhoneContainer = document.getElementById('person-phone-container');
-var companyPhoneContainer = document.getElementById('company-phone-container');
-var hobbyContainer = document.getElementById('hobby-container');
-
 var fetchData = null;
-
 target.onchange = setFilter;
 
 // CHANGE IP TO LOCAL!!
@@ -188,6 +187,7 @@ function getInputs() {
     var filterValue = filter.value;
     var keyValue = key.value;
 
+    if ()
     return filterValue == 'all' ? targetValue : targetValue + "/" + filterValue + "/" + keyValue;
 }
 
@@ -211,4 +211,3 @@ function addHobbyInput() {
     hobbyContainer.innerHTML += "<input type='text' class='hobby-name form-control' placeholder='name (optional)'>";
     hobbyContainer.innerHTML += "<input type='text' class='hobby-desciption form-control' placeholder='desciption (optional)'>";
 }
-

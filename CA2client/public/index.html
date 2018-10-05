@@ -13,7 +13,7 @@
   <div class="container">
     <h1>new Krak</h1>
     <select id="target" class="form-control selcls">
-      <option value="" disabled selected hidden>target</option>
+      <option value="" disabled selected hidden>select</option>
       <option value="person">person</option>
       <option value="company">company</option>
       <option value="city">city</option>
@@ -25,14 +25,16 @@
     <select id="filter" class="form-control selcls">
       <option value="" disabled selected hidden>choose target</option>
     </select>
-
     <input type="text" id="key" class="form-control" placeholder="keyword">
+
     <button id="find-btn" class="btn btn-info btn-lg">find</button>
+    <button id="find-btn" class="btn btn-info btn-lg" data-toggle="modal" data-target="#advanced-search-modal">advanced search</button>
 
     <!-- Trigger the modal with a button -->
     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#person-model">add person</button>
     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#company-model">add company</button>
 
+    <!----------------------------------->
     <!-- Person Modal -->
     <div class="modal fade" id="person-model" role="dialog">
       <div class="modal-dialog">
@@ -80,6 +82,7 @@
 
       </div>
     </div>
+    <!----------------------------------->
 
     <!-- Person Edit Modal -->
     <div class="modal fade" id="person-edit-model" role="dialog">
@@ -132,6 +135,7 @@
 
       </div>
     </div>
+    <!----------------------------------->
 
     <!-- Company Modal -->
     <div class="modal fade" id="company-model" role="dialog">
@@ -175,6 +179,7 @@
 
       </div>
     </div>
+    <!----------------------------------->
 
     <!-- Company Edit Modal -->
     <div class="modal fade" id="company-edit-model" role="dialog">
@@ -220,6 +225,47 @@
               <input type="text" id="edit-company-employees" class="form-control">
             </div>
             <br>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default">edit</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!----------------------------------->
+
+    <!-- Company by value Modal -->
+    <div class="modal fade" id="advanced-search-modal" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">company by values</h4>
+          </div>
+          <div class="modal-body">
+
+            <b>minimum employees: </b>
+            <input type="number" id="as-min-emps" class="form-control" min="1"></input>
+
+            <b>maximum employees: </b>
+            <input type="number" id="as-max-emps" class="form-control" min="1"></input>
+
+            <b>minimum market value: </b>
+            <input type="number" id="as-min-market" class="form-control" min="1"></input>
+
+            <b>maximum market value: </b>
+            <input type="number" id="as-max-market" class="form-control" min="1"></input>
+
+            <b>street: </b>
+            <input type="text" id="as-street" class="form-control"></input>
+
+            <b>zipcode: </b>
+            <input type="number" id="as-zip-code" class="form-control" min="1"></input>
 
             <div class="modal-footer">
               <button type="button" class="btn btn-default">edit</button>
