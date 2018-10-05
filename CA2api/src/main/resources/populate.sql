@@ -8193,7 +8193,7 @@ INSERT INTO address (Addressinfo, street, cityinfo_id) VALUES ('1', 'Alberteaven
 INSERT INTO address (Addressinfo, street, cityinfo_id) VALUES ('2', 'Alberteavenue', 1352);
 
 INSERT INTO HOBBY (NAME, DESCRIPTION) VALUES ('Fodbold', 'at sparke til en bold');
-INSERT INTO HOBBY (NAME, DESCRIPTION) VALUES ('Pyromand', 'at lefe brandmand');
+INSERT INTO HOBBY (NAME, DESCRIPTION) VALUES ('Pyroman', 'at lege brandmand');
 INSERT INTO HOBBY (NAME, DESCRIPTION) VALUES ('computer spil', 'at slå på et keyboard');
 INSERT INTO HOBBY (NAME, DESCRIPTION) VALUES ('sove', 'zZzzZzzZZz');
 INSERT INTO HOBBY (NAME, DESCRIPTION) VALUES ('samle frimærker', 'whyy');
