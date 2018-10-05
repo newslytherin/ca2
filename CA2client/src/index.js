@@ -186,8 +186,6 @@ function getInputs() {
     var targetValue = target.value;
     var filterValue = filter.value;
     var keyValue = key.value;
-
-    if ()
     return filterValue == 'all' ? targetValue : targetValue + "/" + filterValue + "/" + keyValue;
 }
 
@@ -210,4 +208,18 @@ function addHobbyInput() {
     hobbyContainer.innerHTML += "<hr>";
     hobbyContainer.innerHTML += "<input type='text' class='hobby-name form-control' placeholder='name (optional)'>";
     hobbyContainer.innerHTML += "<input type='text' class='hobby-desciption form-control' placeholder='desciption (optional)'>";
+}
+
+function getQueryParams(){
+    var entity = "company/";
+    var params = [];
+    params.push(document.getElementById('qp-min-emps').value);
+    params.push(document.getElementById('qp-max-emps').value);
+    params.push(document.getElementById('qp-min-market').value);
+    params.push(document.getElementById('qp-max-market').value);
+    params.push(document.getElementById('qp-street').value);
+    params.push(document.getElementById('qp-zip-code').value);
+
+
+
 }
