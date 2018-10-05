@@ -60,4 +60,21 @@ public class AddressFacade
             em.close();
         }
     }
+    
+    public AddressDTO updateAddress(Address a)
+    {
+        EntityManager em = getEm();
+        Address tmp = null;
+        try {
+            em.getTransaction().begin();
+            tmp = em.find(Address.class, a.getId());
+            tmp.setCityInfo(a.getCityInfo());
+            tmp.setInfoEntities(a.getInfoEntities());
+            tmp.setStreet(a.getStreet());
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+        return new AddressDTO(tmp);
+    }
 }

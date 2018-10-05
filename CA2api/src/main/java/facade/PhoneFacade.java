@@ -17,82 +17,100 @@ import javax.persistence.Persistence;
  *
  * @author Stephan
  */
-public class PhoneFacade {
+public class PhoneFacade
+{
 
-    private static EntityManagerFactory emf;
+    private EntityManagerFactory emf;
 
-    public PhoneFacade() {
+    public PhoneFacade()
+    {
         emf = Persistence.createEntityManagerFactory("pu");
     }
 
-    public static void addEntityManageractory(EntityManagerFactory ef) {
+    public void addEntityManageractory(EntityManagerFactory ef)
+    {
         emf = ef;
     }
 
-    public static PhoneDTO getPhoneDTOByNumber(int number) {
+    public PhoneDTO getPhoneDTOByNumber(String number)
+    {
         EntityManager em = emf.createEntityManager();
 
-        try {
+        try
+        {
             return em.createNamedQuery("Phone.findbynumber", PhoneDTO.class)
                     .setParameter("number", number)
                     .getSingleResult();
-        } finally {
+        } finally
+        {
             em.close();
         }
     }
 
-    public static List<PhoneDTO> getAllPhonesDTO() {
+    public List<PhoneDTO> getAllPhonesDTO()
+    {
         EntityManager em = emf.createEntityManager();
 
-        try {
+        try
+        {
             return em.createNamedQuery("Phone.findall", PhoneDTO.class)
                     .getResultList();
-        } finally {
+        } finally
+        {
             em.close();
         }
     }
-    
-    public static PhoneDTO addPhone(Phone phone, int infoEntityid) {
+
+    public PhoneDTO addPhone(Phone phone, int infoEntityid)
+    {
         EntityManager em = emf.createEntityManager();
 
-        try {
+        try
+        {
             phone.setInfoEntity(em.find(InfoEntity.class, infoEntityid));
             em.getTransaction().begin();
             em.persist(phone);
             em.getTransaction().commit();
-        } finally {
+        } finally
+        {
             em.close();
         }
-        
+
         return new PhoneDTO(phone);
     }
-    
-    public static PhoneDTO deletePhone(Phone phone) {
+
+    public PhoneDTO deletePhone(Phone phone)
+    {
         EntityManager em = emf.createEntityManager();
 
-        try {
+        try
+        {
             em.getTransaction().begin();
             em.remove(phone);
             em.getTransaction().commit();
-        } finally {
+        } finally
+        {
             em.close();
         }
-        
+
         return new PhoneDTO(phone);
     }
-    
-    public static PhoneDTO editPhone(Phone phone) {
+
+    public PhoneDTO editPhone(Phone phone)
+    {
         EntityManager em = emf.createEntityManager();
 
-        try {
+        try
+        {
             em.getTransaction().begin();
             em.merge(phone);
             em.getTransaction().commit();
-        } finally {
+        } finally
+        {
             em.close();
         }
-        
+
         return new PhoneDTO(phone);
     }
-    
+
 }

@@ -18,7 +18,7 @@ var fetchData = null;
 target.onchange = setFilter;
 
 // CHANGE IP TO LOCAL!!
-const URL = "http://localhost:8090/CA2api/api/";
+const URL = "http://localhost:8084/CA2api/api/";
 
 function getData() {
     resetTable();

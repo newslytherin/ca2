@@ -446,7 +446,99 @@ Consumes json
 * api/phone
 * api/phone/number/{`number`}
 
+---
+#### **GET** `api/phone`
+*returns a list of all phone numbers*
+
+**Success**
+```js
+{
+  "number": "10275229",
+  "description": "Mobil",
+  "infoEntity": "Maria Astaberg"
+},
+{...}
+```
+
+**Error**
+```js
+{
+  "statusCode": 500,
+  "message": "xxx",
+  "description": "xxx"
+}
+```
+---
+#### **GET** `api/phone/number/{`number`}`
+*returns a specific phone number*
+
+**Success**
+```js
+{
+  "number": "10275229",
+  "description": "Mobil",
+  "infoEntity": "Maria Astaberg"
+},
+{...}
+```
+
+**Error**
+```js
+{
+  "statusCode": 500,
+  "message": "xxx",
+  "description": "xxx"
+}
+```
+
+---
 **Address**
 
-* api/address
-* api/address/zip/{`zip`}
+#### **GET** `api/Address`
+*returns a list of all adresses*
+
+**Success**
+```js
+{
+  "id": 1,
+  "address": "Mariegade 1",
+  "persons": ["Bente Arthurholm", ...],
+  "city": "Scanning",
+  "zipCode": 555
+},
+{...}
+```
+
+**Error**
+```js
+{
+  "statusCode": 500,
+  "message": "xxx",
+  "description": "xxx"
+}
+```
+
+---
+#### **GET** `api/Address/zip/{`zip`}`
+*returns a list of all adresses with specific sip code*
+
+**Success**
+```js
+{
+  "id": 1,
+  "address": "Mariegade 1",
+  "persons": ["Bente Arthurholm", ...],
+  "city": "Scanning",
+  "zipCode": 555
+},
+{...}
+```
+
+**Error**
+```js
+{
+  "statusCode": 500,
+  "message": "xxx",
+  "description": "xxx"
+}
+```

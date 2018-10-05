@@ -33,6 +33,8 @@ public class PhoneResource {
     @Context
     private UriInfo context;
     
+    PhoneFacade pf = new PhoneFacade();
+    
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     /**
@@ -49,7 +51,7 @@ public class PhoneResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getJson() {
         
-        String json = gson.toJson(PhoneFacade.getAllPhonesDTO()); 
+        String json = gson.toJson(pf.getAllPhonesDTO()); 
         if(json != null) {
             return Response.ok(json).build();
         } else {
@@ -65,9 +67,9 @@ public class PhoneResource {
     @Path("number/{number}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getJson(@PathParam("number") int number) {
+    public Response getJson(@PathParam("number") String number) {
         
-        String json = gson.toJson(PhoneFacade.getPhoneDTOByNumber(number));  
+        String json = gson.toJson(pf.getPhoneDTOByNumber(number));  
         if(json != null) {   
             return Response.ok(json).build();
         } else {
@@ -86,7 +88,7 @@ public class PhoneResource {
     public Response putJson(String content, @PathParam("id") int infoEntityid) {
         
         Phone phone = gson.fromJson(content, Phone.class);   
-        if(PhoneFacade.addPhone(phone, infoEntityid) != null) {
+        if(pf.addPhone(phone, infoEntityid) != null) {
             return Response.ok(content).build();
         } else {
             return Response.status(Response.Status.NOT_ACCEPTABLE).entity("{}").build();
@@ -100,7 +102,7 @@ public class PhoneResource {
     public Response postJson(String content) {
         
         Phone phone = gson.fromJson(content, Phone.class);     
-        if(PhoneFacade.editPhone(phone) != null) {
+        if(pf.editPhone(phone) != null) {
             return Response.ok(content).build();
         } else {
             return Response.status(Response.Status.NOT_ACCEPTABLE).entity("{}").build();
@@ -114,7 +116,7 @@ public class PhoneResource {
     public Response deleteJson(String content) {
         
         Phone phone = gson.fromJson(content, Phone.class);     
-        if(PhoneFacade.deletePhone(phone) != null) {
+        if(pf.deletePhone(phone) != null) {
             return Response.ok(content).build();
         } else {
             return Response.status(Response.Status.NOT_ACCEPTABLE).entity("{}").build();
