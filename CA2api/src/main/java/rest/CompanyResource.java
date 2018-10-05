@@ -7,6 +7,8 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import entity.Company;
+import entity.Person;
 import exception.CompanyNotFoundException;
 import exception.InvalidDataException;
 import facade.CompanyFacade;
@@ -16,7 +18,9 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
@@ -160,6 +164,37 @@ public class CompanyResource
                 .entity(gson.toJson(f.getCompanyDTOByEmail(email)))
                 .build();
 
+    }
+    
+    
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response postCompany(String json) {
+        Company c = gson.fromJson(json, Company.class);
+        f.addCompany(c);
+        return Response.ok(json).build();
+    }
+
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response putJson(String json) {
+        Company c = gson.fromJson(json, Company.class);
+        f.updateCompany(c);
+        return Response.ok(json).build();
+    }
+
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteJson(String json) {
+        Company c = gson.fromJson(json, Company.class);
+        if (f.deleteCompany(c) != null) {
+            return Response.ok(json).build();
+        } else {
+            return Response.status(Response.Status.NOT_ACCEPTABLE).entity("{}").build();
+        }
     }
     
 }

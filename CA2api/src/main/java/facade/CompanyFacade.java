@@ -212,5 +212,44 @@ public class CompanyFacade
             em.close();
         }
     }
+    
+    
+    public void addCompany(Company c) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(c);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+    }
+    
+    public void updateCompany(Company c) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.merge(c);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+    }
+    
+    
+    public Company deleteCompany(Company company) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            Company c = em.find(Company.class, company.getId());
+            if (c != null) {
+                em.remove(c);
+            }
+            em.getTransaction().commit();
+            return c;
+        } finally {
+            em.close();
+        }
+    }
 
 }
