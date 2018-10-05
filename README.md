@@ -468,19 +468,89 @@ Consumes json
 
 **City**
 
-* api/city
-* api/city/zip/{`zip`}
+#### **GET** `api/city`
+*returns a list of all cities*
 
+```js
+{
+  "zipCode": 555,
+  "city": "Scanning",
+  "addresses": ["Mariegade 1", "Emilievej 1", ...]
+},
+{...}
+```
+**Error**
+```js
+{
+  "statusCode": 500,
+  "message": "xxx",
+  "description": "xxx"
+}
+```
+---
+#### **GET** `api/city/zip/{`zip`}`
+*returns a specific city*
+
+```js
+{
+  "zipCode": 555,
+  "city": "Scanning",
+  "addresses": ["Mariegade 1", "Emilievej 1", ...]
+}
+```
+**Error**
+```js
+{
+  "statusCode": 500,
+  "message": "xxx",
+  "description": "xxx"
+}
+```
+
+---
 **Hobby**
+#### **GET** `api/hobby`
+*returns a list of all hobbies*
 
-* api/hobby
-* api/hobby/name/{`name`}
+```js
+{
+  "id": 1,
+  "name": "Fodbold",
+  "description": "at sparke til en bold",
+  "people": ["Maria Astaberg", "Gitte Astridhøj", "Lars Villumhøj", ...]
+},
+{...}
+```
+**Error**
+```js
+{
+  "statusCode": 500,
+  "message": "xxx",
+  "description": "xxx"
+}
+```
+---
+#### **GET** `api/hobby/name/{`number`}`
+*returns a specific hobby*
 
-**Phone**
+**Success**
+```js
+{
+  "id": 1,
+  "name": "Fodbold",
+  "description": "at sparke til en bold",
+  "people": ["Maria Astaberg", "Gitte Astridhøj", "Lars Villumhøj", ...]
+}
+```
 
-* api/phone
-* api/phone/number/{`number`}
-
+**Error**
+```js
+{
+  "statusCode": 500,
+  "message": "xxx",
+  "description": "xxx"
+}
+```
 ---
 #### **GET** `api/phone`
 *returns a list of all phone numbers*
