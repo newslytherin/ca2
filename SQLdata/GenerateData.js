@@ -63,7 +63,7 @@ function saveToFile(name, text) {
     const fs = require('fs');
 
     // write to a new file named text.txt
-    fs.writeFile(name + '.txt', text.join("\n"), (err) => {
+    fs.writeFile(name + '1.txt', text.join("\n"), (err) => {
         // throws an error, you could also catch it here
         if (err) throw err;
 
@@ -114,7 +114,7 @@ function genPerson(max) {
 function genCompanies(max) {
     var comps = [];
     for (let i = 0; i < max; i++) {
-        var name = fNames[randonNum(fNames.length)] + companyNames[randonNum(companyNames)];
+        var name = fNames[randonNum(fNames.length)] + companyNames[randonNum(companyNames.length)];
         var email = name + "@mail.dk";
         var cvr = randonNum(90000000);
         var emps = randonNum(50) + 1;
@@ -122,6 +122,7 @@ function genCompanies(max) {
         var value = randonNum(1000000000) + 10000;
         comps.push("INSERT INTO INFO (type, email, name, cvr, numemployees, description, marketvalue, address_id) VALUES ('C', '" + email + "', '" + name + "', '" + cvr + "', '" + emps + "', '" + description + "', '" + value + "', '" + getAddress() + "');");
     }
+    // console.log(comps[0]);
     saveToFile("companies", comps);
 }
 
@@ -144,11 +145,11 @@ function genHobbiesForPerson(max) {
     saveToFile("persons and hobbies", totalHobs);
 }
 
-// genCompanies(150);
+genCompanies(150);
 // genPerson(3000);
 // genPhoneNumbers(3149);
 // genAddresses();
-genHobbiesForPerson(3000);
+// genHobbiesForPerson(3000);
 
 function getAddress() {
     for (let i = 0; i < 10000; i++) {
