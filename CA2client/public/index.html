@@ -120,7 +120,7 @@
               <h4>hobbies</h4>
               <div id="edit-hobby-container">
               </div>
-              <button type="button" id="add-hobby" class="btn btn-default phone">add hobby</button>
+              <button type="button" class="btn btn-default add-hobby">add hobby</button>
             </div>
           </div>
 
@@ -173,6 +173,61 @@
           </div>
         </div>
 
+      </div>
+    </div>
+
+    <!-- Company Edit Modal -->
+    <div class="modal fade" id="company-edit-model" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title" id="edit-company-title"></h4>
+          </div>
+          <div class="modal-body">
+
+            <div id="general">
+              <div id="edit-name"></div>
+              <b>email: </b>
+              <input type="text" id="edit-company-email" class="form-control"></input>
+              <div id="edit-phone-container">
+              </div>
+              <button type="button" id="add-company-phone" class="btn btn-default phone">add phone</button>
+            </div>
+            <br>
+
+            <div id="address">
+              <h4>address</h4>
+              <b>Street</b>
+              <input type="text" id="edit-company-street" class="form-control">
+
+              <b>City</b>
+              <input type="text" id="edit-company-city" class="form-control">
+
+              <b>Zip code</b>
+              <input type="text" id="edit-company-zipcode" class="form-control">
+            </div>
+            <br>
+
+            <div id="market">
+              <h4>market</h4>
+              <b>market value</b>
+              <input type="text" id="edit-company-value" class="form-control">
+
+              <b>employees</b>
+              <input type="text" id="edit-company-employees" class="form-control">
+            </div>
+            <br>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default">edit</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
 

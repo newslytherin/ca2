@@ -93,13 +93,18 @@ function renderFilters(filters) {
 }
 
 function viewDetails(object) {
-    // 
-    if(target.value != 'person' && target.value != 'company') return;
-    $('#person-edit-model').modal('show');
-    setEditValues(object.target.id);
+    if(target.value == 'person') {
+        $('#person-edit-model').modal('show');
+        setEditValuesPerson(object.target.id);
+    } else if(target.value == 'company') {
+        $('#company-edit-model').modal('show');
+        setEditValuesCompany(object.target.id);
+    } else {
+        return;
+    }
 }
 
-function setEditValues(index) {
+function setEditValuesPerson(index) {
     var jsonObject = fetchData[index];
     console.log(jsonObject);
 
@@ -125,6 +130,30 @@ function setEditValues(index) {
     }
 }
 
+function setEditValuesCompany(index) {
+    var jsonObject = fetchData[index];
+    console.log(jsonObject);
+
+    // general
+    document.getElementById('edit-company-title').innerText = jsonObject['name'] + " (cvr: " + jsonObject['cvr'] + ")";
+    document.getElementById('edit-company-email').value = jsonObject['email'];
+
+    document.getElementById('edit-phone-container').innerHTML = "<h5><b>phones</b></h5>";
+    for(var phone in jsonObject['phones']){  
+        document.getElementById('edit-phone-container').innerHTML += "<input type='text' class='form-control' value='" + jsonObject['phones'][phone] + "'>";
+        console.log(jsonObject['phones'][phone]);
+    }
+
+    // address
+    document.getElementById('edit-company-street').value = jsonObject['street'];
+    document.getElementById('edit-company-city').value = jsonObject['city'];
+    document.getElementById('edit-company-zipcode').value = jsonObject['zipCode'];
+
+    // address
+    document.getElementById('edit-company-value').value = jsonObject['marketValue'];
+    document.getElementById('edit-company-employees').value = jsonObject['numEmployees'];
+}
+
 // iterate through data and adds it to the table 
 function renderTable(data) {
     var tHead = "";
@@ -140,7 +169,6 @@ function renderTable(data) {
     // iterate through json objects in array
     for (var index in data) {
         tBody += "<tr>";
-        // tBody += "<td><button value = '" + index + "'>edit</button></td>";
         // iterate through values in json object
         for (var key in data[index]) {
             // adds table header from key values
@@ -183,3 +211,4 @@ function addHobbyInput() {
     hobbyContainer.innerHTML += "<input type='text' class='hobby-name form-control' placeholder='name (optional)'>";
     hobbyContainer.innerHTML += "<input type='text' class='hobby-desciption form-control' placeholder='desciption (optional)'>";
 }
+
