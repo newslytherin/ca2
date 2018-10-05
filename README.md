@@ -87,7 +87,8 @@ newlines added for readability
 | api/person/id/{`id`}        | returns a person with specific id |
 | api/person/phone/{`phone`}  | returns a person with specific phone number |
 | api/person/email/{`email`}  | returns a person with specific email |
-| api/person/person?zip=`zip`&street=`street`&hobby=`hobby` | returns a person with specific query params |
+| api/person/hobby/{`hobby`}  | returns a person with specific hobby |
+| api/person/person?zip=`zip`&street=`street` | returns a person with specific query params |
 
 ## Company
 
