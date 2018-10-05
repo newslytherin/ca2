@@ -15,21 +15,22 @@ document.getElementById('companyParamBtn').addEventListener('click', getCompanyQ
 document.getElementById('personParamBtn').addEventListener('click', getPersonQuery);
 document.getElementById('add-hobby').addEventListener('click', addHobbyInput);
 document.getElementById('tablebody').addEventListener('click', viewDetails);
+document.getElementById('add-person').addEventListener('click', addPerson);
 
 var fetchData = null;
 target.onchange = setFilter;
 
 var inputs;
 
-function getPersonQuery(){
+function getPersonQuery() {
     getData(getPersonParams);
 }
 
-function getCompanyQuery(){
+function getCompanyQuery() {
     getData(getCompanyParams);
 }
 
-function getDefault(){
+function getDefault() {
     getData(getInputs);
 }
 
@@ -46,7 +47,7 @@ function getData(callback) {
         })
         .catch(err => {
             if (err.httpError) {
-                err.fullError.then(eJson => console.log("Error: " + eJson.detail))
+                err.fullError.then(eJson => console.log("Error: " + eJson.message))
             } else {
                 console.log("Netværks fejl")
             }
@@ -140,13 +141,14 @@ function viewDetails(object) {
 }
 
 function setEditValuesPerson(index) {
-    var jsonObject = fetchData[index];
-    console.log(jsonObject);
+
+    var jsonObject = (!Array.isArray(fetchData)) ? fetchData : fetchData[index];
 
     // general
     document.getElementById('edit-title').innerText = jsonObject['name'];
     document.getElementById('edit-email').value = jsonObject['email'];
 
+    // phones
     document.getElementById('edit-phone-container').innerHTML = "<h5><b>phones</b></h5>";
     for (var phone in jsonObject['phones']) {
         document.getElementById('edit-phone-container').innerHTML += "<input type='text' class='form-control' value='" + jsonObject['phones'][phone] + "'>";
@@ -154,9 +156,9 @@ function setEditValuesPerson(index) {
     }
 
     // address
-    document.getElementById('edit-street').value = jsonObject['address'];
-    document.getElementById('edit-city').value = jsonObject['city'];
-    document.getElementById('edit-zipcode').value = jsonObject['zipCode'];
+    if(jsonObject['address'] != undefined) document.getElementById('edit-street').value = jsonObject['address'];
+    if(jsonObject['city'] != undefined) document.getElementById('edit-city').value = jsonObject['city'];
+    if(jsonObject['zipCode'] != 0) document.getElementById('edit-zipcode').value = jsonObject['zipCode'];
 
     // hobbies
     document.getElementById('edit-hobby-container').innerHTML = "";
@@ -166,13 +168,14 @@ function setEditValuesPerson(index) {
 }
 
 function setEditValuesCompany(index) {
-    var jsonObject = fetchData[index];
-    console.log(jsonObject);
+
+    var jsonObject = (!Array.isArray(fetchData)) ? fetchData : fetchData[index];
 
     // general
     document.getElementById('edit-company-title').innerText = jsonObject['name'] + " (cvr: " + jsonObject['cvr'] + ")";
     document.getElementById('edit-company-email').value = jsonObject['email'];
 
+    // phones
     document.getElementById('edit-phone-container').innerHTML = "<h5><b>phones</b></h5>";
     for (var phone in jsonObject['phones']) {
         document.getElementById('edit-phone-container').innerHTML += "<input type='text' class='form-control' value='" + jsonObject['phones'][phone] + "'>";
@@ -180,11 +183,11 @@ function setEditValuesCompany(index) {
     }
 
     // address
-    document.getElementById('edit-company-street').value = jsonObject['street'];
+    document.getElementById('edit-company-street').value = jsonObject['address'];
     document.getElementById('edit-company-city').value = jsonObject['city'];
     document.getElementById('edit-company-zipcode').value = jsonObject['zipCode'];
 
-    // address
+    // company info
     document.getElementById('edit-company-value').value = jsonObject['marketValue'];
     document.getElementById('edit-company-employees').value = jsonObject['numEmployees'];
 }
@@ -262,10 +265,7 @@ function getPersonParams() {
         }
     }
     $('#person-params-modal').modal('hide');
-    var queryParam = "person?" + queryParams.join("&");
-
-    console.log(queryParam);
-    return queryParam;
+    return "person?" + queryParams.join("&");
 }
 
 function getCompanyParams() {
@@ -292,8 +292,68 @@ function getCompanyParams() {
         }
     }
     $('#company-params-modal').modal('hide');
-    var queryParam = "company?" + queryParams.join("&");
-
-    console.log(queryParam);
-    return queryParam;
+    return "company?" + queryParams.join("&");
 }
+
+function addPerson() {
+    var person = {};
+    person.firstName = document.getElementById('firstName').value;
+    person.lastName = document.getElementById('lastName').value;
+    person.email = document.getElementById('email').value;
+    var data = JSON.stringify(person);
+    setData(data, "person");
+}
+
+function addCompanyAsJson() {
+    var company = {};
+    company.name = document.getElementById('name');
+    company.email = document.getElementById('email');
+    company.description = document.getElementById('desc');
+    company.cvr = document.getElementById('cvr');
+    company.numEmployees = document.getElementById('emps');
+    company.marketValue = document.getElementById('market');
+    return JSON.stringify(company);
+}
+
+function addPhoneAsJson() {
+    var phone = {};
+    // fk ie id?
+    phone.number = document.getElementById('number');
+    phone.description = document.getElementById('description');
+    return JSON.stringify(phone);
+}
+
+function addHobbyAsJson() {
+    var hobby = {};
+    // fk person id?
+    hobby.name = document.getElementById('name');
+    hobby.description = document.getElementById('description');
+    return JSON.stringify(hobby);
+}
+
+function addAddressAsJson() {
+    var address = {};
+    // fk ie id?
+    // fk zipcode?
+    address.street = document.getElementById('street');
+    address.addressIfo = document.getElementById('description');
+    return JSON.stringify(address);
+}
+
+function setData(data, path) {
+    resetTable();
+    fetch(URL + path, {
+            method: "POST",
+            redirect: "follow",
+            body: data,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).catch(err => {
+            if (err.httpError) {
+                err.fullError.then(eJson => console.log("Error: " + eJson.detail))
+            } else {
+                console.log("Netværks fejl")
+            }
+        })
+    }
