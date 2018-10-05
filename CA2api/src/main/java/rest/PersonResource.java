@@ -35,7 +35,7 @@ public class PersonResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getJson(@QueryParam("street") String street, @QueryParam("zipcode") String zipCode) throws InvalidDataException {
+    public Response getPerson(@QueryParam("street") String street, @QueryParam("zipcode") String zipCode) throws InvalidDataException {
         Map<String, String> params = new HashMap<>();
         if (street != null) {
             params.put("street", street);
@@ -49,35 +49,35 @@ public class PersonResource {
     @GET
     @Path("id/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getJsonById(@PathParam("id") int id) throws PersonNotFoundException {
+    public Response getPersonById(@PathParam("id") int id) throws PersonNotFoundException {
         return Response.ok(gson.toJson(pf.getPersonDTOById(id))).build();
     }
 
     @GET
     @Path("phone/{phone}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getJsonByPhone(@PathParam("phone") String phone) throws PersonNotFoundException {
+    public Response getPersonByPhone(@PathParam("phone") String phone) throws PersonNotFoundException {
         return Response.ok(gson.toJson(pf.getPersonDTOByPhone(phone))).build();
     }
 
     @GET
     @Path("email/{email}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getJsonByEmail(@PathParam("email") String email) throws PersonNotFoundException {
+    public Response getPersonByEmail(@PathParam("email") String email) throws PersonNotFoundException {
         return Response.ok(gson.toJson(pf.getPersonDTOByEmail(email))).build();
     }
 
     @GET
     @Path("hobby/{hobby}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getJsonByHobby(@PathParam("hobby") String hobby) throws PersonNotFoundException {
+    public Response getPersonByHobby(@PathParam("hobby") String hobby) throws PersonNotFoundException {
         return Response.ok(gson.toJson(pf.getPersonDTOByHobby(hobby))).build();
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response postJson(String json) throws InvalidDataException {
+    public Response postPerson(String json) throws InvalidDataException {
         Person p = gson.fromJson(json, Person.class);
         if (p.getFirstName() == null || p.getLastName() == null || p.getEmail() == null) {
             throw new InvalidDataException("Not enough data");
@@ -89,7 +89,7 @@ public class PersonResource {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response putJson(String json) {
+    public Response putPerson(String json) {
         Person p = gson.fromJson(json, Person.class);
         pf.updatePerson(p);
         return Response.ok(json).build();
@@ -98,7 +98,7 @@ public class PersonResource {
     @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteJson(String json) {
+    public Response deletePerson(String json) {
         Person p = gson.fromJson(json, Person.class);
         if (pf.deletePerson(p) != null) {
             return Response.ok(json).build();

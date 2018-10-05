@@ -127,15 +127,20 @@ public class PersonFacade {
         return pdto;
     }
 
-    public void updatePerson(Person p) {
+    public PersonDTO updatePerson(Person p) {
         EntityManager em = emf.createEntityManager();
+        Person tmp = null;
         try {
             em.getTransaction().begin();
-            em.merge(p);
+            tmp = em.find(Person.class, p.getId());
+            tmp.setFirstName(p.getFirstName());
+            tmp.setLastName(p.getLastName());
+            tmp.setEmail(p.getEmail());
             em.getTransaction().commit();
         } finally {
             em.close();
         }
+        return new PersonDTO(tmp);
     }
 
     public Person deletePerson(Person person) {
