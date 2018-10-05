@@ -45,7 +45,7 @@ function handleHttpErrors(res) {
 function setFilter() {
     switch (target.value) {
         case 'person':
-            addFilters('all', 'phone', 'email', 'hobby', 'city');
+            addFilters('all', 'id', 'phone', 'email', 'hobby');
             break;
         case 'company':
             addFilters('all', 'cvr', 'name', 'phone', 'email', 'city');
