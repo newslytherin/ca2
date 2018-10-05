@@ -16,6 +16,7 @@ document.getElementById('personParamBtn').addEventListener('click', getPersonQue
 document.getElementById('add-hobby').addEventListener('click', addHobbyInput);
 document.getElementById('tablebody').addEventListener('click', viewDetails);
 document.getElementById('add-person').addEventListener('click', addPerson);
+document.getElementById('add-company').addEventListener('click', addCompany);
 
 var fetchData = null;
 target.onchange = setFilter;
@@ -183,9 +184,9 @@ function setEditValuesCompany(index) {
     }
 
     // address
-    document.getElementById('edit-company-street').value = jsonObject['address'];
-    document.getElementById('edit-company-city').value = jsonObject['city'];
-    document.getElementById('edit-company-zipcode').value = jsonObject['zipCode'];
+    if(jsonObject['address'] != undefined) document.getElementById('edit-company-street').value = jsonObject['address'];
+    if(jsonObject['city'] != undefined) document.getElementById('edit-company-city').value = jsonObject['city'];
+    if(jsonObject['zipCode'] != undefined) document.getElementById('edit-company-zipcode').value = jsonObject['zipCode'];
 
     // company info
     document.getElementById('edit-company-value').value = jsonObject['marketValue'];
@@ -304,15 +305,16 @@ function addPerson() {
     setData(data, "person");
 }
 
-function addCompanyAsJson() {
+function addCompany() {
     var company = {};
-    company.name = document.getElementById('name');
-    company.email = document.getElementById('email');
-    company.description = document.getElementById('desc');
-    company.cvr = document.getElementById('cvr');
-    company.numEmployees = document.getElementById('emps');
-    company.marketValue = document.getElementById('market');
-    return JSON.stringify(company);
+    company.name = document.getElementById('c-name').value;
+    company.email = document.getElementById('c-email').value;
+    company.description = document.getElementById('c-desc').value;
+    company.cvr = document.getElementById('c-cvr').value;
+    company.numEmployees = document.getElementById('c-emps').value;
+    company.marketValue = document.getElementById('c-value').value;
+    var data = JSON.stringify(company);
+    setData(data, "company");
 }
 
 function addPhoneAsJson() {
