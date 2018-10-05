@@ -27,8 +27,9 @@ if neither street nor zipcode is specified return a list of all persons
 **Fejl forbindelse**
 ```json
 {
-  "status code": 404,
-   "detail": "xxxx",
+  "statusCode": 404,
+   "message": "xxx",
+   "description": "xxx"
 }
 ```
 newlines added for readability
@@ -54,8 +55,9 @@ returns a list of persons with a specific hobby as json
 **Fejl forbindelse**
 ```json
 {
-  "status code": 404,
-   "detail": "xxxx",
+  "statusCode": 404,
+   "message": "xxx",
+   "description": "xxx"
 }
 ```
 newlines added for readability
@@ -78,8 +80,9 @@ returns a person with the specific id as json
 **Fejl forbindelse**
 ```json
 {
-  "status code": 404,
-   "detail": "xxxx",
+  "statusCode": 404,
+   "message": "xxx",
+   "description": "xxx"
 }
 ```
 newlines added for readability
@@ -102,8 +105,9 @@ returns a person with the specific email as json
 **Fejl forbindelse**
 ```json
 {
-  "status code": 404,
-   "detail": "xxxx",
+  "statusCode": 404,
+   "message": "xxx",
+   "description": "xxx"
 }
 ```
 newlines added for readability
@@ -122,19 +126,18 @@ Consumes json
 **Succes**
 ```json
 {
+  "firstName": "xxx",
+  "lastName": "xxx",
   "id": 1,
   "email": "xxx",
-  "name": "xxx",
-  "zipCode": 1234,
-  "phones": [12345678, 23456789, ...],
-  "hobbies": ["hobby1", "hobby2", ...]
 }
 ```
 **Fejl forbindelse**
 ```json
 {
-  "status code": 404,
-   "detail": "xxxx",
+  "statusCode": 500,
+   "message": "xxx",
+   "description": "xxx"
 }
 ```
 newlines added for readability
