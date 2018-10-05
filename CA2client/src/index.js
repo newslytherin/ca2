@@ -16,7 +16,12 @@ var hobbyContainer = document.getElementById('hobby-container');
 
 target.onchange = setFilter;
 
+<<<<<<< HEAD
+// CHANGE IP TO LOCAL!!
+const URL = "http://localhost:8090/CA2api/api/";
+=======
 const URL = "http://localhost:8084/CA2api/api/";
+>>>>>>> bd18a31325ce55fc327c643a7a32c2756cbd92f5
 
 function getData() {
     fetch(URL + getInputs())
