@@ -149,7 +149,7 @@ newlines added for readability
 #### **GET** `api/company`
 *returns a list of all companies*
 
-url filters:
+url filters:<br>
 set minimum marketvalue<br> 
 ?valuemin=5
 
