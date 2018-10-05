@@ -352,31 +352,40 @@ only allow companies with an address on in a certain area<br>
 ```
 ---
 
-#### **GET** `api/company/?countmin=countmin&countmax=countmax&zip=zip&street=street&valuemin=valuemin&valuemax=valuemax`
-*returns a companies with specific parameters*
-
-**Fuldført forbindelse**
-```js
-[
-  {"name": "name",
-  "description": "description",
-  "cvr": "cvr",
-  "numEmployees": "numEmployees",
-  "marketValue": "marketValue"},
-  { ... }
-]
+#### **POST** `api/company`
+Consumes json
+```json
+{
+	"name": "Daniel",
+	"email": "test@test.dk",
+	"cvr": "55-2355-6-63",
+	"description": "beskrivelsen",
+	"numEmployees": 500,
+	"marketValue": 2000
+}
 ```
-
+**Succes**
+```json
+{
+	"id": 11,
+	"name": "Daniel",
+	"email": "test@test.dk",
+	"cvr": "55-2355-6-63",
+	"description": "beskrivelsen",
+	"numEmployees": 500,
+	"marketValue": 2000
+}
+```
 **Fejl forbindelse**
-```js
+```json
 {
   "statusCode": 500,
    "message": "xxx",
    "description": "xxx"
 }
 ```
----
 
+---
 
 
 **City**
