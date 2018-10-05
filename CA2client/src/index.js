@@ -8,23 +8,37 @@ var personPhoneContainer = document.getElementById('person-phone-container');
 var companyPhoneContainer = document.getElementById('company-phone-container');
 var hobbyContainer = document.getElementById('hobby-container');
 
-document.getElementById('find-btn').addEventListener('click', getData);
+document.getElementById('find-btn').addEventListener('click', getDefault);
 document.getElementById('add-person-phone').addEventListener('click', addPersonPhoneInput);
 document.getElementById('add-company-phone').addEventListener('click', addCompanyPhoneInput);
-document.getElementById('c-advanced-btn').addEventListener('click', getCompanyParams);
-document.getElementById('p-advanced-btn').addEventListener('click', getCompanyParams);
+document.getElementById('companyParamBtn').addEventListener('click', getCompanyQuery);
+document.getElementById('personParamBtn').addEventListener('click', getPersonQuery);
 document.getElementById('add-hobby').addEventListener('click', addHobbyInput);
 document.getElementById('tablebody').addEventListener('click', viewDetails);
 
 var fetchData = null;
 target.onchange = setFilter;
 
-//  CHANGE IP TO LOCAL!!
-const URL = "http://localhost:8084/CA2api/api/";
+var inputs;
 
-function getData() {
+function getPersonQuery(){
+    getData(getPersonParams);
+}
+
+function getCompanyQuery(){
+    getData(getCompanyParams);
+}
+
+function getDefault(){
+    getData(getInputs);
+}
+
+//  CHANGE IP TO LOCAL!!
+const URL = "http://localhost:8090/CA2api/api/";
+
+function getData(callback) {
     resetTable();
-    fetch(URL + getInputs())
+    fetch(URL + callback())
         .then(res => handleHttpErrors(res))
         .then(data => {
             fetchData = data;
@@ -62,23 +76,23 @@ function setFilter() {
             addFilters('all', 'id', 'phone', 'email', 'hobby');
             toggelAdvancedbtn("person");
             break;
-            case 'company':
+        case 'company':
             addFilters('all', 'cvr', 'name', 'phone', 'email');
             toggelAdvancedbtn("company");
             break;
-            case 'city':
+        case 'city':
             addFilters('all', 'zip');
             toggelAdvancedbtn();
             break;
-            case 'address':
+        case 'address':
             addFilters('all', 'zip');
             toggelAdvancedbtn();
             break;
-            case 'phone':
+        case 'phone':
             addFilters('all', 'number');
             toggelAdvancedbtn();
             break;
-            case 'hobby':
+        case 'hobby':
             addFilters('all', 'name');
             toggelAdvancedbtn();
     }
@@ -98,10 +112,10 @@ function toggelAdvancedbtn(target) {
     if (target === "person") {
         $('#p-advanced-btn').removeClass('hidden');
         $('#c-advanced-btn').addClass('hidden');
-    }else if(target === "company"){
+    } else if (target === "company") {
         $('#c-advanced-btn').removeClass('hidden');
         $('#p-advanced-btn').addClass('hidden');
-    }else{
+    } else {
         $('#p-advanced-btn').addClass('hidden');
         $('#c-advanced-btn').addClass('hidden');
     }
@@ -114,10 +128,10 @@ function renderFilters(filters) {
 }
 
 function viewDetails(object) {
-    if(target.value == 'person') {
+    if (target.value == 'person') {
         $('#person-edit-model').modal('show');
         setEditValuesPerson(object.target.id);
-    } else if(target.value == 'company') {
+    } else if (target.value == 'company') {
         $('#company-edit-model').modal('show');
         setEditValuesCompany(object.target.id);
     } else {
@@ -134,7 +148,7 @@ function setEditValuesPerson(index) {
     document.getElementById('edit-email').value = jsonObject['email'];
 
     document.getElementById('edit-phone-container').innerHTML = "<h5><b>phones</b></h5>";
-    for(var phone in jsonObject['phones']){  
+    for (var phone in jsonObject['phones']) {
         document.getElementById('edit-phone-container').innerHTML += "<input type='text' class='form-control' value='" + jsonObject['phones'][phone] + "'>";
         console.log(jsonObject['phones'][phone]);
     }
@@ -146,7 +160,7 @@ function setEditValuesPerson(index) {
 
     // hobbies
     document.getElementById('edit-hobby-container').innerHTML = "";
-    for(var hobby in jsonObject['hobbies']){  
+    for (var hobby in jsonObject['hobbies']) {
         document.getElementById('edit-hobby-container').innerHTML += "<input type='text' class='form-control' value='" + jsonObject['hobbies'][hobby] + "'>";
     }
 }
@@ -160,7 +174,7 @@ function setEditValuesCompany(index) {
     document.getElementById('edit-company-email').value = jsonObject['email'];
 
     document.getElementById('edit-phone-container').innerHTML = "<h5><b>phones</b></h5>";
-    for(var phone in jsonObject['phones']){  
+    for (var phone in jsonObject['phones']) {
         document.getElementById('edit-phone-container').innerHTML += "<input type='text' class='form-control' value='" + jsonObject['phones'][phone] + "'>";
         console.log(jsonObject['phones'][phone]);
     }
@@ -242,18 +256,19 @@ function getPersonParams() {
     params.push(document.getElementById('street').value);
 
     var queryParams = [];
-    for(var index in params) {
-        if(params[index] != '' && params[index] != null) {
+    for (var index in params) {
+        if (params[index] != '' && params[index] != null) {
             queryParams.push(identities[index] + "=" + params[index]);
         }
     }
-    $('#query-params-modal').modal('hide');
-    var s = "person?" + queryParams.join("&");
-    console.log(queryParams);
-    console.log(s);
+    $('#person-params-modal').modal('hide');
+    var queryParam = "person?" + queryParams.join("&");
+
+    console.log(queryParam);
+    return queryParam;
 }
 
-function getCompanyParams(){
+function getCompanyParams() {
     var identities = [];
     identities.push('empmin');
     identities.push('empmax');
@@ -271,13 +286,14 @@ function getCompanyParams(){
     params.push(document.getElementById('qp-zip-code').value);
 
     var queryParams = [];
-    for(var index in params) {
-        if(params[index] != '' && params[index] != null) {
+    for (var index in params) {
+        if (params[index] != '' && params[index] != null) {
             queryParams.push(identities[index] + "=" + params[index]);
         }
     }
-    $('#query-params-modal').modal('hide');
-    var s = "company?" + queryParams.join("&");
-    console.log(queryParams);
-    console.log(s);
+    $('#company-params-modal').modal('hide');
+    var queryParam = "company?" + queryParams.join("&");
+
+    console.log(queryParam);
+    return queryParam;
 }
