@@ -26,7 +26,7 @@ public class InvalidDataExceptionMapper implements ExceptionMapper<InvalidDataEx
     public Response toResponse(InvalidDataException ex) {
         boolean isDebug = context.getInitParameter("debug").equals("true");
         ExceptionDTO err = new ExceptionDTO(ex, 500, isDebug);
-        err.setDescription("Company not found");
+        err.setDescription("Invalid data");
 
         return Response.status(500)
                 .entity(gson.toJson(err))

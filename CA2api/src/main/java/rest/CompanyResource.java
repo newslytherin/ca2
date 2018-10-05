@@ -7,6 +7,8 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import exception.CompanyNotFoundException;
+import exception.InvalidDataException;
 import facade.CompanyFacade;
 import java.util.HashMap;
 import java.util.Map;
@@ -52,7 +54,7 @@ public class CompanyResource
             @QueryParam("valuemax") String valuemax,
             @QueryParam("street") String street,
             @QueryParam("zipCode") String zipCode
-    )
+    ) throws InvalidDataException
     {
         System.out.println("-----");
         System.out.println(zipCode);
@@ -98,7 +100,7 @@ public class CompanyResource
     @GET
     @Path("name/{name}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getByName(@PathParam("name") String name)
+    public Response getByName(@PathParam("name") String name) throws CompanyNotFoundException
     {
 
         return Response
@@ -111,7 +113,7 @@ public class CompanyResource
     @GET
     @Path("cvr/{cvr}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getByCvr(@PathParam("cvr") String cvr)
+    public Response getByCvr(@PathParam("cvr") String cvr) throws CompanyNotFoundException
     {
 
         return Response
@@ -124,7 +126,7 @@ public class CompanyResource
     @GET
     @Path("id/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getById(@PathParam("id") int id)
+    public Response getById(@PathParam("id") int id) throws CompanyNotFoundException
     {
 
         return Response
@@ -137,7 +139,7 @@ public class CompanyResource
     @GET
     @Path("phone/{phone}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getByPhone(@PathParam("phone") String phone)
+    public Response getByPhone(@PathParam("phone") String phone) throws CompanyNotFoundException
     {
 
         return Response
@@ -150,7 +152,7 @@ public class CompanyResource
     @GET
     @Path("email/{email}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getByEmail(@PathParam("email") String email)
+    public Response getByEmail(@PathParam("email") String email) throws CompanyNotFoundException
     {
 
         return Response
