@@ -387,6 +387,42 @@ Consumes json
 
 ---
 
+#### **PUT** `api/company`
+Consumes json
+```json
+{
+   "id": 11,
+   "name": "Daniel",
+   "email": "test@test.dk",
+   "cvr": "55-2355-6-63",
+   "description": "beskrivelsen",
+   "numEmployees": 500,
+   "marketValue": 2000
+}
+```
+**Succes**
+```json
+{
+   "id": 11,
+   "name": "Daniel",
+   "email": "test@test.dk",
+   "cvr": "55-2355-6-63",
+   "description": "beskrivelsen",
+   "numEmployees": 500,
+   "marketValue": 2000
+}
+```
+**Fejl forbindelse**
+```json
+{
+  "statusCode": 500,
+   "message": "xxx",
+   "description": "xxx"
+}
+```
+
+---
+
 
 **City**
 
