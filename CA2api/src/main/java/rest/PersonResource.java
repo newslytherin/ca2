@@ -66,6 +66,7 @@ public class PersonResource {
     public Response getJsonByEmail(@PathParam("email") String email) throws PersonNotFoundException {
         return Response.ok(gson.toJson(pf.getPersonDTOByEmail(email))).build();
     }
+
     @GET
     @Path("hobby/{hobby}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -76,10 +77,13 @@ public class PersonResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response postJson(String json) {
+    public Response postJson(String json) throws InvalidDataException {
         Person p = gson.fromJson(json, Person.class);
+        if (p.getFirstName() == null || p.getLastName() == null || p.getEmail() == null) {
+            throw new InvalidDataException("Not enough data");
+        }
         pf.addPerson(p);
-        return Response.ok(json).build();
+        return Response.ok(gson.toJson(p)).build();
     }
 
     @PUT

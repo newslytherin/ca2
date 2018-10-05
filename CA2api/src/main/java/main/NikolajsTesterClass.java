@@ -17,7 +17,7 @@ public class NikolajsTesterClass {
 //        params.put("street", "Hansstrede");
 //        params.put("zipCode", "388");
 //        pf.getPersonDTOWithFilters(params).forEach(System.out::println);
-pf.getPersonDTOByHobby("fodbold").forEach(System.out::println);
+            pf.getPersonDTOByHobby("fodbold").forEach(System.out::println);
 //        System.out.println(pf.getPersonDTOById(1));
 //        System.out.println(pf.getPersonDTOByPhone("12345678"));
 //        System.out.println(pf.getPersonDTOByEmail("Nikolaj.Stephan.zip91@mail.dk"));

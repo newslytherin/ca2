@@ -114,7 +114,7 @@ public class PersonFacade {
         }
     }
 
-    public void addPerson(Person p) {
+    public PersonDTO addPerson(Person p) {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
@@ -123,6 +123,8 @@ public class PersonFacade {
         } finally {
             em.close();
         }
+        PersonDTO pdto = new PersonDTO(p);
+        return pdto;
     }
 
     public void updatePerson(Person p) {

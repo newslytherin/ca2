@@ -19,8 +19,7 @@ import javax.persistence.Table;
 @Inheritance
 @DiscriminatorColumn(name = "type")
 @Table(name = "INFO")
-public class InfoEntity implements Serializable
-{
+public class InfoEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -33,35 +32,26 @@ public class InfoEntity implements Serializable
     @ManyToOne(fetch = FetchType.EAGER)
     private Address address;
 
-    public InfoEntity()
-    {
-        phones = new ArrayList();
+    public InfoEntity() {
     }
 
-    
-    
-    public Integer getId()
-    {
+    public Integer getId() {
         return id;
     }
 
-    public String getEmail()
-    {
+    public String getEmail() {
         return email;
     }
 
-    public List<Phone> getPhones()
-    {
+    public List<Phone> getPhones() {
         return phones;
     }
 
-    public Address getAddress()
-    {
+    public Address getAddress() {
         return address;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return "";
     }
 
@@ -70,10 +60,8 @@ public class InfoEntity implements Serializable
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "InfoEntity{" + "id=" + id + ", email=" + email + ", phones=" + phones + ", address=" + address + '}';
     }
 
-    
 }
