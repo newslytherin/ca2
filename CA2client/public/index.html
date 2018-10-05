@@ -28,7 +28,11 @@
     <input type="text" id="key" class="form-control" placeholder="keyword">
 
     <button id="find-btn" class="btn btn-info btn-lg">find</button>
-    <button id="find-btn" class="btn btn-info btn-lg" data-toggle="modal" data-target="#query-params-modal">advanced search</button>
+    <button id='c-advanced-btn' class='btn btn-info btn-lg hidden' data-toggle='modal' data-target='#company-params-modal'> advanced search</button>
+    <button id='p-advanced-btn' class='btn btn-info btn-lg hidden' data-toggle='modal' data-target='#person-params-modal'> advanced search</button>
+    <!-- <span id="advanced-btn-div">   -->
+      <!-- <button id="advanced-btn" class="btn btn-info btn-lg" data-toggle="modal" data-target="#query-params-modal">advanced search</button> -->
+    <!-- </span> -->
 
     <!-- Trigger the modal with a button -->
     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#person-model">add person</button>
@@ -238,7 +242,7 @@
     <!----------------------------------->
 
     <!-- Company by Query Params Modal -->
-    <div class="modal fade" id="query-params-modal" role="dialog">
+    <div class="modal fade" id="company-params-modal" role="dialog">
       <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -250,25 +254,25 @@
           <div class="modal-body">
 
             <b>minimum employees: </b>
-            <input type="number" id="qp-min-emps" class="form-control" min="1"></input>
+            <input type="number" id="qp-min-emps" class="form-control" min="1">
 
             <b>maximum employees: </b>
-            <input type="number" id="qp-max-emps" class="form-control" min="1"></input>
+            <input type="number" id="qp-max-emps" class="form-control" min="1">
 
             <b>minimum market value: </b>
-            <input type="number" id="qp-min-market" class="form-control" min="1"></input>
+            <input type="number" id="qp-min-market" class="form-control" min="1">
 
             <b>maximum market value: </b>
-            <input type="number" id="qp-max-market" class="form-control" min="1"></input>
+            <input type="number" id="qp-max-market" class="form-control" min="1">
 
             <b>street: </b>
-            <input type="text" id="qp-street" class="form-control"></input>
+            <input type="text" id="qp-street" class="form-control">
 
             <b>zipcode: </b>
-            <input type="number" id="qp-zip-code" class="form-control" min="1"></input>
+            <input type="number" id="qp-zip-code" class="form-control" min="1">
 
             <div class="modal-footer">
-              <button type="button" id="queryParamBtn" class="btn btn-default">edit</button>
+              <button type="button" id="companyParamBtn" class="btn btn-default">find</button>
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
           </div>
@@ -276,6 +280,34 @@
         </div>
       </div>
     </div>
+
+    <!-- Person by Query Params Modal -->
+    <div class="modal fade" id="person-params-modal" role="dialog">
+        <div class="modal-dialog">
+  
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">company by values</h4>
+            </div>
+            <div class="modal-body">
+  
+              <b>zipcode: </b>
+              <input type="number" id="zipcode" class="form-control" min="1">
+  
+              <b>street: </b>
+              <input type="text" id="street" class="form-control" min="1">
+  
+              <div class="modal-footer">
+                <button type="button" id="personParamBtn" class="btn btn-default">find</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </div>
 
     <table class="table">
       <thead id="tablehead">

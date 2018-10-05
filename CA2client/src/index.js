@@ -11,14 +11,15 @@ var hobbyContainer = document.getElementById('hobby-container');
 document.getElementById('find-btn').addEventListener('click', getData);
 document.getElementById('add-person-phone').addEventListener('click', addPersonPhoneInput);
 document.getElementById('add-company-phone').addEventListener('click', addCompanyPhoneInput);
-document.getElementById('queryParamBtn').addEventListener('click', getQueryParams);
+document.getElementById('c-advanced-btn').addEventListener('click', getCompanyParams);
+document.getElementById('p-advanced-btn').addEventListener('click', getCompanyParams);
 document.getElementById('add-hobby').addEventListener('click', addHobbyInput);
 document.getElementById('tablebody').addEventListener('click', viewDetails);
 
 var fetchData = null;
 target.onchange = setFilter;
 
-// CHANGE IP TO LOCAL!!
+//  CHANGE IP TO LOCAL!!
 const URL = "http://localhost:8084/CA2api/api/";
 
 function getData() {
@@ -59,21 +60,27 @@ function setFilter() {
     switch (target.value) {
         case 'person':
             addFilters('all', 'id', 'phone', 'email', 'hobby');
+            toggelAdvancedbtn("person");
             break;
-        case 'company':
+            case 'company':
             addFilters('all', 'cvr', 'name', 'phone', 'email');
+            toggelAdvancedbtn("company");
             break;
-        case 'city':
+            case 'city':
             addFilters('all', 'zip');
+            toggelAdvancedbtn();
             break;
-        case 'address':
+            case 'address':
             addFilters('all', 'zip');
+            toggelAdvancedbtn();
             break;
-        case 'phone':
+            case 'phone':
             addFilters('all', 'number');
+            toggelAdvancedbtn();
             break;
-        case 'hobby':
+            case 'hobby':
             addFilters('all', 'name');
+            toggelAdvancedbtn();
     }
 }
 
@@ -84,6 +91,20 @@ function addFilters() {
         filters.push(arguments[key]);
     }
     renderFilters(filters);
+}
+
+// adds advanced button
+function toggelAdvancedbtn(target) {
+    if (target === "person") {
+        $('#p-advanced-btn').removeClass('hidden');
+        $('#c-advanced-btn').addClass('hidden');
+    }else if(target === "company"){
+        $('#c-advanced-btn').removeClass('hidden');
+        $('#p-advanced-btn').addClass('hidden');
+    }else{
+        $('#p-advanced-btn').addClass('hidden');
+        $('#c-advanced-btn').addClass('hidden');
+    }
 }
 
 // adds filters to option
@@ -211,7 +232,28 @@ function addHobbyInput() {
     hobbyContainer.innerHTML += "<input type='text' class='hobby-desciption form-control' placeholder='desciption (optional)'>";
 }
 
-function getQueryParams(){
+function getPersonParams() {
+    var identities = [];
+    identities.push('zipcode');
+    identities.push('street');
+
+    var params = [];
+    params.push(document.getElementById('zipcode').value);
+    params.push(document.getElementById('street').value);
+
+    var queryParams = [];
+    for(var index in params) {
+        if(params[index] != '' && params[index] != null) {
+            queryParams.push(identities[index] + "=" + params[index]);
+        }
+    }
+    $('#query-params-modal').modal('hide');
+    var s = "person?" + queryParams.join("&");
+    console.log(queryParams);
+    console.log(s);
+}
+
+function getCompanyParams(){
     var identities = [];
     identities.push('empmin');
     identities.push('empmax');
