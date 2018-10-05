@@ -50,7 +50,7 @@ public class HobbyResource
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getJson()
+    public Response getAllHobby()
     {
         return Response.ok(gson.toJson(hf.getAllHobby())).build();
     }
@@ -58,13 +58,13 @@ public class HobbyResource
     @GET
     @Path("name/{name}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getJsonByName(@PathParam("name") String name) {
+    public Response getHobbyByName(@PathParam("name") String name) {
         return Response.ok(gson.toJson(hf.getHobbyByName(name))).build();
     }
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response putJson(String json) {
+    public Response putHobby(String json) {
         Hobby h = gson.fromJson(json, Hobby.class);
         hf.addHobby(h);
         return Response.ok(json).build();
@@ -72,7 +72,7 @@ public class HobbyResource
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response postJson(String json) {
+    public Response postHobby(String json) {
         Hobby h = gson.fromJson(json, Hobby.class);
         hf.addHobby(h);
         return Response.ok(json).build();

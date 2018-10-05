@@ -51,7 +51,7 @@ public class AddressResource
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getJson()
+    public Response getAllAddress()
     {
         return Response.ok(gson.toJson(af.getAllAddressDTO())).build();
     }
@@ -59,7 +59,7 @@ public class AddressResource
     @GET
     @Path("zip/{zip}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getJsonByZip(@PathParam("zip") int zip)
+    public Response getAddressByZip(@PathParam("zip") int zip)
     {
         return Response.ok(gson.toJson(af.getAddressByZip(zip))).build();
     }
@@ -67,7 +67,7 @@ public class AddressResource
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response putJson(String json)
+    public Response putAddress(String json)
     {
         Address a = gson.fromJson(json, Address.class);
         af.addAddress(a);
@@ -77,7 +77,7 @@ public class AddressResource
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response postJson(String json)
+    public Response postAddress(String json)
     {
         Address a = gson.fromJson(json, Address.class);
         af.addAddress(a);
