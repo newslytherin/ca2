@@ -3,6 +3,7 @@ package facade;
 import entity.Hobby;
 import entity.Person;
 import entity.PersonDTO;
+import exception.InvalidDataException;
 import exception.PersonNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ public class PersonFacade {
         this.emf = emf;
     }
 
-    public List<PersonDTO> getPersonDTOWithFilters(Map<String, String> parameters) {
+    public List<PersonDTO> getPersonDTOWithFilters(Map<String, String> parameters) throws InvalidDataException {
         EntityManager em = emf.createEntityManager();
         String jpql = "SELECT new entity.PersonDTO(p) FROM Person p";
         //build query string
@@ -46,6 +47,8 @@ public class PersonFacade {
                 query = query.setParameter("zipCode", Integer.parseInt(parameters.get("zipCode")));
             }
             return query.getResultList();
+        } catch (Exception ex) {
+            throw new InvalidDataException("Inserted data is not valid");
         } finally {
             em.close();
         }

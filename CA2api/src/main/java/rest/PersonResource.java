@@ -3,6 +3,8 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import entity.Person;
+import exception.InvalidDataException;
+import exception.PersonNotFoundException;
 import facade.PersonFacade;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +35,7 @@ public class PersonResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getJson(@QueryParam("street") String street, @QueryParam("zipcode") String zipCode) {
+    public Response getJson(@QueryParam("street") String street, @QueryParam("zipcode") String zipCode) throws InvalidDataException {
         Map<String, String> params = new HashMap<>();
         if (street != null) {
             params.put("street", street);
@@ -47,27 +49,27 @@ public class PersonResource {
     @GET
     @Path("id/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getJsonById(@PathParam("id") int id) {
+    public Response getJsonById(@PathParam("id") int id) throws PersonNotFoundException {
         return Response.ok(gson.toJson(pf.getPersonDTOById(id))).build();
     }
 
     @GET
     @Path("phone/{phone}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getJsonByPhone(@PathParam("phone") String phone) {
+    public Response getJsonByPhone(@PathParam("phone") String phone) throws PersonNotFoundException {
         return Response.ok(gson.toJson(pf.getPersonDTOByPhone(phone))).build();
     }
 
     @GET
     @Path("email/{email}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getJsonByEmail(@PathParam("email") String email) {
+    public Response getJsonByEmail(@PathParam("email") String email) throws PersonNotFoundException {
         return Response.ok(gson.toJson(pf.getPersonDTOByEmail(email))).build();
     }
     @GET
     @Path("hobby/{hobby}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getJsonByHobby(@PathParam("hobby") String hobby) {
+    public Response getJsonByHobby(@PathParam("hobby") String hobby) throws PersonNotFoundException {
         return Response.ok(gson.toJson(pf.getPersonDTOByHobby(hobby))).build();
     }
 
