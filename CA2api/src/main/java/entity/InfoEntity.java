@@ -62,9 +62,11 @@ public class InfoEntity implements Serializable {
     public void setAddress(Address address) {
         this.address = address;
     }
-
-    void addPhone(Phone phone) {
-        phones.add(phone);
+    
+    public InfoEntity addPhone(Phone phone){
+        
+        phone.setInfoEntity(this);
+        return this;
     }
 
     @Override
