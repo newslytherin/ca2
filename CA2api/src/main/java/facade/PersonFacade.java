@@ -132,10 +132,7 @@ public class PersonFacade {
         Person tmp = null;
         try {
             em.getTransaction().begin();
-            tmp = em.find(Person.class, p.getId());
-            tmp.setFirstName(p.getFirstName());
-            tmp.setLastName(p.getLastName());
-            tmp.setEmail(p.getEmail());
+            tmp = em.find(Person.class, p.getId()).updateValues(p);
             em.getTransaction().commit();
         } finally {
             em.close();

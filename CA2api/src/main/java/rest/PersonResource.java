@@ -82,8 +82,7 @@ public class PersonResource {
         if (p.getFirstName() == null || p.getLastName() == null || p.getEmail() == null) {
             throw new InvalidDataException("Not enough data");
         }
-        pf.addPerson(p);
-        return Response.ok(gson.toJson(p)).build();
+        return Response.ok(gson.toJson(pf.addPerson(p))).build();
     }
 
     @PUT
@@ -91,8 +90,7 @@ public class PersonResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response putPerson(String json) {
         Person p = gson.fromJson(json, Person.class);
-        pf.updatePerson(p);
-        return Response.ok(json).build();
+        return Response.ok(pf.updatePerson(p)).build();
     }
 
     @DELETE

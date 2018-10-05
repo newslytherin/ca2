@@ -18,6 +18,13 @@ public class Person extends InfoEntity implements Serializable {
     //@ElementCollection()
     private List<Hobby> hobbies;
 
+    public Person updateValues(Person p) {
+        this.email = p.getEmail();
+        this.firstName = p.getFirstName();
+        this.lastName = p.getLastName();
+        return this;
+    }
+
     public String getFirstName() {
         return firstName;
     }
