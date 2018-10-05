@@ -111,8 +111,33 @@ newlines added for readability
 ---
 
 #### **POST** `api/person`
- 
-
+Consumes json
+```json
+{
+	"firstName": "Daniel",
+	"lastName": "Lindholm",
+	"email": "mail@mail.dk" 
+}
+```
+**Succes**
+```json
+{
+  "id": 1,
+  "email": "xxx",
+  "name": "xxx",
+  "zipCode": 1234,
+  "phones": [12345678, 23456789, ...],
+  "hobbies": ["hobby1", "hobby2", ...]
+}
+```
+**Fejl forbindelse**
+```json
+{
+  "status code": 404,
+   "detail": "xxxx",
+}
+```
+newlines added for readability
 ---
 
 
