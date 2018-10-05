@@ -8,7 +8,7 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import entity.Company;
-import dto.CompanyDTO;
+import entity.CompanyDTO;
 import entity.Person;
 import exception.CompanyNotFoundException;
 import exception.InvalidDataException;

@@ -2,7 +2,7 @@ package facade;
 
 import entity.Hobby;
 import entity.Person;
-import dto.PersonDTO;
+import entity.PersonDTO;
 import exception.InvalidDataException;
 import exception.PersonNotFoundException;
 import java.util.ArrayList;

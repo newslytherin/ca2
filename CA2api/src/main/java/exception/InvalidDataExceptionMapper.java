@@ -6,7 +6,6 @@
 
 package exception;
 
-import dto.ExceptionDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import javax.servlet.ServletContext;

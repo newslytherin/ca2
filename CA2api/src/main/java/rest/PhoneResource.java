@@ -8,7 +8,7 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import entity.Phone;
-import dto.PhoneDTO;
+import entity.PhoneDTO;
 import facade.PhoneFacade;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;

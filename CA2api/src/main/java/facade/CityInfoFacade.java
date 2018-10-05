@@ -5,7 +5,7 @@
  */
 package facade;
 
-import dto.CityInfoDTO;
+import entity.CityInfoDTO;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

@@ -1,6 +1,5 @@
-package dto;
+package entity;
 
-import entity.Address;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.persistence.ElementCollection;

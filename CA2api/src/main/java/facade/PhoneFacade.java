@@ -9,7 +9,7 @@ import entity.Company;
 import entity.InfoEntity;
 import entity.Person;
 import entity.Phone;
-import dto.PhoneDTO;
+import entity.PhoneDTO;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

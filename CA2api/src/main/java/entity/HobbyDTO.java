@@ -1,7 +1,5 @@
-package dto;
+package entity;
 
-import entity.Hobby;
-import entity.Person;
 import static java.util.Arrays.stream;
 import java.util.List;
 import java.util.stream.Collectors;
