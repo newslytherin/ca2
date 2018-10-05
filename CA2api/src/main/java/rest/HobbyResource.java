@@ -77,4 +77,14 @@ public class HobbyResource
         hf.addHobby(h);
         return Response.ok(json).build();
     }
+    
+    @POST
+    @Path("hobbyid/{hobbyid}/personid/{personid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addHobby(@PathParam("hobbyid") int hobbyid, @PathParam("personid") int personid){
+        
+        hf.addHobbyToPerson(personid, hobbyid);
+        return Response.ok().build();
+        
+    }
 }
