@@ -33,16 +33,13 @@ public class PersonResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getJson(@QueryParam("street") String street, @QueryParam("hobby") String hobby, @QueryParam("zipcode") String zipCode) {
+    public Response getJson(@QueryParam("street") String street, @QueryParam("zipcode") String zipCode) {
         Map<String, String> params = new HashMap<>();
         if (street != null) {
             params.put("street", street);
         }
         if (zipCode != null) {
             params.put("zipCode", zipCode);
-        }
-        if (hobby != null) {
-            params.put("hobby", hobby);
         }
         return Response.ok(gson.toJson(pf.getPersonDTOWithFilters(params))).build();
     }
