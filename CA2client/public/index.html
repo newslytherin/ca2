@@ -141,17 +141,17 @@
 
             <div id="general">
               <h4>general</h4>
-              <input type="text" id="name" class="form-control" placeholder="name">
-              <input type="text" id="cvr" class="form-control" placeholder="cvr">
-              <input type="text" id="email" class="form-control" placeholder="email">
-              <input type="text" id="email" class="form-control" placeholder="description">
-              <input type="number" id="email" class="form-control" placeholder="employees" min="1">
-              <input type="number" id="email" class="form-control" placeholder="market value">
+              <input type="text" id="c-name" class="form-control" placeholder="name">
+              <input type="text" id="c-cvr" class="form-control" placeholder="cvr">
+              <input type="text" id="c-email" class="form-control" placeholder="email">
+              <input type="text" id="c-desc" class="form-control" placeholder="description">
+              <input type="number" id="c-emps" class="form-control" placeholder="employees" min="1">
+              <input type="number" id="c-value" class="form-control" placeholder="market value">
             </div>
             <br>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default">add</button>
+            <button type="button" id="add-company" class="btn btn-default">add</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
         </div>
@@ -185,13 +185,13 @@
             <div id="address">
               <h4>address</h4>
               <b>Street</b>
-              <input type="text" id="edit-company-street" class="form-control">
+              <input type="text" id="edit-company-street" class="form-control" placeholder="street">
 
               <b>City</b>
-              <input type="text" id="edit-company-city" class="form-control">
+              <input type="text" id="edit-company-city" class="form-control" placeholder="city">
 
               <b>Zip code</b>
-              <input type="text" id="edit-company-zipcode" class="form-control">
+              <input type="text" id="edit-company-zipcode" class="form-control" placeholder="zip code">
             </div>
             <br>
 
@@ -206,7 +206,7 @@
             <br>
 
             <div class="modal-footer">
-              <button type="button" class="btn btn-default">edit</button>
+              <button type="button" class="btn btn-default">save</button>
               <button type="button" class="btn btn-default">delete</button>
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
