@@ -150,22 +150,22 @@ newlines added for readability
 *returns a list of all companies*
 
 url filters:
-set minimum marketvalue 
+set minimum marketvalue<br> 
 ?valuemin=5
 
-set maximum marketvalue
+set maximum marketvalue<br>
 ?valuemax=2500
 
-set minimum employee count
+set minimum employee count<br>
 ?empmin=400
 
-set maximum employee count
+set maximum employee count<br>
 ?empmax=400
 
-only allow companies with an address on a certain street
+only allow companies with an address on a certain street<br>
 ?street=nørgaardsvej
 
-only allow companies with an address on in a certain area
+only allow companies with an address on in a certain area<br>
 ?zipcode=2800
 
 **Fuldført forbindelse**
