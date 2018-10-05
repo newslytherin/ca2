@@ -146,6 +146,10 @@ public class PersonFacade {
             em.getTransaction().begin();
             Person p = em.find(Person.class, person.getId());
             if (p != null) {
+                for (Hobby h : p.getHobbies()) {
+                    h.getPeople().remove(p);
+                }
+                p.getAddress().getInfoEntities().remove(p);
                 em.remove(p);
             }
             em.getTransaction().commit();
