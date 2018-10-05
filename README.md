@@ -149,15 +149,76 @@ newlines added for readability
 #### **GET** `api/company`
 *returns a list of all companies*
 
+url filters:
+set minimum marketvalue 
+?valuemin=5
+
+set maximum marketvalue
+?valuemax=2500
+
+set minimum employee count
+?empmin=400
+
+set maximum employee count
+?empmax=400
+
+only allow companies with an address on a certain street
+?street=nørgaardsvej
+
+only allow companies with an address on in a certain area
+?zipcode=2800
+
 **Fuldført forbindelse**
 ```js
 [
-  {"name": "name",
-  "description": "description",
-  "cvr": "cvr",
-  "numEmployees": "numEmployees",
-  "marketValue": "marketValue"},
-  { ... }
+    {
+        "id": 1,
+        "name": "Testcompany",
+        "email": "test@company.dk",
+        "address": "Nørgaardsvej 30",
+        "zipCode": 2800,
+        "city": "Lyngby",
+        "cvr": "554-1122-33",
+        "description": "beskrivelsen",
+        "numEmployees": 500,
+        "marketValue": 2000,
+        "phones": [
+            "83838485",
+            "12345678"
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Testcompany",
+        "email": "test@company.dk",
+        "address": "Nørgaardsvej 30",
+        "zipCode": 2800,
+        "city": "Lyngby",
+        "cvr": "554-1122-33",
+        "description": "beskrivelsen",
+        "numEmployees": 500,
+        "marketValue": 2000,
+        "phones": [
+            "83838485",
+            "12345678"
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Testcompany",
+        "email": "test@company.dk",
+        "address": "Nørgaardsvej 30",
+        "zipCode": 2800,
+        "city": "Lyngby",
+        "cvr": "554-1122-33",
+        "description": "beskrivelsen",
+        "numEmployees": 500,
+        "marketValue": 2000,
+        "phones": [
+            "83838485",
+            "12345678"
+        ]
+    }
 ]
 ```
 
