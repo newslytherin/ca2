@@ -142,6 +142,7 @@ returns the new person as json
 }
 ```
 newlines added for readability
+
 ---
 #### **PUT** `api/person`
 Consumes json
@@ -174,6 +175,7 @@ returns the modified person
 }
 ```
 newlines added for readability
+
 ---
 
 
