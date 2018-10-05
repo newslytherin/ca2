@@ -10,7 +10,7 @@ public class AddressDTO
     private Integer id;
     private String street;
     private String address;
-    private List<String> persons;
+    private List<String> infoEntities;
     private String city;
     private int zipCode;
 
@@ -18,7 +18,7 @@ public class AddressDTO
     {
         this.id = a.getId();
         this.address = a.getStreet() + " " + a.getAddressInfo();
-        this.persons = a.getInfoEntities().stream().map(InfoEntity->InfoEntity.getName()).collect(Collectors.toList());
+        this.infoEntities = a.getInfoEntities().stream().map(InfoEntity->InfoEntity.getName()).collect(Collectors.toList());
         this.city = a.getCityInfo().getCity();
         this.zipCode = a.getCityInfo().getZipCode();
     }
