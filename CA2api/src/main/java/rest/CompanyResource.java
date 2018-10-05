@@ -8,6 +8,7 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import entity.Company;
+import entity.CompanyDTO;
 import entity.Person;
 import exception.CompanyNotFoundException;
 import exception.InvalidDataException;
@@ -57,13 +58,9 @@ public class CompanyResource
             @QueryParam("valuemin") String valuemin,
             @QueryParam("valuemax") String valuemax,
             @QueryParam("street") String street,
-            @QueryParam("zipCode") String zipCode
+            @QueryParam("zipcode") String zipCode
     ) throws InvalidDataException
     {
-        System.out.println("-----");
-        System.out.println(zipCode);
-        System.out.println(street);
-        System.out.println("-----");
         
         Map<String, String> map = new HashMap();
 
@@ -172,23 +169,23 @@ public class CompanyResource
     @Produces(MediaType.APPLICATION_JSON)
     public Response postCompany(String json) {
         Company c = gson.fromJson(json, Company.class);
-        f.addCompany(c);
-        return Response.ok(json).build();
+        CompanyDTO cDTO = f.addCompany(c);
+        return Response.ok(gson.toJson(cDTO)).build();
     }
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response putJson(String json) {
+    public Response putCompany(String json) {
         Company c = gson.fromJson(json, Company.class);
-        f.updateCompany(c);
-        return Response.ok(json).build();
+        CompanyDTO cDTO = f.updateCompany(c);
+        return Response.ok(gson.toJson(cDTO)).build();
     }
 
     @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteJson(String json) {
+    public Response deleteCompany(String json) {
         Company c = gson.fromJson(json, Company.class);
         if (f.deleteCompany(c) != null) {
             return Response.ok(json).build();
