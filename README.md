@@ -530,7 +530,7 @@ Consumes json
 }
 ```
 ---
-#### **GET** `api/hobby/name/{`number`}`
+#### **GET** `api/hobby/name/{`name`}`
 *returns a specific hobby*
 
 **Success**
