@@ -1,5 +1,6 @@
 //import 'bootstrap/dist/css/bootstrap.css'
 
+// DOM variables
 var target = document.getElementById('target');
 var filter = document.getElementById('filter');
 var tableHead = document.getElementById('tablehead');
@@ -8,6 +9,7 @@ var personPhoneContainer = document.getElementById('person-phone-container');
 var companyPhoneContainer = document.getElementById('company-phone-container');
 var hobbyContainer = document.getElementById('hobby-container');
 
+// evenet listeners
 document.getElementById('find-btn').addEventListener('click', getDefault);
 document.getElementById('add-person-phone').addEventListener('click', addPersonPhoneInput);
 document.getElementById('add-company-phone').addEventListener('click', addCompanyPhoneInput);
@@ -17,27 +19,40 @@ document.getElementById('add-hobby').addEventListener('click', addHobbyInput);
 document.getElementById('tablebody').addEventListener('click', viewDetails);
 document.getElementById('add-person').addEventListener('click', addPerson);
 document.getElementById('add-company').addEventListener('click', addCompany);
+target.onchange = setFilter; // changes filter options
 
+// api root url
+const URL = "http://localhost:8090/CA2api/api/";
+
+// data from fetch
 var fetchData = null;
-target.onchange = setFilter;
 
-var inputs;
+////////////////////////////////////////
+//  FETCH CALLS WITH CALLBACKS 
+////////////////////////////////////////
 
+// call fetch with parson query params
 function getPersonQuery() {
     getData(getPersonParams);
 }
 
+// call fetch with company query params
 function getCompanyQuery() {
     getData(getCompanyParams);
 }
 
+// call fetch with target, filter and key params
 function getDefault() {
     getData(getInputs);
 }
 
-//  CHANGE IP TO LOCAL!!
-const URL = "http://localhost:8090/CA2api/api/";
+// returns input from target, filter and key as uri string
+// returns target if filter value equals 'all'
+function getInputs() {
+    return filter.value == 'all' ? target.value : target.value + "/" + filter.value + "/" + key.value;
+}
 
+// call fetch with callback param to specify query request
 function getData(callback) {
     resetTable();
     fetch(URL + callback())
@@ -55,6 +70,7 @@ function getData(callback) {
         })
 }
 
+// error handler, if the res status code is above 300 and returns a json error
 function handleHttpErrors(res) {
     if (res.ok) {
         return res.json();
@@ -66,10 +82,16 @@ function handleHttpErrors(res) {
     }
 }
 
+// set tables to be empty
+// (the idea was to implement a loader when fetch calls would come instantly)
 function resetTable() {
     tableHead.innerHTML = null;
     tableBody.innerHTML = null;
 }
+
+////////////////////////////////////////
+//  SET FILTERS AND BUTTONS
+////////////////////////////////////////
 
 // set values for filter option
 function setFilter() {
@@ -109,7 +131,13 @@ function addFilters() {
     renderFilters(filters);
 }
 
-// adds advanced button
+// adds filters to option
+function renderFilters(filters) {
+    filter.innerHTML = filters.map(
+        value => "<option value=" + value + ">" + value + "</option>").join();
+}
+
+// adds advanced button (jquery)
 function toggelAdvancedbtn(target) {
     if (target === "person") {
         $('#p-advanced-btn').removeClass('hidden');
@@ -123,12 +151,11 @@ function toggelAdvancedbtn(target) {
     }
 }
 
-// adds filters to option
-function renderFilters(filters) {
-    filter.innerHTML = filters.map(
-        value => "<option value=" + value + ">" + value + "</option>").join();
-}
+////////////////////////////////////////
+//  OPENS MODALS AND SET VALUES
+////////////////////////////////////////
 
+// opens edit modal for person or company
 function viewDetails(object) {
     if (target.value == 'person') {
         $('#person-edit-model').modal('show');
@@ -141,57 +168,84 @@ function viewDetails(object) {
     }
 }
 
+// sets values in edit person modal
 function setEditValuesPerson(index) {
 
+    // generic list/ object initializer
     var jsonObject = (!Array.isArray(fetchData)) ? fetchData : fetchData[index];
 
-    // general
+    // general setters
     document.getElementById('edit-title').innerText = jsonObject['name'];
     document.getElementById('edit-email').value = jsonObject['email'];
 
-    // phones
-    document.getElementById('edit-phone-container').innerHTML = "<h5><b>phones</b></h5>";
+    // phones setters
+    document.getElementById('person-phone-container').innerHTML = "<h5><b>phones</b></h5>";
     for (var phone in jsonObject['phones']) {
-        document.getElementById('edit-phone-container').innerHTML += "<input type='text' class='form-control' value='" + jsonObject['phones'][phone] + "'>";
-        console.log(jsonObject['phones'][phone]);
+        document.getElementById('person-phone-container').innerHTML += "<input type='text' class='form-control' value='" + jsonObject['phones'][phone] + "'>";
     }
 
-    // address
+    // address setters
     if(jsonObject['address'] != undefined) document.getElementById('edit-street').value = jsonObject['address'];
     if(jsonObject['city'] != undefined) document.getElementById('edit-city').value = jsonObject['city'];
     if(jsonObject['zipCode'] != 0) document.getElementById('edit-zipcode').value = jsonObject['zipCode'];
 
-    // hobbies
+    // hobbies setters
     document.getElementById('edit-hobby-container').innerHTML = "";
     for (var hobby in jsonObject['hobbies']) {
         document.getElementById('edit-hobby-container').innerHTML += "<input type='text' class='form-control' value='" + jsonObject['hobbies'][hobby] + "'>";
     }
 }
 
+// sets values in edit company modal
 function setEditValuesCompany(index) {
 
+    // generic list/ object initializer
     var jsonObject = (!Array.isArray(fetchData)) ? fetchData : fetchData[index];
 
-    // general
+    // general setters
     document.getElementById('edit-company-title').innerText = jsonObject['name'] + " (cvr: " + jsonObject['cvr'] + ")";
     document.getElementById('edit-company-email').value = jsonObject['email'];
 
-    // phones
-    document.getElementById('edit-phone-container').innerHTML = "<h5><b>phones</b></h5>";
+    // phones setters
+    document.getElementById('company-phone-container').innerHTML = "<h5><b>phones</b></h5>";
     for (var phone in jsonObject['phones']) {
-        document.getElementById('edit-phone-container').innerHTML += "<input type='text' class='form-control' value='" + jsonObject['phones'][phone] + "'>";
-        console.log(jsonObject['phones'][phone]);
+        document.getElementById('company-phone-container').innerHTML += "<input type='text' class='form-control' value='" + jsonObject['phones'][phone] + "'>";
     }
 
-    // address
+    // address setters
     if(jsonObject['address'] != undefined) document.getElementById('edit-company-street').value = jsonObject['address'];
     if(jsonObject['city'] != undefined) document.getElementById('edit-company-city').value = jsonObject['city'];
     if(jsonObject['zipCode'] != undefined) document.getElementById('edit-company-zipcode').value = jsonObject['zipCode'];
 
-    // company info
+    // company info setters
     document.getElementById('edit-company-value').value = jsonObject['marketValue'];
     document.getElementById('edit-company-employees').value = jsonObject['numEmployees'];
 }
+
+// adds phone input fields in person edit modal
+function addPersonPhoneInput() {
+    personPhoneContainer.innerHTML += "<hr>";
+    personPhoneContainer.innerHTML += "<input type='text' class='form-control phone' placeholder='phone number'>";
+    personPhoneContainer.innerHTML += "<input type='text' class='phone-description form-control' placeholder='phone description'>";
+}
+
+// adds hobby input fields in person edit modal
+function addHobbyInput() {
+    hobbyContainer.innerHTML += "<hr>";
+    hobbyContainer.innerHTML += "<input type='text' class='hobby-name form-control' placeholder='name (optional)'>";
+    hobbyContainer.innerHTML += "<input type='text' class='hobby-desciption form-control' placeholder='desciption (optional)'>";
+}
+
+// adds phone input fields in company edit modal
+function addCompanyPhoneInput() {
+    companyPhoneContainer.innerHTML += "<hr>";
+    companyPhoneContainer.innerHTML += "<input type='text' class='form-control phone' placeholder='phone number'>";
+    companyPhoneContainer.innerHTML += "<input type='text' class='phone-description form-control' placeholder='phone description'>";
+}
+
+////////////////////////////////////////
+//  RENDERS TABLE DATA
+////////////////////////////////////////
 
 // iterate through data and adds it to the table 
 function renderTable(data) {
@@ -222,43 +276,24 @@ function renderTable(data) {
     tableBody.innerHTML = tBody;
 }
 
-function getInputs() {
-    var targetValue = target.value;
-    var filterValue = filter.value;
-    var keyValue = key.value;
-    return filterValue == 'all' ? targetValue : targetValue + "/" + filterValue + "/" + keyValue;
-}
+////////////////////////////////////////
+//  SET QUERY PARAMETERS IN ADVANCED SEARCH
+////////////////////////////////////////
 
-// note: get phone numers by class!
-function addPersonPhoneInput() {
-    personPhoneContainer.innerHTML += "<hr>";
-    personPhoneContainer.innerHTML += "<input type='text' class='form-control phone' placeholder='phone number'>";
-    personPhoneContainer.innerHTML += "<input type='text' class='phone-description form-control' placeholder='phone description'>";
-}
-
-// note: get phone numers by class!
-function addCompanyPhoneInput() {
-    companyPhoneContainer.innerHTML += "<hr>";
-    companyPhoneContainer.innerHTML += "<input type='text' class='form-control phone' placeholder='phone number'>";
-    companyPhoneContainer.innerHTML += "<input type='text' class='phone-description form-control' placeholder='phone description'>";
-}
-
-// note: get hobby numers by class!
-function addHobbyInput() {
-    hobbyContainer.innerHTML += "<hr>";
-    hobbyContainer.innerHTML += "<input type='text' class='hobby-name form-control' placeholder='name (optional)'>";
-    hobbyContainer.innerHTML += "<input type='text' class='hobby-desciption form-control' placeholder='desciption (optional)'>";
-}
-
+// converts person values into a query param
 function getPersonParams() {
+
+    // adds value specification to array
     var identities = [];
     identities.push('zipcode');
     identities.push('street');
 
+    // adds value to array
     var params = [];
     params.push(document.getElementById('zipcode').value);
     params.push(document.getElementById('street').value);
 
+    // adds value specification and value to array if value exist
     var queryParams = [];
     for (var index in params) {
         if (params[index] != '' && params[index] != null) {
@@ -266,10 +301,15 @@ function getPersonParams() {
         }
     }
     $('#person-params-modal').modal('hide');
+
+    // returns a joined string with '&' seperation
     return "person?" + queryParams.join("&");
 }
 
+// converts company values into a query param
 function getCompanyParams() {
+
+    // adds value specification to array
     var identities = [];
     identities.push('empmin');
     identities.push('empmax');
@@ -278,6 +318,7 @@ function getCompanyParams() {
     identities.push('street');
     identities.push('zipCode');
 
+    // adds value to array
     var params = [];
     params.push(document.getElementById('qp-min-emps').value);
     params.push(document.getElementById('qp-max-emps').value);
@@ -286,6 +327,7 @@ function getCompanyParams() {
     params.push(document.getElementById('qp-street').value);
     params.push(document.getElementById('qp-zip-code').value);
 
+    // adds value specification and value to array if value exist
     var queryParams = [];
     for (var index in params) {
         if (params[index] != '' && params[index] != null) {
@@ -293,9 +335,16 @@ function getCompanyParams() {
         }
     }
     $('#company-params-modal').modal('hide');
+
+    // returns a joined string with '&' seperation
     return "company?" + queryParams.join("&");
 }
 
+////////////////////////////////////////
+//  CONVERTS INPUT TO JSON
+////////////////////////////////////////
+
+// adds person values to object and converts to it json
 function addPerson() {
     var person = {};
     person.firstName = document.getElementById('firstName').value;
@@ -305,6 +354,7 @@ function addPerson() {
     setData(data, "person");
 }
 
+// adds company values to object and converts to it json
 function addCompany() {
     var company = {};
     company.name = document.getElementById('c-name').value;
@@ -317,6 +367,7 @@ function addCompany() {
     setData(data, "company");
 }
 
+// adds phone values to object and converts to it json
 function addPhoneAsJson() {
     var phone = {};
     // fk ie id?
@@ -325,6 +376,7 @@ function addPhoneAsJson() {
     return JSON.stringify(phone);
 }
 
+// adds hobby values to object and converts to it json
 function addHobbyAsJson() {
     var hobby = {};
     // fk person id?
@@ -333,6 +385,7 @@ function addHobbyAsJson() {
     return JSON.stringify(hobby);
 }
 
+// adds address values to object and converts to it json
 function addAddressAsJson() {
     var address = {};
     // fk ie id?
@@ -342,6 +395,7 @@ function addAddressAsJson() {
     return JSON.stringify(address);
 }
 
+// calls fetch POST to add data at given path
 function setData(data, path) {
     resetTable();
     fetch(URL + path, {
