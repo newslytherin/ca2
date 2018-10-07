@@ -22,7 +22,7 @@ document.getElementById('add-company').addEventListener('click', addCompany);
 target.onchange = setFilter; // changes filter options
 
 // api root url
-const URL = "https://stephandjurhuus.com/CA2api/";
+const URL = "https://stephandjurhuus.com/CA2api/api/";
 
 // data from fetch
 var fetchData = null;
