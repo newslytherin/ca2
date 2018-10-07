@@ -259,31 +259,61 @@
 
     <!-- Person by Query Params Modal -->
     <div class="modal fade" id="person-params-modal" role="dialog">
-        <div class="modal-dialog">
-  
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">company by values</h4>
-            </div>
-            <div class="modal-body">
-  
-              <b>zipcode: </b>
-              <input type="number" id="zipcode" class="form-control" min="1">
-  
-              <b>street: </b>
-              <input type="text" id="street" class="form-control" min="1">
-  
-              <div class="modal-footer">
-                <button type="button" id="personParamBtn" class="btn btn-default">find</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
-            </div>
-  
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">company by values</h4>
           </div>
+          <div class="modal-body">
+
+            <b>zipcode: </b>
+            <input type="number" id="zipcode" class="form-control" min="1">
+
+            <b>street: </b>
+            <input type="text" id="street" class="form-control" min="1">
+
+            <div class="modal-footer">
+              <button type="button" id="personParamBtn" class="btn btn-default">find</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
         </div>
       </div>
+    </div>
+
+    <!-- Add Hobby -->
+    <div class="modal fade" id="add-hobby-modal" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">add hobby</h4>
+          </div>
+          <div class="modal-body">
+
+            <b>name: </b>
+            <input type="number" id="add-hobby-name" class="form-control">
+
+            <b>description: </b>
+            <input type="text" id="add-hobby-desc" class="form-control">
+
+            <div class="modal-footer">
+              <button type="button" id="add-hobby-btn" class="btn btn-default">add</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+      
 
     <table class="table">
       <thead id="tablehead">

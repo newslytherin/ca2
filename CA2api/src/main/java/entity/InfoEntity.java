@@ -26,7 +26,7 @@ public abstract class InfoEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
-    @Column(unique = true)
+    //@Column(unique = true)
     protected String email;
     //protected boolean status;
     @OneToMany(mappedBy = "infoEntity", fetch = FetchType.EAGER,cascade = CascadeType.ALL)

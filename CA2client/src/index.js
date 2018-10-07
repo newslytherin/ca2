@@ -22,7 +22,7 @@ document.getElementById('add-company').addEventListener('click', addCompany);
 target.onchange = setFilter; // changes filter options
 
 // api root url
-const URL = "http://localhost:8090/CA2api/api/";
+const URL = "https://stephandjurhuus.com/CA2api/";
 
 // data from fetch
 var fetchData = null;
@@ -377,7 +377,7 @@ function addPhoneAsJson() {
 }
 
 // adds hobby values to object and converts to it json
-function addHobbyAsJson() {
+function addHobbyAsJson(id) {
     var hobby = {};
     // fk person id?
     hobby.name = document.getElementById('name');
