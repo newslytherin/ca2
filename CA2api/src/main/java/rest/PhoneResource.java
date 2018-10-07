@@ -51,13 +51,8 @@ public class PhoneResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getJson() {
-        
         String json = gson.toJson(pf.getAllPhonesDTO()); 
-        if(json != null) {
-            return Response.ok(json).build();
-        } else {
-            return Response.status(Response.Status.NOT_ACCEPTABLE).entity("{}").build();
-        }
+        return Response.ok(json).build();
     }
     
     /**
