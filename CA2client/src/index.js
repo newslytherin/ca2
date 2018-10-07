@@ -8,6 +8,7 @@ var tableBody = document.getElementById('tablebody');
 var personPhoneContainer = document.getElementById('person-phone-container');
 var companyPhoneContainer = document.getElementById('company-phone-container');
 var hobbyContainer = document.getElementById('hobby-container');
+var addHobbyContainer = document.getElementById('add-hobby-container');
 
 // evenet listeners
 document.getElementById('find-btn').addEventListener('click', getDefault);
@@ -16,16 +17,19 @@ document.getElementById('add-company-phone').addEventListener('click', addCompan
 document.getElementById('companyParamBtn').addEventListener('click', getCompanyQuery);
 document.getElementById('personParamBtn').addEventListener('click', getPersonQuery);
 document.getElementById('add-hobby').addEventListener('click', addHobbyInput);
+document.getElementById('save-hobby').addEventListener('click', addHobbyAsJson);
 document.getElementById('tablebody').addEventListener('click', viewDetails);
 document.getElementById('add-person').addEventListener('click', addPerson);
 document.getElementById('add-company').addEventListener('click', addCompany);
 target.onchange = setFilter; // changes filter options
+filter.onchange = toggleKeyInput; // toggles key input
 
 // api root url
 const URL = "https://stephandjurhuus.com/CA2api/api/";
 
 // data from fetch
 var fetchData = null;
+var id = null;
 
 ////////////////////////////////////////
 //  FETCH CALLS WITH CALLBACKS 
@@ -59,6 +63,7 @@ function getData(callback) {
         .then(res => handleHttpErrors(res))
         .then(data => {
             fetchData = data;
+            console.log(data);
             return renderTable(data)
         })
         .catch(err => {
@@ -137,6 +142,10 @@ function renderFilters(filters) {
         value => "<option value=" + value + ">" + value + "</option>").join();
 }
 
+function toggleKeyInput(){
+    filter.value == 'all' ? $('#key').addClass('hidden') : $('#key').removeClass('hidden');
+}
+
 // adds advanced button (jquery)
 function toggelAdvancedbtn(target) {
     if (target === "person") {
@@ -171,10 +180,12 @@ function viewDetails(object) {
 // sets values in edit person modal
 function setEditValuesPerson(index) {
 
+    id = null;
     // generic list/ object initializer
     var jsonObject = (!Array.isArray(fetchData)) ? fetchData : fetchData[index];
 
     // general setters
+    id = jsonObject['id'];
     document.getElementById('edit-title').innerText = jsonObject['name'];
     document.getElementById('edit-email').value = jsonObject['email'];
 
@@ -190,10 +201,11 @@ function setEditValuesPerson(index) {
     if(jsonObject['zipCode'] != 0) document.getElementById('edit-zipcode').value = jsonObject['zipCode'];
 
     // hobbies setters
-    document.getElementById('edit-hobby-container').innerHTML = "";
+    document.getElementById('hobby-container').innerHTML = "";
     for (var hobby in jsonObject['hobbies']) {
-        document.getElementById('edit-hobby-container').innerHTML += "<input type='text' class='form-control' value='" + jsonObject['hobbies'][hobby] + "'>";
+        document.getElementById('hobby-container').innerHTML += "<p type='text' class='form-control'>"+jsonObject['hobbies'][hobby]+"</p>";
     }
+    
 }
 
 // sets values in edit company modal
@@ -231,9 +243,12 @@ function addPersonPhoneInput() {
 
 // adds hobby input fields in person edit modal
 function addHobbyInput() {
-    hobbyContainer.innerHTML += "<hr>";
-    hobbyContainer.innerHTML += "<input type='text' class='hobby-name form-control' placeholder='name (optional)'>";
-    hobbyContainer.innerHTML += "<input type='text' class='hobby-desciption form-control' placeholder='desciption (optional)'>";
+    addHobbyContainer.innerHTML = "<hr";
+    addHobbyContainer.innerHTML += "<b>add hobby</b>";
+    addHobbyContainer.innerHTML += "<input type='text' id='add-hoby-name' class='hobby-name form-control' placeholder='name'>";
+    addHobbyContainer.innerHTML += "<input type='text' id='add-hoby-desc' class='hobby-desciption form-control' placeholder='desciption'>";
+    $('#save-hobby').removeClass('hidden');
+    $('#add-hobby').addClass('hidden');
 }
 
 // adds phone input fields in company edit modal
@@ -377,12 +392,19 @@ function addPhoneAsJson() {
 }
 
 // adds hobby values to object and converts to it json
-function addHobbyAsJson(id) {
+function addHobbyAsJson() {
     var hobby = {};
-    // fk person id?
-    hobby.name = document.getElementById('name');
-    hobby.description = document.getElementById('description');
-    return JSON.stringify(hobby);
+    //hobby. = id;
+    hobby.name = document.getElementById('add-hoby-name');
+    hobby.description = document.getElementById('add-hoby-desc');
+
+    addHobbyContainer.innerHTML = null;
+    $('#person-edit-model').modal('hide');
+    $('#add-hobby').removeClass('hidden');
+    $('#save-hobby').addClass('hidden');
+
+    var data = JSON.stringify(hobby);
+    //setData(data, "hobby");
 }
 
 // adds address values to object and converts to it json
@@ -413,3 +435,4 @@ function setData(data, path) {
             }
         })
     }
+
