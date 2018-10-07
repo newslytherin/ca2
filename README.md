@@ -583,8 +583,57 @@ Consumes json
   "number": "10275229",
   "description": "Mobil",
   "infoEntity": "Maria Astaberg"
-},
-{...}
+}
+```
+
+**Error**
+```js
+{
+  "statusCode": 500,
+  "message": "xxx",
+  "description": "xxx"
+}
+```
+---
+#### **POST** `api/phone/infoentityid/{id}`
+*adds a specific phone number*
+
+**Success**
+```js
+{
+  "number": "10275229",
+  "description": "Mobil",
+  "infoEntityId": "9"
+}
+```
+
+**Error**
+```js
+{
+  "statusCode": 500,
+  "message": "xxx",
+  "description": "xxx"
+}
+```
+
+---
+#### **PUT** `api/phone/number/{number}`
+*adds a specific phone number*
+
+**Consumes**
+```js
+{
+  "description": "Mobil"
+}
+```
+
+**Success**
+```js
+{
+  "number": "10275229",
+  "description": "Mobil",
+  "infoEntityId": "9"
+}
 ```
 
 **Error**
