@@ -399,7 +399,6 @@ function addHobbyAsJson() {
     hobby.description = document.getElementById('add-hoby-desc');
 
     addHobbyContainer.innerHTML = null;
-    $('#person-edit-model').modal('hide');
     $('#add-hobby').removeClass('hidden');
     $('#save-hobby').addClass('hidden');
 
